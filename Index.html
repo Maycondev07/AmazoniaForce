@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazônia Force — Soluções em Produtos Pneumáticos</title>
+    <meta name="description" content="Mangueiras PU, engates rápidos, válvulas e conexões pneumáticas de qualidade premium. Desempenho e confiança para sua indústria.">
+    <meta name="keywords" content="produtos pneumáticos, mangueiras PU, engates rápidos, válvulas, conexões pneumáticas, Amazônia Force">
+    <meta property="og:title" content="Amazônia Force — Soluções em Produtos Pneumáticos">
+    <meta property="og:description" content="Mangueiras PU, engates rápidos, válvulas e conexões pneumáticas de qualidade premium. Desempenho e confiança para sua indústria.">
+    <meta property="og:type" content="website">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI1MCIgZmlsbD0iIzIyYzU1ZSIvPjwvc3ZnPg==">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="Style.css">
+</head>
+<body>
+
+    <!-- 1. TOP BAR -->
+    <div class="top-bar" id="top-bar">
+        <div class="top-bar-left">
+            <a href="#contato" aria-label="Fale conosco no WhatsApp">
+                <i data-lucide="message-circle" class="icon-small"></i>
+                Fale conosco no WhatsApp
+            </a>
+        </div>
+        <div class="top-bar-right">
+            <span>Frete grátis acima de R$ 299</span>
+        </div>
+    </div>
+
+    <!-- 2. HEADER -->
+    <header class="header" id="main-header">
+        <div class="header-container">
+            <div class="mobile-menu-btn" id="mobile-menu-open" aria-label="Abrir menu">
+                <i data-lucide="menu"></i>
+            </div>
+            
+            <a href="#" class="logo-area" aria-label="Amazônia Force Home">
+                <div class="logo-icon">
+                    <i data-lucide="wind" class="icon-logo"></i>
+                </div>
+                <div class="logo-text">
+                    <strong>AMAZÔNIA FORCE</strong>
+                    <span>Soluções Pneumáticas</span>
+                </div>
+            </a>
+
+            <div class="search-bar" id="desktop-search">
+                <input type="text" placeholder="Buscar produtos pneumáticos..." aria-label="Buscar produtos">
+                <button type="button" aria-label="Pesquisar" id="search-btn">
+                    <i data-lucide="search"></i>
+                </button>
+            </div>
+
+            <div class="header-actions">
+                <a href="#login" class="user-area" aria-label="Área do usuário">
+                    <i data-lucide="user"></i>
+                    <div class="user-text">
+                        <span>Olá, entre ou</span>
+                        <strong>Cadastre-se</strong>
+                    </div>
+                </a>
+                
+                <a href="#cart" class="cart-area" aria-label="Carrinho de compras" id="cart-button">
+                    <div class="cart-icon-wrapper">
+                        <i data-lucide="shopping-cart"></i>
+                        <span class="cart-badge">0</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 3. CATEGORY NAV -->
+    <nav class="category-nav" id="main-nav" aria-label="Navegação por categorias">
+        <ul class="nav-list">
+            <li><a href="#mangueiras" class="active" data-category="mangueiras">Mangueiras PU</a></li>
+            <li><a href="#engates" data-category="engates">Engates Rápidos</a></li>
+            <li><a href="#valvulas" data-category="valvulas">Válvulas</a></li>
+            <li><a href="#conexoes" data-category="conexoes">Conexões</a></li>
+            <li><a href="#reguladores" data-category="reguladores">Reguladores</a></li>
+            <li><a href="#ferramentas" data-category="ferramentas">Ferramentas</a></li>
+            <li><a href="#cilindros" data-category="cilindros">Cilindros</a></li>
+            <li><a href="#acessorios" data-category="acessorios">Acessórios</a></li>
+        </ul>
+    </nav>
+
+    <!-- 4. HERO SECTION -->
+    <section class="hero" id="hero">
+        <div class="hero-background" style="background-image: url('Assets/hero_mangueiras.png');">
+            <div class="hero-gradient-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <span class="badge badge-new">LANÇAMENTO</span>
+            <h1>Mangueira PU 8mm — Kit 3 Cores</h1>
+            <p>Vermelha, amarela e azul. Flexibilidade e resistência para linhas de ar comprimido.</p>
+            <div class="price-block">
+                <span class="price-label">A partir de</span>
+                <span class="price-value">R$ 189,90</span>
+            </div>
+            <button type="button" class="btn btn-primary" id="btn-hero-buy">
+                Comprar Agora <i data-lucide="arrow-right"></i>
+            </button>
+        </div>
+        <div class="floating-circle circle-1"></div>
+        <div class="floating-circle circle-2"></div>
+        <div class="floating-circle circle-3"></div>
+    </section>
+
+    <!-- 5. CATEGORIES SECTION -->
+    <section class="categories-section" id="categorias">
+        <div class="section-header">
+            <div>
+                <h2>Categorias</h2>
+                <p class="subtitle">Tudo em pneumática industrial</p>
+            </div>
+            <a href="#todas-categorias" class="link-more">Ver todas <i data-lucide="arrow-right"></i></a>
+        </div>
+        
+        <div class="category-grid" id="category-grid">
+            <a href="#mangueiras" class="category-card" data-category-id="1">
+                <div class="icon-container"><i data-lucide="cable"></i></div>
+                <h3>Mangueiras PU</h3>
+                <span class="count">24 produtos</span>
+            </a>
+            <a href="#engates" class="category-card" data-category-id="2">
+                <div class="icon-container"><i data-lucide="link"></i></div>
+                <h3>Engates Rápidos</h3>
+                <span class="count">18 produtos</span>
+            </a>
+            <a href="#valvulas" class="category-card" data-category-id="3">
+                <div class="icon-container"><i data-lucide="settings"></i></div>
+                <h3>Válvulas</h3>
+                <span class="count">32 produtos</span>
+            </a>
+            <a href="#conexoes" class="category-card" data-category-id="4">
+                <div class="icon-container"><i data-lucide="git-merge"></i></div>
+                <h3>Conexões</h3>
+                <span class="count">45 produtos</span>
+            </a>
+            <a href="#reguladores" class="category-card" data-category-id="5">
+                <div class="icon-container"><i data-lucide="gauge"></i></div>
+                <h3>Reguladores</h3>
+                <span class="count">12 produtos</span>
+            </a>
+            <a href="#ferramentas" class="category-card" data-category-id="6">
+                <div class="icon-container"><i data-lucide="wrench"></i></div>
+                <h3>Ferramentas</h3>
+                <span class="count">28 produtos</span>
+            </a>
+            <a href="#cilindros" class="category-card" data-category-id="7">
+                <div class="icon-container"><i data-lucide="cylinder"></i></div>
+                <h3>Cilindros</h3>
+                <span class="count">15 produtos</span>
+            </a>
+            <a href="#acessorios" class="category-card" data-category-id="8">
+                <div class="icon-container"><i data-lucide="package"></i></div>
+                <h3>Acessórios</h3>
+                <span class="count">40 produtos</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- 6. OFFERS SECTION -->
+    <section class="offers-section" id="ofertas">
+        <div class="section-header">
+            <div>
+                <h2>Ofertas em Destaque</h2>
+                <p class="subtitle">Os melhores preços da semana</p>
+            </div>
+            <a href="#todas-ofertas" class="link-more">Ver mais <i data-lucide="arrow-right"></i></a>
+        </div>
+
+        <div class="product-grid" id="product-grid">
+            <!-- Product 1 -->
+            <article class="product-card" data-product-id="prod-01">
+                <button type="button" class="wishlist-btn" aria-label="Adicionar aos favoritos"><i data-lucide="heart"></i></button>
+                <span class="discount-badge">-15%</span>
+                <div class="image-container">
+                    <img src="Assets/mangueira_vermelha.png" alt="Mangueira PU 8mm Vermelha 100m" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Mangueira PU 8mm Vermelha 100m</h3>
+                    <div class="product-prices">
+                        <span class="old-price">R$ 189,90</span>
+                        <span class="current-price">R$ 159,90</span>
+                    </div>
+                    <span class="installments">ou 3x de R$ 53,30</span>
+                    <button type="button" class="btn btn-buy" aria-label="Comprar Mangueira PU 8mm Vermelha">
+                        <i data-lucide="shopping-cart"></i> Comprar
+                    </button>
+                </div>
+            </article>
+
+            <!-- Product 2 -->
+            <article class="product-card" data-product-id="prod-02">
+                <button type="button" class="wishlist-btn" aria-label="Adicionar aos favoritos"><i data-lucide="heart"></i></button>
+                <span class="discount-badge">-15%</span>
+                <div class="image-container">
+                    <img src="Assets/mangueira_amarela.png" alt="Mangueira PU 8mm Amarela 100m" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Mangueira PU 8mm Amarela 100m</h3>
+                    <div class="product-prices">
+                        <span class="old-price">R$ 189,90</span>
+                        <span class="current-price">R$ 159,90</span>
+                    </div>
+                    <span class="installments">ou 3x de R$ 53,30</span>
+                    <button type="button" class="btn btn-buy" aria-label="Comprar Mangueira PU 8mm Amarela">
+                        <i data-lucide="shopping-cart"></i> Comprar
+                    </button>
+                </div>
+            </article>
+
+            <!-- Product 3 -->
+            <article class="product-card" data-product-id="prod-03">
+                <button type="button" class="wishlist-btn" aria-label="Adicionar aos favoritos"><i data-lucide="heart"></i></button>
+                <span class="discount-badge">-15%</span>
+                <div class="image-container">
+                    <img src="Assets/mangueira_azul.png" alt="Mangueira PU 8mm Azul 100m" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Mangueira PU 8mm Azul 100m</h3>
+                    <div class="product-prices">
+                        <span class="old-price">R$ 189,90</span>
+                        <span class="current-price">R$ 159,90</span>
+                    </div>
+                    <span class="installments">ou 3x de R$ 53,30</span>
+                    <button type="button" class="btn btn-buy" aria-label="Comprar Mangueira PU 8mm Azul">
+                        <i data-lucide="shopping-cart"></i> Comprar
+                    </button>
+                </div>
+            </article>
+
+            <!-- Product 4 -->
+            <article class="product-card" data-product-id="prod-04">
+                <button type="button" class="wishlist-btn" aria-label="Adicionar aos favoritos"><i data-lucide="heart"></i></button>
+                <span class="discount-badge">-20%</span>
+                <div class="image-container">
+                    <img src="Assets/engate_rapido.png" alt="Engate Rápido 1/4&quot; NPT" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Engate Rápido 1/4" NPT</h3>
+                    <div class="product-prices">
+                        <span class="old-price">R$ 34,90</span>
+                        <span class="current-price">R$ 27,90</span>
+                    </div>
+                    <span class="installments">ou 1x de R$ 27,90</span>
+                    <button type="button" class="btn btn-buy" aria-label="Comprar Engate Rápido 1/4&quot; NPT">
+                        <i data-lucide="shopping-cart"></i> Comprar
+                    </button>
+                </div>
+            </article>
+
+            <!-- Product 5 -->
+            <article class="product-card" data-product-id="prod-05">
+                <button type="button" class="wishlist-btn" aria-label="Adicionar aos favoritos"><i data-lucide="heart"></i></button>
+                <span class="discount-badge">-15%</span>
+                <div class="image-container">
+                    <img src="Assets/valvula_solenoide.png" alt="Válvula Solenoide 5/2 Vias" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Válvula Solenoide 5/2 Vias</h3>
+                    <div class="product-prices">
+                        <span class="old-price">R$ 289,00</span>
+                        <span class="current-price">R$ 245,00</span>
+                    </div>
+                    <span class="installments">ou 4x de R$ 61,25</span>
+                    <button type="button" class="btn btn-buy" aria-label="Comprar Válvula Solenoide 5/2 Vias">
+                        <i data-lucide="shopping-cart"></i> Comprar
+                    </button>
+                </div>
+            </article>
+
+            <!-- Product 6 -->
+            <article class="product-card" data-product-id="prod-06">
+                <button type="button" class="wishlist-btn" aria-label="Adicionar aos favoritos"><i data-lucide="heart"></i></button>
+                <span class="discount-badge">-20%</span>
+                <div class="image-container">
+                    <div class="product-img-placeholder">
+                        <i data-lucide="image"></i>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">União Instantânea 8mm (10un)</h3>
+                    <div class="product-prices">
+                        <span class="old-price">R$ 49,90</span>
+                        <span class="current-price">R$ 39,90</span>
+                    </div>
+                    <span class="installments">ou 1x de R$ 39,90</span>
+                    <button type="button" class="btn btn-buy" aria-label="Comprar União Instantânea 8mm">
+                        <i data-lucide="shopping-cart"></i> Comprar
+                    </button>
+                </div>
+            </article>
+
+            <!-- Product 7 -->
+            <article class="product-card" data-product-id="prod-07">
+                <button type="button" class="wishlist-btn" aria-label="Adicionar aos favoritos"><i data-lucide="heart"></i></button>
+                <span class="discount-badge">-15%</span>
+                <div class="image-container">
+                    <div class="product-img-placeholder">
+                        <i data-lucide="image"></i>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Filtro Regulador de Ar 1/2"</h3>
+                    <div class="product-prices">
+                        <span class="old-price">R$ 129,90</span>
+                        <span class="current-price">R$ 109,90</span>
+                    </div>
+                    <span class="installments">ou 2x de R$ 54,95</span>
+                    <button type="button" class="btn btn-buy" aria-label="Comprar Filtro Regulador de Ar">
+                        <i data-lucide="shopping-cart"></i> Comprar
+                    </button>
+                </div>
+            </article>
+
+            <!-- Product 8 -->
+            <article class="product-card" data-product-id="prod-08">
+                <button type="button" class="wishlist-btn" aria-label="Adicionar aos favoritos"><i data-lucide="heart"></i></button>
+                <span class="discount-badge">-15%</span>
+                <div class="image-container">
+                    <div class="product-img-placeholder">
+                        <i data-lucide="image"></i>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Cilindro Pneumático 32x100</h3>
+                    <div class="product-prices">
+                        <span class="old-price">R$ 199,90</span>
+                        <span class="current-price">R$ 169,90</span>
+                    </div>
+                    <span class="installments">ou 3x de R$ 56,63</span>
+                    <button type="button" class="btn btn-buy" aria-label="Comprar Cilindro Pneumático">
+                        <i data-lucide="shopping-cart"></i> Comprar
+                    </button>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- 7. CTA SECTION -->
+    <section class="cta-section" id="contato">
+        <div class="cta-card">
+            <h2>Precisa de ajuda com seu pedido?</h2>
+            <p>Fale com nossos especialistas em soluções pneumáticas agora mesmo.</p>
+            <a href="https://wa.me/5592999999999" class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer">
+                <i data-lucide="message-circle"></i> Chamar no WhatsApp
+            </a>
+            <p class="phone-info">(92) 99999-9999</p>
+        </div>
+    </section>
+
+    <!-- 8. FOOTER -->
+    <footer class="footer" id="main-footer">
+        <div class="footer-top">
+            <div class="footer-col col-1">
+                <div class="footer-logo">
+                    <i data-lucide="wind"></i> AMAZÔNIA FORCE
+                </div>
+                <p class="footer-desc">Mangueiras PU, engates rápidos, válvulas e conexões pneumáticas de qualidade premium. Desempenho e confiança para sua indústria.</p>
+            </div>
+            <div class="footer-col col-2">
+                <h4>Produtos</h4>
+                <ul>
+                    <li><a href="#mangueiras">Mangueiras</a></li>
+                    <li><a href="#engates">Engates</a></li>
+                    <li><a href="#valvulas">Válvulas</a></li>
+                    <li><a href="#conexoes">Conexões</a></li>
+                    <li><a href="#reguladores">Reguladores</a></li>
+                </ul>
+            </div>
+            <div class="footer-col col-3">
+                <h4>Institucional</h4>
+                <ul>
+                    <li><a href="#sobre">Sobre nós</a></li>
+                    <li><a href="#privacidade">Política de Privacidade</a></li>
+                    <li><a href="#termos">Termos de Uso</a></li>
+                    <li><a href="#trocas">Trocas e Devoluções</a></li>
+                </ul>
+            </div>
+            <div class="footer-col col-4">
+                <h4>Atendimento</h4>
+                <ul>
+                    <li><i data-lucide="message-circle" class="icon-small"></i> WhatsApp: (92) 99999-9999</li>
+                    <li><i data-lucide="mail" class="icon-small"></i> Email: contato@amazoniaforce.com.br</li>
+                    <li><i data-lucide="clock" class="icon-small"></i> Horário: Seg-Sex 8h-18h</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Amazônia Force. Todos os direitos reservados.</p>
+            <div class="payment-methods">
+                <i data-lucide="credit-card"></i>
+                <i data-lucide="barcode"></i>
+                <i data-lucide="wallet"></i>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 9. MOBILE MENU -->
+    <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+        <div class="mobile-menu-overlay" id="mobile-menu-overlay"></div>
+        <div class="mobile-menu-panel">
+            <div class="mobile-menu-header">
+                <div class="user-greeting">Olá, Visitante</div>
+                <button type="button" class="btn-close" id="mobile-menu-close" aria-label="Fechar menu">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            <ul class="mobile-nav-list">
+                <li><a href="#mangueiras" data-category="mangueiras">Mangueiras PU</a></li>
+                <li><a href="#engates" data-category="engates">Engates Rápidos</a></li>
+                <li><a href="#valvulas" data-category="valvulas">Válvulas</a></li>
+                <li><a href="#conexoes" data-category="conexoes">Conexões</a></li>
+                <li><a href="#reguladores" data-category="reguladores">Reguladores</a></li>
+                <li><a href="#ferramentas" data-category="ferramentas">Ferramentas</a></li>
+                <li><a href="#cilindros" data-category="cilindros">Cilindros</a></li>
+                <li><a href="#acessorios" data-category="acessorios">Acessórios</a></li>
+            </ul>
+            <div class="mobile-contact">
+                <a href="https://wa.me/5592999999999" class="mobile-contact-link">
+                    <i data-lucide="message-circle"></i> (92) 99999-9999
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 10. SEARCH OVERLAY -->
+    <div class="search-overlay" id="search-overlay" aria-hidden="true">
+        <div class="search-overlay-content">
+            <button type="button" class="btn-close-search" id="search-close" aria-label="Fechar busca">
+                <i data-lucide="x"></i>
+            </button>
+            <div class="search-input-wrapper">
+                <i data-lucide="search" class="search-icon"></i>
+                <input type="text" id="overlay-search-input" placeholder="O que você está procurando?" aria-label="Buscar produtos" autofocus>
+            </div>
+        </div>
+    </div>
+
+    <!-- 11. TOAST CONTAINER -->
+    <div class="toast-container" id="toast-container" aria-live="polite"></div>
+
+    <!-- 12. Scripts -->
+    <script src="Script.js"></script>
+    <!-- 13. Lucide Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
