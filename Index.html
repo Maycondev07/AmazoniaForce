@@ -212,12 +212,11 @@ class="login-btn">
 
 </a>
 
-<button
-class="favorite-btn">
+<button class="favorite-btn">
 
 ❤
 
-<span>
+<span class="favorite-count">
 
 0
 
@@ -225,17 +224,17 @@ class="favorite-btn">
 
 </button>
 
-<a
-href="Routes/carrinho.html"
-class="cart-btn">
+<a href="javascript:void(0)"
+   class="cart-btn"
+   onclick="toggleCart()">
 
-🛒
+    🛒
 
-<span>
+    <span class="cart-count">
 
-0
+        0
 
-</span>
+    </span>
 
 </a>
 
@@ -245,17 +244,6 @@ class="cart-btn">
 
 </div>
 
-<button class="cart-btn" onclick="toggleCart()">
-
-    Carrinho
-
-    <span class="cart-count">
-
-        0
-
-    </span>
-
-</button>
 
 </header>
 
