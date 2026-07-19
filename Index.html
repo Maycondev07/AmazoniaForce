@@ -1,439 +1,1712 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
 
-    <head>
+<head>
 
-        <meta charset="UTF-8">
+    <!-- ========================= -->
+    <!-- META TAGS -->
+    <!-- ========================= -->
 
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
 
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        <title>Amazonia Force | Produtos Pneumáticos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <meta
-            name="description"
-            content="Loja especializada em produtos pneumáticos industriais.">
+    <title>Amazonia Force | Soluções Pneumáticas Industriais</title>
 
-        <meta
-            name="keywords"
-            content="pneumática, válvulas, cilindros, conexões, mangueiras">
+    <meta name="description"
+        content="Especialista em produtos pneumáticos industriais. Cilindros, válvulas, conexões, mangueiras, FRL e automação industrial.">
 
-        <meta
-            property="og:title"
-            content="Amazonia Force">
+    <meta name="keywords"
+        content="pneumática, cilindros pneumáticos, válvulas, conexões, automação industrial">
 
-        <meta
-            property="og:type"
-            content="website">
+    <meta name="robots"
+        content="index,follow">
 
-        <meta
-            property="og:image"
-            content="Assets/img/og.jpg">
+    <meta property="og:type"
+        content="website">
 
-        <meta
-            property="og:description"
-            content="Especialista em produtos pneumáticos.">
+    <meta property="og:title"
+        content="Amazonia Force">
 
-        <link rel="icon" href="Assets/icons/favicon.ico">
+    <meta property="og:description"
+        content="Especialista em soluções pneumáticas industriais.">
 
-        <link rel="stylesheet" href="style.css">
+    <meta property="og:image"
+        content="Assets/img/og-image.jpg">
 
-    </head>
+    <meta property="og:url"
+        content="https://amazoniaforce.com.br">
 
-    <body>
+    <meta name="twitter:card"
+        content="summary_large_image">
 
-        <div class="loader">
-            <span></span>
-        </div>
+    <link rel="icon"
+        href="Assets/icons/favicon.ico">
 
-        <div class="top-bar">
+    <link rel="stylesheet"
+        href="style.css">
 
-            <div class="container">
+</head>
 
-                <div class="top-left">
+<body>
 
-                    <a href="#">
-                        Atendimento
-                    </a>
+<div class="mini-cart">
 
-                    <a href="#">
-                        Rastrear Pedido
-                    </a>
+    <div class="mini-cart-header">
 
-                </div>
+        <h3>Meu Carrinho</h3>
 
-                <div class="top-right">
+    </div>
 
-                    <a href="#">
-                        Ofertas
-                    </a>
+    <div class="cart-items"></div>
 
-                    <a href="#">
-                        Contato
-                    </a>
+    <div class="mini-cart-footer">
 
-                </div>
+        <strong>Total:</strong>
 
-            </div>
+        <span class="cart-total">
 
-        </div>
-
-        <header>
-
-        <div class="container">
-
-        <div class="header-grid">
-
-        <div class="logo">
-
-        <a href="index.html">
-
-        <img
-        src="Assets/img/logo.png"
-        alt="Amazonia Force">
-
-        </a>
-
-        </div>
-
-        <div class="search-area">
-
-        <form>
-
-        <input
-        type="search"
-        placeholder="O que você procura?">
-
-        <button>
-
-        🔍
-
-        </button>
-
-        </form>
-
-        </div>
-
-        <div class="header-actions">
-
-        <a
-        class="login-btn"
-        href="Routes/login.html">
-
-        Entrar
-
-        </a>
-
-        <a
-        class="cart-btn"
-        href="Routes/carrinho.html">
-
-        Carrinho
-
-        <span>
-
-        0
+            R$ 0,00
 
         </span>
 
-        </a>
+        <button class="btn-primary">
+
+            Finalizar Compra
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ========================= -->
+<!-- LOADER -->
+<!-- ========================= -->
+
+<div class="loader">
+
+    <span></span>
+
+</div>
+
+<!-- ========================= -->
+<!-- TOP BAR -->
+<!-- ========================= -->
+
+<div class="top-bar">
+
+    <div class="container">
+
+        <div class="top-left">
+
+            <a href="#">
+
+                Atendimento Especializado
+
+            </a>
+
+            <a href="#">
+
+                Rastrear Pedido
+
+            </a>
 
         </div>
 
-        </div>
+        <div class="top-right">
+
+            <a href="Routes/ofertas.html">
+
+                Ofertas
+
+            </a>
+
+            <a href="Routes/contato.html">
+
+                Contato
+
+            </a>
 
         </div>
 
-        </header>
+    </div>
 
-        <nav class="navbar">
+</div>
 
-        <div class="container">
+<!-- ========================= -->
+<!-- HEADER -->
+<!-- ========================= -->
 
-        <ul>
+<header id="header">
 
-        <li>
+<div class="container">
 
-        <a href="#">
+<div class="header-grid">
 
-        Produtos
+<!-- Logo -->
 
-        </a>
+<div class="logo">
 
-        <div class="mega-menu">
+<a href="index.html">
 
-        <div>
+<img
+src="Assets/img/logo.png"
+alt="Amazonia Force">
 
-        <h4>
+</a>
 
-        Categorias
+</div>
 
-        </h4>
+<!-- Pesquisa -->
 
-        <a href="#">
+<div class="search-area">
 
-        Cilindros
+<form id="searchForm">
 
-        </a>
+<input
 
-        <a href="#">
+type="search"
 
-        Conexões
+placeholder="Buscar produtos, marcas ou categorias..."
 
-        </a>
+autocomplete="off"
 
-        <a href="#">
+id="searchInput">
 
-        Mangueiras
+<button type="submit">
 
-        </a>
+<svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+<path d="M21 21l-4.3-4.3m1.3-5.2a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z"
+stroke="currentColor"
+stroke-width="2"
+fill="none"
+stroke-linecap="round"/>
+</svg>
 
-        <a href="#">
+</button>
 
-        Válvulas
+</form>
 
-        </a>
+<div id="searchResults" class="search-results"></div>
 
-        </div>
+</div>
 
-        <div>
+<!-- Ações -->
 
-        <h4>
+<div class="header-actions">
 
-        Marcas
+<a
+href="Routes/login.html"
+class="login-btn">
 
-        </h4>
+<div>
 
-        <a href="#">
+<strong>Olá!</strong>
 
-        SMC
+<span>Entrar ou cadastrar</span>
 
-        </a>
+</div>
 
-        <a href="#">
+</a>
 
-        Festo
+<button
+class="favorite-btn">
 
-        </a>
+❤
 
-        <a href="#">
+<span>
 
-        Parker
+0
 
-        </a>
+</span>
 
-        <a href="#">
+</button>
 
-        Metal Work
+<a
+href="Routes/carrinho.html"
+class="cart-btn">
 
-        </a>
+🛒
 
-        </div>
+<span>
 
-        <div>
+0
 
-        <h4>
+</span>
 
-        Destaques
+</a>
 
-        </h4>
+</div>
 
-        <a href="#">
+</div>
 
-        Novidades
+</div>
 
-        </a>
+<button class="cart-btn" onclick="toggleCart()">
 
-        <a href="#">
+    Carrinho
 
-        Promoções
+    <span class="cart-count">
 
-        </a>
+        0
 
-        <a href="#">
+    </span>
 
-        Mais Vendidos
+</button>
 
-        </a>
+</header>
 
-        </div>
+<!-- ========================= -->
+<!-- MENU -->
+<!-- ========================= -->
 
-        </div>
+<nav class="navbar">
 
-        </li>
+<div class="container">
 
-        <li>
+<button class="menu-toggle">
 
-        <a href="#">
+☰
 
-        Categorias
+Categorias
 
-        </a>
+</button>
 
-        </li>
+<ul>
 
-        <li>
+<li>
 
-        <a href="#">
+<a href="Routes/produtos.html">
 
-        Ofertas
+Produtos
 
-        </a>
+</a>
 
-        </li>
+<div class="mega-menu">
 
-        <li>
+<div>
 
-        <a href="#">
+<h4>
 
-        Marcas
+Produtos
 
-        </a>
+</h4>
 
-        </li>
+<a href="#">Cilindros Pneumáticos</a>
 
-        <li>
+<a href="#">Mini Cilindros</a>
 
-        <a href="#">
+<a href="#">Cilindros Compactos</a>
 
-        Contato
+<a href="#">Guias Lineares</a>
 
-        </a>
+<a href="#">Atuadores</a>
 
-        </li>
+</div>
 
-        </ul>
+<div>
 
-        </div>
+<h4>
 
-        </nav>
+Válvulas
 
-        <main>
+</h4>
 
-        <!-- ========================================= -->
-        <!-- HERO -->
-        <!-- ========================================= -->
+<a href="#">5/2</a>
 
-        <section class="hero">
+<a href="#">3/2</a>
 
-            <div class="hero-slider">
+<a href="#">Direcionais</a>
 
-                <div class="slide active">
+<a href="#">Mecânicas</a>
 
-                    <div class="hero-content">
+<a href="#">Solenoides</a>
 
-                        <span class="hero-tag">
-                            Tecnologia Industrial
-                        </span>
+</div>
 
-                        <h1>
-                            Produtos Pneumáticos para Alta Performance
-                        </h1>
+<div>
 
-                        <p>
+<h4>
 
-                            Trabalhamos com as principais marcas do mercado oferecendo
-                            qualidade, rapidez e segurança para sua empresa.
+Conexões
 
-                        </p>
+</h4>
 
-                        <div class="hero-buttons">
+<a href="#">Engate Rápido</a>
 
-                            <a href="Routes/produtos.html" class="btn-primary">
+<a href="#">Espigão</a>
 
-                                Comprar Agora
+<a href="#">União Reta</a>
 
-                            </a>
+<a href="#">Cotovelos</a>
 
-                            <a href="Routes/ofertas.html" class="btn-secondary">
+<a href="#">Tês</a>
 
-                                Ver Ofertas
+</div>
 
-                            </a>
+<div>
 
-                        </div>
+<h4>
 
-                    </div>
+Marcas</h4>
 
-                    <div class="hero-image">
+<a href="#">SMC</a>
 
-                        <img
-                            src="Assets/img/banner-01.png"
-                            alt="Banner Principal">
+<a href="#">Festo</a>
 
-                    </div>
+<a href="#">Parker</a>
 
-                </div>
+<a href="#">Metal Work</a>
 
-                <div class="slide">
+<a href="#">Camozzi</a>
 
-                    <div class="hero-content">
+</div>
 
-                        <span class="hero-tag">
+</div>
 
-                            Linha Industrial
+</li>
 
-                        </span>
+<li>
 
-                        <h1>
+<a href="Routes/categoria.html">
 
-                            Cilindros Pneumáticos de Alta Precisão
+Categorias
 
-                        </h1>
+</a>
 
-                        <p>
+</li>
 
-                            Soluções para automação industrial com máxima eficiência.
+<li>
 
-                        </p>
+<a href="Routes/ofertas.html">
 
-                        <a
-                            href="Routes/produtos.html"
-                            class="btn-primary">
+Ofertas
 
-                            Comprar
+</a>
+
+</li>
+
+<li>
+
+<a href="#marcas">
+
+Marcas
+
+</a>
+
+</li>
+
+<li>
+
+<a href="Routes/sobre.html">
+
+Sobre
+
+</a>
+
+</li>
+
+<li>
+
+<a href="Routes/contato.html">
+
+Contato
+
+</a>
+
+</li>
+
+</ul>
+
+</div>
+
+</nav>
+
+<!-- ========================= -->
+<!-- MAIN -->
+<!-- ========================= -->
+
+<main>
+
+<!-- ========================================================= -->
+<!-- A PARTE 2 COMEÇARÁ AQUI COM O HERO E O SLIDER PRINCIPAL -->
+<!-- ========================================================= -->
+
+<!-- ========================================================= -->
+<!-- HERO -->
+<!-- ========================================================= -->
+
+<section class="hero">
+
+    <div class="container">
+
+        <div class="hero-slider">
+
+            <!-- ================= Slide 01 ================= -->
+
+            <article class="slide active">
+
+                <div class="hero-content">
+
+                    <span class="hero-badge">
+
+                        SOLUÇÕES INDUSTRIAIS
+
+                    </span>
+
+                    <h1>
+
+                        Tecnologia Pneumática
+                        para Alta Performance
+
+                    </h1>
+
+                    <p>
+
+                        Produtos de alta qualidade para automação industrial,
+                        manutenção e linhas de produção. Trabalhamos com as
+                        principais marcas do mercado nacional e internacional.
+
+                    </p>
+
+                    <div class="hero-buttons">
+
+                        <a href="Routes/produtos.html" class="btn-primary">
+
+                            Comprar Agora
+
+                        </a>
+
+                        <a href="Routes/ofertas.html" class="btn-secondary">
+
+                            Ver Promoções
 
                         </a>
 
                     </div>
 
-                    <div class="hero-image">
+                    <div class="hero-numbers">
 
-                        <img
-                            src="Assets/img/banner-02.png"
-                            alt="Banner">
+                        <div>
+
+                            <strong>
+
+                                +10.000
+
+                            </strong>
+
+                            <span>
+
+                                Produtos
+
+                            </span>
+
+                        </div>
+
+                        <div>
+
+                            <strong>
+
+                                +500
+
+                            </strong>
+
+                            <span>
+
+                                Empresas
+
+                            </span>
+
+                        </div>
+
+                        <div>
+
+                            <strong>
+
+                                +25
+
+                            </strong>
+
+                            <span>
+
+                                Anos
+
+                            </span>
+
+                        </div>
 
                     </div>
 
                 </div>
 
+                <div class="hero-image">
+
+                    <img
+
+                        src="Assets/img/banner-01.png"
+
+                        alt="Linha Pneumática"
+
+                        loading="eager">
+
+                </div>
+
+            </article>
+
+            <!-- ================= Slide 02 ================= -->
+
+            <article class="slide">
+
+                <div class="hero-content">
+
+                    <span class="hero-badge">
+
+                        LINHA INDUSTRIAL
+
+                    </span>
+
+                    <h1>
+
+                        Cilindros
+                        de Alta Precisão
+
+                    </h1>
+
+                    <p>
+
+                        Equipamentos desenvolvidos para máxima durabilidade
+                        e precisão em aplicações industriais.
+
+                    </p>
+
+                    <div class="hero-buttons">
+
+                        <a href="#" class="btn-primary">
+
+                            Conhecer
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <div class="hero-image">
+
+                    <img
+
+                        src="Assets/img/banner-02.png"
+
+                        alt="Cilindros"
+
+                        loading="lazy">
+
+                </div>
+
+            </article>
+
+            <!-- ================= Slide 03 ================= -->
+
+            <article class="slide">
+
+                <div class="hero-content">
+
+                    <span class="hero-badge">
+
+                        OFERTAS
+
+                    </span>
+
+                    <h1>
+
+                        Até 40%
+                        de Desconto
+
+                    </h1>
+
+                    <p>
+
+                        Aproveite nossas campanhas especiais em produtos
+                        selecionados.
+
+                    </p>
+
+                    <div class="hero-buttons">
+
+                        <a href="#" class="btn-primary">
+
+                            Aproveitar
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <div class="hero-image">
+
+                    <img
+
+                        src="Assets/img/banner-03.png"
+
+                        alt="Promoções"
+
+                        loading="lazy">
+
+                </div>
+
+            </article>
+
+        </div>
+
+        <!-- Navegação -->
+
+        <button class="slider-prev">
+
+            &#10094;
+
+        </button>
+
+        <button class="slider-next">
+
+            &#10095;
+
+        </button>
+
+        <!-- Indicadores -->
+
+        <div class="hero-pagination">
+
+            <button class="hero-dot active"></button>
+
+            <button class="hero-dot"></button>
+
+            <button class="hero-dot"></button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================================================= -->
+<!-- BENEFÍCIOS -->
+<!-- ========================================================= -->
+
+<section class="benefits">
+
+    <div class="container">
+
+        <article class="benefit">
+
+            <div class="benefit-icon">
+
+                🚚
+
             </div>
 
-            <button class="slider-prev">
+            <div>
 
-                ❮
+                <h3>
 
-            </button>
+                    Entrega Rápida
 
-            <button class="slider-next">
+                </h3>
 
-                ❯
+                <p>
 
-            </button>
+                    Envio para todo o Brasil.
 
-        </section>
-        </main>
+                </p>
 
-        <footer>
+            </div>
 
-        </footer>
+        </article>
 
-        <script src="script.js"></script>
+        <article class="benefit">
 
-    </body>
+            <div class="benefit-icon">
+
+                🔒
+
+            </div>
+
+            <div>
+
+                <h3>
+
+                    Compra Segura
+
+                </h3>
+
+                <p>
+
+                    Ambiente protegido.
+
+                </p>
+
+            </div>
+
+        </article>
+
+        <article class="benefit">
+
+            <div class="benefit-icon">
+
+                💳
+
+            </div>
+
+            <div>
+
+                <h3>
+
+                    Parcelamento
+
+                </h3>
+
+                <p>
+
+                    Em até 12x.
+
+                </p>
+
+            </div>
+
+        </article>
+
+        <article class="benefit">
+
+            <div class="benefit-icon">
+
+                ⭐
+
+            </div>
+
+            <div>
+
+                <h3>
+
+                    Produtos Originais
+
+                </h3>
+
+                <p>
+
+                    Garantia de fábrica.
+
+                </p>
+
+            </div>
+
+        </article>
+
+    </div>
+
+</section>
+
+<!-- ========================================================= -->
+<!-- CATEGORIAS -->
+<!-- ========================================================= -->
+
+<section class="categories">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>
+
+                Navegue por Categoria
+
+            </h2>
+
+            <a href="Routes/categoria.html">
+
+                Ver Todas
+
+            </a>
+
+        </div>
+
+        <div class="categories-grid">
+
+            <a href="#" class="category-card">
+
+                <img src="Assets/img/cat-cilindros.png" alt="">
+
+                <h3>Cilindros</h3>
+
+            </a>
+
+            <a href="#" class="category-card">
+
+                <img src="Assets/img/cat-valvulas.png" alt="">
+
+                <h3>Válvulas</h3>
+
+            </a>
+
+            <a href="#" class="category-card">
+
+                <img src="Assets/img/cat-conexoes.png" alt="">
+
+                <h3>Conexões</h3>
+
+            </a>
+
+            <a href="#" class="category-card">
+
+                <img src="Assets/img/cat-mangueiras.png" alt="">
+
+                <h3>Mangueiras</h3>
+
+            </a>
+
+            <a href="#" class="category-card">
+
+                <img src="Assets/img/cat-frl.png" alt="">
+
+                <h3>FRL</h3>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================================================= -->
+<!-- PRODUTOS EM DESTAQUE -->
+<!-- ========================================================= -->
+
+<section class="featured-products">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <div>
+
+                <span class="section-subtitle">
+                    Produtos Selecionados
+                </span>
+
+                <h2>
+                    Produtos em Destaque
+                </h2>
+
+            </div>
+
+            <a href="Routes/produtos.html" class="view-all">
+
+                Ver todos →
+
+            </a>
+
+        </div>
+
+        <div
+            class="products-grid"
+            id="featuredProducts">
+
+            <!-- Carregado pelo JavaScript -->
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================================================= -->
+<!-- BANNER PROMOCIONAL -->
+<!-- ========================================================= -->
+
+<section class="promo-banner">
+
+    <div class="container">
+
+        <div class="promo-content">
+
+            <div class="promo-text">
+
+                <span>
+
+                    OFERTA ESPECIAL
+
+                </span>
+
+                <h2>
+
+                    Equipamentos
+                    para Automação Industrial
+
+                </h2>
+
+                <p>
+
+                    Trabalhamos com as melhores marcas do mercado
+                    oferecendo qualidade, garantia e entrega rápida.
+
+                </p>
+
+                <a
+                    href="Routes/ofertas.html"
+                    class="btn-primary">
+
+                    Aproveitar Promoções
+
+                </a>
+
+            </div>
+
+            <div class="promo-image">
+
+                <img
+
+                    src="Assets/img/banner-industrial.png"
+
+                    alt="Automação Industrial"
+
+                    loading="lazy">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================================================= -->
+<!-- OFERTAS DA SEMANA -->
+<!-- ========================================================= -->
+
+<section class="offers">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <div>
+
+                <span class="section-subtitle">
+
+                    Economia
+
+                </span>
+
+                <h2>
+
+                    Ofertas da Semana
+
+                </h2>
+
+            </div>
+
+            <a href="Routes/ofertas.html">
+
+                Ver Ofertas →
+
+            </a>
+
+        </div>
+
+        <div class="products-grid" id="offerProducts">
+
+            <!-- Produtos via JSON -->
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================================================= -->
+<!-- MAIS VENDIDOS -->
+<!-- ========================================================= -->
+
+<section class="best-sellers">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <div>
+
+                <span class="section-subtitle">
+
+                    Mais Procurados
+
+                </span>
+
+                <h2>
+
+                    Produtos Mais Vendidos
+
+                </h2>
+
+            </div>
+
+        </div>
+
+        <div class="products-grid"
+
+             id="bestSellerProducts">
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================================================= -->
+<!-- BANNER DUPLO -->
+<!-- ========================================================= -->
+
+<section class="double-banner">
+
+    <div class="container">
+
+        <div class="banner-grid">
+
+            <article class="banner-item">
+
+                <img
+                    src="Assets/img/banner-small-01.jpg"
+                    alt="Banner">
+
+                <div class="banner-info">
+
+                    <span>
+
+                        Pneumática Industrial
+
+                    </span>
+
+                    <h3>
+
+                        Cilindros
+
+                    </h3>
+
+                    <a href="#">
+
+                        Comprar →
+
+                    </a>
+
+                </div>
+
+            </article>
+
+            <article class="banner-item">
+
+                <img
+                    src="Assets/img/banner-small-02.jpg"
+                    alt="Banner">
+
+                <div class="banner-info">
+
+                    <span>
+
+                        Linha Completa
+
+                    </span>
+
+                    <h3>
+
+                        Conexões
+
+                    </h3>
+
+                    <a href="#">
+
+                        Comprar →
+
+                    </a>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================================================= -->
+<!-- CONTADOR -->
+<!-- ========================================================= -->
+
+<section class="numbers">
+
+    <div class="container">
+
+        <div class="numbers-grid">
+
+            <div class="number-item">
+
+                <h2>
+
+                    +10.000
+
+                </h2>
+
+                <span>
+
+                    Produtos
+
+                </span>
+
+            </div>
+
+            <div class="number-item">
+
+                <h2>
+
+                    +500
+
+                </h2>
+
+                <span>
+
+                    Clientes
+
+                </span>
+
+            </div>
+
+            <div class="number-item">
+
+                <h2>
+
+                    +25
+
+                </h2>
+
+                <span>
+
+                    Anos
+
+                </span>
+
+            </div>
+
+            <div class="number-item">
+
+                <h2>
+
+                    100%
+
+                </h2>
+
+                <span>
+
+                    Garantia
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================================================= -->
+<!-- MARCAS -->
+<!-- ========================================================= -->
+
+<section class="brands" id="marcas">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <div>
+
+                <span class="section-subtitle">
+
+                    Trabalhamos com as melhores
+
+                </span>
+
+                <h2>
+
+                    Marcas Parceiras
+
+                </h2>
+
+            </div>
+
+        </div>
+
+        <div class="brands-grid">
+
+            <img src="Assets/img/brands/smc.png" alt="SMC">
+            <img src="Assets/img/brands/festo.png" alt="Festo">
+            <img src="Assets/img/brands/parker.png" alt="Parker">
+            <img src="Assets/img/brands/camozzi.png" alt="Camozzi">
+            <img src="Assets/img/brands/metalwork.png" alt="Metal Work">
+            <img src="Assets/img/brands/norgren.png" alt="Norgren">
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================================================= -->
+<!-- DEPOIMENTOS -->
+<!-- ========================================================= -->
+
+<section class="testimonials">
+
+<div class="container">
+
+<div class="section-title">
+
+<div>
+
+<span class="section-subtitle">
+
+Clientes
+
+</span>
+
+<h2>
+
+Quem compra recomenda
+
+</h2>
+
+</div>
+
+</div>
+
+<div class="testimonial-grid">
+
+<article class="testimonial-card">
+
+<p>
+
+"Excelente atendimento, entrega rápida e produtos originais."
+
+</p>
+
+<h4>
+
+Carlos Henrique
+
+</h4>
+
+<span>
+
+Engenheiro Industrial
+
+</span>
+
+</article>
+
+<article class="testimonial-card">
+
+<p>
+
+"Empresa muito séria. Compramos regularmente."
+
+</p>
+
+<h4>
+
+Mariana Souza
+
+</h4>
+
+<span>
+
+Compradora
+
+</span>
+
+</article>
+
+<article class="testimonial-card">
+
+<p>
+
+"Qualidade acima da média e ótimo suporte técnico."
+
+</p>
+
+<h4>
+
+Fernando Lima
+
+</h4>
+
+<span>
+
+Automação Industrial
+
+</span>
+
+</article>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================================================= -->
+<!-- BLOG -->
+<!-- ========================================================= -->
+
+<section class="blog">
+
+<div class="container">
+
+<div class="section-title">
+
+<div>
+
+<span class="section-subtitle">
+
+Conteúdo
+
+</span>
+
+<h2>
+
+Últimos Artigos
+
+</h2>
+
+</div>
+
+<a href="#">
+
+Ver Blog →
+
+</a>
+
+</div>
+
+<div class="blog-grid">
+
+<article class="blog-card">
+
+<img src="Assets/img/blog/blog1.jpg" alt="">
+
+<div>
+
+<h3>
+
+Como aumentar a vida útil dos cilindros pneumáticos
+
+</h3>
+
+<a href="#">
+
+Leia Mais →
+
+</a>
+
+</div>
+
+</article>
+
+<article class="blog-card">
+
+<img src="Assets/img/blog/blog2.jpg" alt="">
+
+<div>
+
+<h3>
+
+Como escolher uma válvula corretamente
+
+</h3>
+
+<a href="#">
+
+Leia Mais →
+
+</a>
+
+</div>
+
+</article>
+
+<article class="blog-card">
+
+<img src="Assets/img/blog/blog3.jpg" alt="">
+
+<div>
+
+<h3>
+
+Boas práticas para automação industrial
+
+</h3>
+
+<a href="#">
+
+Leia Mais →
+
+</a>
+
+</div>
+
+</article>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================================================= -->
+<!-- NEWSLETTER -->
+<!-- ========================================================= -->
+
+<section class="newsletter">
+
+<div class="container">
+
+<div class="newsletter-content">
+
+<div class="newsletter-text">
+
+<span>
+
+Receba nossas ofertas
+
+</span>
+
+<h2>
+
+Cadastre seu e-mail
+
+</h2>
+
+<p>
+
+Receba promoções e novidades em primeira mão.
+
+</p>
+
+</div>
+
+<form class="newsletter-form">
+
+<input
+type="email"
+placeholder="Digite seu e-mail">
+
+<button>
+
+Cadastrar
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================================================= -->
+<!-- FOOTER -->
+<!-- ========================================================= -->
+
+<footer class="footer">
+
+<div class="container">
+
+<div class="footer-grid">
+
+<div>
+
+<img
+class="footer-logo"
+src="Assets/img/logo-white.png"
+alt="Amazonia Force">
+
+<p>
+
+Especialistas em produtos pneumáticos para automação industrial.
+
+</p>
+
+</div>
+
+<div>
+
+<h3>
+
+Institucional
+
+</h3>
+
+<ul>
+
+<li><a href="#">Sobre</a></li>
+
+<li><a href="#">Contato</a></li>
+
+<li><a href="#">Política de Privacidade</a></li>
+
+<li><a href="#">Termos</a></li>
+
+</ul>
+
+</div>
+
+<div>
+
+<h3>
+
+Categorias
+
+</h3>
+
+<ul>
+
+<li><a href="#">Cilindros</a></li>
+
+<li><a href="#">Válvulas</a></li>
+
+<li><a href="#">Conexões</a></li>
+
+<li><a href="#">Mangueiras</a></li>
+
+</ul>
+
+</div>
+
+<div>
+
+<h3>
+
+Atendimento
+
+</h3>
+
+<ul>
+
+<li>Segunda à Sexta</li>
+
+<li>08h às 18h</li>
+
+<li>(00) 0000-0000</li>
+
+<li>contato@empresa.com</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div class="footer-payments">
+
+<div class="payments">
+
+<img src="Assets/icons/visa.svg" alt="">
+<img src="Assets/icons/mastercard.svg" alt="">
+<img src="Assets/icons/pix.svg" alt="">
+<img src="Assets/icons/boleto.svg" alt="">
+
+</div>
+
+</div>
+
+</div>
+
+<div class="copyright">
+
+<p>
+
+© 2026 Amazonia Force • Todos os direitos reservados.
+
+</p>
+
+</div>
+
+</footer>
+
+<!-- ========================================================= -->
+<!-- MODAL LOGIN -->
+<!-- ========================================================= -->
+
+<div id="loginModal" class="modal">
+
+<div class="modal-content">
+
+<button class="close-modal">
+
+×
+
+</button>
+
+<h2>
+
+Entrar
+
+</h2>
+
+<form>
+
+<input
+type="email"
+placeholder="Seu e-mail">
+
+<input
+type="password"
+placeholder="Sua senha">
+
+<button>
+
+Entrar
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+<!-- Toast -->
+
+<div id="toast" class="toast">
+
+Produto adicionado ao carrinho.
+
+</div>
+
+<!-- Back To Top -->
+
+<button id="backToTop">
+
+↑
+
+</button>
+
+</main>
+
+<script src="script.js"></script>
+
+</body>
 
 </html>

@@ -1,0 +1,13 @@
+[
+  {
+    "id":1,
+    "nome":"Cilindro Pneumático ISO",
+    "categoria":"Cilindros",
+    "marca":"SMC",
+    "preco":289.90,
+    "precoAntigo":359.90,
+    "imagem":"Assets/img/produtos/cilindro01.png",
+    "desconto":20,
+    "avaliacao":5
+  }
+]
