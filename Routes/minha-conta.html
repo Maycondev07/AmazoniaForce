@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Minha Conta | Amazônia Force</title>
+
+    <meta name="description"
+        content="Gerencie sua conta, pedidos, endereços e favoritos.">
+
+    <link rel="icon" href="../Assets/icons/favicon.ico">
+
+    <link rel="stylesheet" href="../style.css">
+
+</head>
+
+<body>
+
+    <!-- Loader -->
+
+    <div class="loader">
+
+        <span></span>
+
+    </div>
+
+    <!-- TopBar -->
+
+    <div class="top-bar">
+
+        <div class="container">
+
+            <div class="top-left">
+
+                <span>🚚 Frete para todo Brasil</span>
+
+                <span>✔ Compra Segura</span>
+
+            </div>
+
+            <div class="top-right">
+
+                <a href="contato.html">Contato</a>
+
+                <a href="sobre.html">Sobre</a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Header -->
+
+    <header id="header">
+
+        <div class="container">
+
+            <div class="header-grid">
+
+                <a href="../index.html" class="logo">
+
+                    <img src="../Assets/img/logo.png"
+                        alt="Amazonia Force">
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- Breadcrumb -->
+
+    <section class="breadcrumb">
+
+        <div class="container">
+
+            <a href="../index.html">
+
+                Home
+
+            </a>
+
+            <span>/</span>
+
+            <strong>
+
+                Minha Conta
+
+            </strong>
+
+        </div>
+
+    </section>
+
+    <!-- Painel -->
+
+    <section class="account-page">
+
+        <div class="container">
+
+            <div class="account-layout">
+
+                <!-- Menu -->
+
+                <aside class="account-sidebar">
+
+                    <div class="account-user">
+
+                        <img
+                            src="../Assets/img/user.png"
+                            alt="Usuário">
+
+                        <h3>
+
+                            Olá, Cliente
+
+                        </h3>
+
+                        <span>
+
+                            cliente@email.com
+
+                        </span>
+
+                    </div>
+
+                    <ul class="account-menu">
+
+                        <li class="active">
+
+                            <a href="#dashboard">
+
+                                📊 Dashboard
+
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            <a href="#orders">
+
+                                📦 Meus Pedidos
+
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            <a href="#favorites">
+
+                                ❤️ Favoritos
+
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            <a href="#addresses">
+
+                                📍 Endereços
+
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            <a href="#payments">
+
+                                💳 Pagamentos
+
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            <a href="#profile">
+
+                                👤 Dados Pessoais
+
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            <a href="#security">
+
+                                🔒 Segurança
+
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            <a href="#notifications">
+
+                                🔔 Notificações
+
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            <a href="login.html">
+
+                                🚪 Sair
+
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </aside>
+
+                <!-- Conteúdo -->
+
+                <main class="account-content">
+
+                    <section id="dashboard">
+
+                        <h1>
+
+                            Minha Conta
+
+                        </h1>
+
+                        <p>
+
+                            Bem-vindo ao painel da Amazônia Force.
+
+                        </p>
+
+                        <div class="account-cards">
+
+                            <div class="account-card">
+
+                                <h3>
+
+                                    Pedidos
+
+                                </h3>
+
+                                <strong>
+
+                                    12
+
+                                </strong>
+
+                            </div>
+
+                            <div class="account-card">
+
+                                <h3>
+
+                                    Favoritos
+
+                                </h3>
+
+                                <strong>
+
+                                    8
+
+                                </strong>
+
+                            </div>
+
+                            <div class="account-card">
+
+                                <h3>
+
+                                    Endereços
+
+                                </h3>
+
+                                <strong>
+
+                                    3
+
+                                </strong>
+
+                            </div>
+
+                            <div class="account-card">
+
+                                <h3>
+
+                                    Cupons
+
+                                </h3>
+
+                                <strong>
+
+                                    5
+
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </section>
+                    <!-- Meus Pedidos -->
+
+                    <section id="orders" class="account-section">
+
+                        <h2>
+
+                            Meus Pedidos
+
+                        </h2>
+
+                        <table class="orders-table">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>Pedido</th>
+
+                                    <th>Data</th>
+
+                                    <th>Status</th>
+
+                                    <th>Total</th>
+
+                                    <th>Ações</th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+
+                                    <td>#100254</td>
+
+                                    <td>15/07/2026</td>
+
+                                    <td>
+
+                                        <span class="status delivered">
+
+                                            Entregue
+
+                                        </span>
+
+                                    </td>
+
+                                    <td>R$ 389,90</td>
+
+                                    <td>
+
+                                        <button class="btn-secondary">
+
+                                            Ver Pedido
+
+                                        </button>
+
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td>#100255</td>
+
+                                    <td>18/07/2026</td>
+
+                                    <td>
+
+                                        <span class="status shipping">
+
+                                            Em Transporte
+
+                                        </span>
+
+                                    </td>
+
+                                    <td>R$ 199,90</td>
+
+                                    <td>
+
+                                        <button class="btn-secondary">
+
+                                            Rastrear
+
+                                        </button>
+
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </section>
+
+                    <!-- Favoritos -->
+
+                    <section id="favorites" class="account-section">
+
+                        <h2>
+
+                            Lista de Favoritos
+
+                        </h2>
+
+                        <div class="favorites-grid">
+
+                            <!-- Produtos carregados via JavaScript -->
+
+                        </div>
+
+                    </section>
+
+                    <!-- Endereços -->
+
+                    <section id="addresses" class="account-section">
+
+                        <h2>
+
+                            Meus Endereços
+
+                        </h2>
+
+                        <div class="address-card">
+
+                            <strong>
+
+                                Endereço Principal
+
+                            </strong>
+
+                            <p>
+
+                                Rua Exemplo, 123
+
+                            </p>
+
+                            <p>
+
+                                Centro • São Paulo/SP
+
+                            </p>
+
+                            <p>
+
+                                CEP: 00000-000
+
+                            </p>
+
+                            <button class="btn-outline">
+
+                                Editar
+
+                            </button>
+
+                        </div>
+
+                    </section>
+
+                    <!-- Pagamentos -->
+
+                    <section id="payments" class="account-section">
+
+                        <h2>
+
+                            Formas de Pagamento
+
+                        </h2>
+
+                        <div class="payment-card">
+
+                            💳 Visa Final 4589
+
+                        </div>
+
+                        <button class="btn-outline">
+
+                            Adicionar Cartão
+
+                        </button>
+
+                    </section>
+
+                    <!-- Dados -->
+
+                    <section id="profile" class="account-section">
+
+                        <h2>
+
+                            Dados Pessoais
+
+                        </h2>
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+
+                                <label>
+
+                                    Nome
+
+                                </label>
+
+                                <input
+                                    type="text"
+                                    value="Cliente Teste">
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label>
+
+                                    E-mail
+
+                                </label>
+
+                                <input
+                                    type="email"
+                                    value="cliente@email.com">
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label>
+
+                                    Telefone
+
+                                </label>
+
+                                <input
+                                    type="tel">
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label>
+
+                                    CPF
+
+                                </label>
+
+                                <input
+                                    type="text">
+
+                            </div>
+
+                        </div>
+
+                        <button class="btn-primary">
+
+                            Salvar Alterações
+
+                        </button>
+
+                    </section>
+
+                    <!-- Segurança -->
+
+                    <section id="security" class="account-section">
+
+                        <h2>
+
+                            Alterar Senha
+
+                        </h2>
+
+                        <div class="form-grid">
+
+                            <div class="form-group">
+
+                                <label>
+
+                                    Senha Atual
+
+                                </label>
+
+                                <input
+                                    type="password">
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label>
+
+                                    Nova Senha
+
+                                </label>
+
+                                <input
+                                    type="password">
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label>
+
+                                    Confirmar Senha
+
+                                </label>
+
+                                <input
+                                    type="password">
+
+                            </div>
+
+                        </div>
+
+                        <button class="btn-primary">
+
+                            Atualizar Senha
+
+                        </button>
+
+                    </section>
+
+                    <!-- Notificações -->
+
+                    <section id="notifications" class="account-section">
+
+                        <h2>
+
+                            Preferências
+
+                        </h2>
+
+                        <label>
+
+                            <input
+                                type="checkbox"
+                                checked>
+
+                            Receber ofertas por e-mail
+
+                        </label>
+
+                        <br><br>
+
+                        <label>
+
+                            <input
+                                type="checkbox"
+                                checked>
+
+                            Receber atualizações dos pedidos
+
+                        </label>
+
+                    </section>
+
+                </main>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Newsletter -->
+
+    <section class="newsletter">
+
+        <div class="container">
+
+            <div class="newsletter-content">
+
+                <div class="newsletter-text">
+
+                    <h2>
+
+                        Receba ofertas exclusivas
+
+                    </h2>
+
+                    <p>
+
+                        Cadastre seu e-mail para receber promoções,
+                        lançamentos e novidades da Amazônia Force.
+
+                    </p>
+
+                </div>
+
+                <form class="newsletter-form">
+
+                    <input
+                        type="email"
+                        placeholder="Digite seu e-mail"
+                        required>
+
+                    <button
+                        type="submit"
+                        class="btn-primary">
+
+                        Assinar
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div class="footer-column">
+
+                    <img
+                        src="../Assets/img/logo-white.png"
+                        class="footer-logo"
+                        alt="Amazonia Force">
+
+                    <p>
+
+                        Soluções completas em pneumática,
+                        automação industrial e equipamentos
+                        para sua empresa.
+
+                    </p>
+
+                </div>
+
+                <div class="footer-column">
+
+                    <h4>
+
+                        Institucional
+
+                    </h4>
+
+                    <ul>
+
+                        <li><a href="sobre.html">Sobre Nós</a></li>
+
+                        <li><a href="contato.html">Contato</a></li>
+
+                        <li><a href="ofertas.html">Ofertas</a></li>
+
+                    </ul>
+
+                </div>
+
+                <div class="footer-column">
+
+                    <h4>
+
+                        Minha Conta
+
+                    </h4>
+
+                    <ul>
+
+                        <li><a href="minha-conta.html">Painel</a></li>
+
+                        <li><a href="carrinho.html">Carrinho</a></li>
+
+                        <li><a href="favoritos.html">Favoritos</a></li>
+
+                        <li><a href="login.html">Sair</a></li>
+
+                    </ul>
+
+                </div>
+
+                <div class="footer-column">
+
+                    <h4>
+
+                        Atendimento
+
+                    </h4>
+
+                    <ul>
+
+                        <li>(11) 4000-0000</li>
+
+                        <li>contato@amazoniaforce.com</li>
+
+                        <li>Segunda à Sexta</li>
+
+                        <li>08:00 às 18:00</li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+
+                © 2026 Amazônia Force — Todos os direitos reservados.
+
+            </div>
+
+        </div>
+
+    </footer>
+
+    <!-- Mini Carrinho -->
+
+    <aside class="mini-cart">
+
+        <div class="mini-cart-header">
+
+            <h3>
+
+                Meu Carrinho
+
+            </h3>
+
+            <button
+                onclick="toggleCart()">
+
+                ✕
+
+            </button>
+
+        </div>
+
+        <div class="cart-items">
+
+        </div>
+
+        <div class="mini-cart-footer">
+
+            <strong>
+
+                Total
+
+            </strong>
+
+            <span class="cart-total">
+
+                R$ 0,00
+
+            </span>
+
+            <a
+                href="checkout.html"
+                class="btn-primary">
+
+                Finalizar Compra
+
+            </a>
+
+        </div>
+
+    </aside>
+
+    <!-- Modal Login -->
+
+    <div
+        class="modal"
+        id="loginModal">
+
+        <div class="modal-content">
+
+            <button
+                class="modal-close"
+                onclick="closeLogin()">
+
+                ✕
+
+            </button>
+
+            <h2>
+
+                Entrar
+
+            </h2>
+
+            <form>
+
+                <input
+                    type="email"
+                    placeholder="E-mail">
+
+                <input
+                    type="password"
+                    placeholder="Senha">
+
+                <button
+                    class="btn-primary">
+
+                    Entrar
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- Toast -->
+
+    <div
+        id="toast"
+        class="toast">
+
+    </div>
+
+    <!-- Back To Top -->
+
+    <button
+        id="backToTop">
+
+        ↑
+
+    </button>
+
+    <script src="../script.js"></script>
+
+</body>
+
+</html>
