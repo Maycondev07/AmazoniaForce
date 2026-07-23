@@ -14,6 +14,15 @@
     <meta name="description"
         content="Finalize sua compra com segurança na Amazônia Force.">
 
+    <meta name="robots" content="noindex,follow">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Checkout | Amazônia Force">
+    <meta property="og:description" content="Finalize sua compra com segurança na Amazônia Force.">
+    <meta property="og:image" content="../Assets/img/logo.png">
+    <meta property="og:url" content="https://amazoniaforce.com.br/Routes/checkout.html">
+    <meta name="twitter:card" content="summary_large_image">
+
     <link rel="icon" href="../Assets/icons/favicon.ico">
 
     <link rel="stylesheet" href="../style.css">
@@ -30,7 +39,7 @@
 
     </div>
 
-    <!-- TopBar -->
+    <!-- Top Bar -->
 
     <div class="top-bar">
 
@@ -886,7 +895,7 @@
 
     <!-- Mini Carrinho -->
 
-    <aside class="mini-cart">
+    <div class="mini-cart">
 
         <div class="mini-cart-header">
 
@@ -896,9 +905,7 @@
 
             </h3>
 
-            <button
-                class="close-cart"
-                onclick="toggleCart()">
+            <button onclick="toggleCart()">
 
                 ✕
 
@@ -914,21 +921,17 @@
 
         <div class="mini-cart-footer">
 
-            <div class="cart-total">
+            <strong>
 
-                <strong>
+                Total
 
-                    Total:
+            </strong>
 
-                </strong>
+            <span class="cart-total">
 
-                <span>
+                R$ 0,00
 
-                    R$ 0,00
-
-                </span>
-
-            </div>
+            </span>
 
             <a
                 href="checkout.html"
@@ -940,7 +943,7 @@
 
         </div>
 
-    </aside>
+    </div>
 
     <!-- Modal Login -->
 

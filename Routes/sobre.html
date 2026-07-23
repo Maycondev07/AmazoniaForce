@@ -16,6 +16,15 @@
     <meta name="description"
         content="Conheça a história da Amazônia Force e descubra nossa missão, valores e compromisso com qualidade e performance.">
 
+    <meta name="robots" content="index,follow">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Sobre | Amazônia Force">
+    <meta property="og:description" content="Conheça a história da Amazônia Force e descubra nossa missão, valores e compromisso com qualidade e performance.">
+    <meta property="og:image" content="../Assets/img/logo.png">
+    <meta property="og:url" content="https://amazoniaforce.com.br/Routes/sobre.html">
+    <meta name="twitter:card" content="summary_large_image">
+
     <link rel="icon"
         href="../Assets/icons/favicon.ico">
 
@@ -34,7 +43,7 @@
 
     </div>
 
-    <!-- TopBar -->
+    <!-- Top Bar -->
 
     <div class="top-bar">
 
@@ -42,25 +51,19 @@
 
             <div class="top-left">
 
-                <span>🚚 Frete para todo Brasil</span>
+                <span>🚚 Frete para todo o Brasil</span>
 
-                <span>✔ Compra 100% Segura</span>
+                <span>✔ Atendimento Especializado</span>
 
             </div>
 
             <div class="top-right">
 
-                <a href="sobre.html">
+                <a href="contato.html">Contato</a>
 
-                    Sobre
+                <a href="sobre.html">Sobre</a>
 
-                </a>
-
-                <a href="login.html">
-
-                    Entrar
-
-                </a>
+                <a href="login.html">Entrar</a>
 
             </div>
 
@@ -76,35 +79,65 @@
 
             <div class="header-grid">
 
-                <a
-                    href="../index.html"
-                    class="logo">
+                <a href="../index.html" class="logo">
 
-                    <img
-                        src="../Assets/img/logo.png"
-                        alt="Amazonia Force">
+                    <img src="../Assets/img/logo.png" alt="Amazônia Force - Logo AF Pneumática">
 
                 </a>
 
-                <form class="search-bar">
+                <form id="searchForm" class="search-area" onsubmit="return false;">
 
-                    <input
-                        type="search"
-                        placeholder="Buscar produtos...">
+                    <input type="search" id="searchInput" placeholder="Buscar mangueira, drywall, chave...">
 
-                    <button type="submit">
-
-                        🔍
-
-                    </button>
+                    <button type="submit" aria-label="Buscar">🔍</button>
 
                 </form>
+
+                <div class="header-actions">
+
+                    <button class="favorite-btn" aria-label="Favoritos">
+                        ❤
+                        <span class="favorite-count">0</span>
+                    </button>
+
+                    <button class="cart-btn" onclick="toggleCart()" aria-label="Ver Carrinho">
+                        🛒
+                        <span class="cart-count">0</span>
+                    </button>
+
+                </div>
 
             </div>
 
         </div>
 
     </header>
+
+    <!-- Navbar -->
+
+    <nav class="navbar">
+
+        <div class="container">
+
+            <button class="menu-toggle">☰ Categorias</button>
+
+            <ul>
+
+                <li><a href="../index.html">Home</a></li>
+
+                <li><a href="produtos.html">Produtos</a></li>
+
+                <li><a href="categoria.html">Categorias</a></li>
+
+                <li><a href="ofertas.html">Ofertas</a></li>
+
+                <li><a href="contato.html">Contato</a></li>
+
+            </ul>
+
+        </div>
+
+    </nav>
 
     <!-- Breadcrumb -->
 
@@ -146,8 +179,8 @@
 
                 <h1>
 
-                    Muito mais que suplementos.
-                    Somos parceiros da sua evolução.
+                    Muito mais que materiais de construção.
+                    Somos parceiros da sua obra.
 
                 </h1>
 
@@ -155,8 +188,8 @@
 
                     A Amazônia Force nasceu para oferecer produtos originais,
                     atendimento especializado e uma experiência de compra segura,
-                    ajudando milhares de brasileiros a alcançarem seus objetivos
-                    com confiança e qualidade.
+                    ajudando milhares de profissionais e empresas a executarem
+                    suas obras e projetos com confiança e qualidade.
 
                 </p>
 
@@ -218,10 +251,10 @@
 
                     <p>
 
-                        A Amazônia Force surgiu com o propósito de tornar os
-                        melhores suplementos alimentares acessíveis para atletas,
-                        praticantes de atividades físicas e pessoas que buscam uma
-                        vida mais saudável.
+                        A Amazônia Force surgiu com o propósito de tornar as
+                        melhores soluções em pneumática e materiais de construção
+                        acessíveis para indústrias, profissionais e pessoas que
+                        buscam qualidade e desempenho em suas obras.
 
                     </p>
 
@@ -236,9 +269,9 @@
 
                     <p>
 
-                        Mais do que vender suplementos, buscamos incentivar um
-                        estilo de vida saudável, acompanhando nossos clientes em
-                        cada etapa da sua evolução.
+                        Mais do que vender mangueiras, conexões e ferramentas,
+                        buscamos ser parceiros das nossas empresas e clientes,
+                        acompanhando cada etapa dos seus projetos.
 
                     </p>
 
@@ -292,9 +325,9 @@
 
                     <p>
 
-                        Oferecer suplementos alimentares originais e de alta
-                        qualidade, proporcionando uma experiência de compra
-                        segura, rápida e eficiente.
+                        Oferecer produtos pneumáticos e materiais de construção
+                        originais e de alta qualidade, proporcionando uma
+                        experiência de compra segura, rápida e eficiente.
 
                     </p>
 
@@ -316,8 +349,8 @@
 
                     <p>
 
-                        Ser uma das maiores referências em suplementação esportiva
-                        no Brasil, reconhecida pela confiança, inovação e
+                        Ser uma das maiores referências em pneumática e materiais
+                        de construção no Brasil, reconhecida pela confiança, inovação e
                         excelência no atendimento.
 
                     </p>
@@ -482,7 +515,7 @@
                     <p>
 
                         Nossa equipe está preparada para ajudar você a encontrar
-                        o suplemento ideal.
+                        a solução ideal.
 
                     </p>
 
@@ -535,7 +568,7 @@
 
                 <p>
 
-                    Trabalhamos diariamente para oferecer a melhor experiência em suplementação esportiva.
+                    Trabalhamos diariamente para oferecer a melhor experiência em pneumática e materiais de construção.
 
                 </p>
 
@@ -602,24 +635,20 @@
             <div class="brands-grid">
 
                 <img
-                    src="../Assets/img/brands/growth.png"
-                    alt="Growth Supplements">
+                    src="https://logo.clearbit.com/smcworld.com"
+                    alt="SMC">
 
                 <img
-                    src="../Assets/img/brands/max.png"
-                    alt="Max Titanium">
+                    src="https://logo.clearbit.com/festo.com"
+                    alt="Festo">
 
                 <img
-                    src="../Assets/img/brands/integral.png"
-                    alt="Integralmedica">
+                    src="https://logo.clearbit.com/parker.com"
+                    alt="Parker">
 
                 <img
-                    src="../Assets/img/brands/dux.png"
-                    alt="Dux Nutrition">
-
-                <img
-                    src="../Assets/img/brands/darklab.png"
-                    alt="Dark Lab">
+                    src="https://logo.clearbit.com/camozzi.com"
+                    alt="Camozzi">
 
             </div>
 
@@ -643,7 +672,7 @@
 
                 <p>
 
-                    Descubra suplementos de alta qualidade para potencializar seus resultados e conquistar seus objetivos.
+                    Descubra produtos de alta qualidade para potencializar suas obras e conquistar seus objetivos.
 
                 </p>
 
@@ -732,14 +761,14 @@
                 <div class="footer-column">
 
                     <img
-                        src="../Assets/img/logo.png"
+                        src="../Assets/img/logo-white.png"
                         alt="Amazonia Force"
                         class="footer-logo">
 
                     <p>
 
-                        Suplementos originais, atendimento especializado e
-                        qualidade para quem busca resultados reais.
+                        Especialistas em soluções pneumáticas e materiais de
+                        construção para indústria e obras de todos os portes.
 
                     </p>
 
@@ -777,9 +806,33 @@
 
                         <li>
 
-                            <a href="politica.html">
+                            <a href="ofertas.html">
 
-                                Política de Privacidade
+                                Ofertas
+
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <div class="footer-column">
+
+                    <h4>
+
+                        Minha Conta
+
+                    </h4>
+
+                    <ul>
+
+                        <li>
+
+                            <a href="login.html">
+
+                                Entrar
 
                             </a>
 
@@ -787,9 +840,19 @@
 
                         <li>
 
-                            <a href="termos.html">
+                            <a href="cadastro.html">
 
-                                Termos de Uso
+                                Criar Conta
+
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            <a href="minha-conta.html">
+
+                                Painel
 
                             </a>
 
@@ -837,44 +900,6 @@
 
                 </div>
 
-                <div class="footer-column">
-
-                    <h4>
-
-                        Redes Sociais
-
-                    </h4>
-
-                    <div class="social-icons">
-
-                        <a href="#">
-
-                            Facebook
-
-                        </a>
-
-                        <a href="#">
-
-                            Instagram
-
-                        </a>
-
-                        <a href="#">
-
-                            TikTok
-
-                        </a>
-
-                        <a href="#">
-
-                            YouTube
-
-                        </a>
-
-                    </div>
-
-                </div>
-
             </div>
 
             <div class="footer-bottom">
@@ -892,17 +917,54 @@
 
     </footer>
 
-    <!-- WhatsApp -->
+    <!-- Mini Carrinho -->
 
-    <a
-        href="https://wa.me/5511970263943"
-        class="whatsapp-float"
-        target="_blank"
-        aria-label="WhatsApp">
+    <div class="mini-cart">
 
-        💬
+        <div class="mini-cart-header">
+            <h3>Meu Carrinho</h3>
+            <button onclick="toggleCart()" aria-label="Fechar carrinho">✕</button>
+        </div>
 
-    </a>
+        <div class="cart-items"></div>
+
+        <div class="mini-cart-footer">
+            <strong>Total</strong>
+            <span class="cart-total">R$ 0,00</span>
+            <a href="checkout.html" class="btn-primary">Finalizar Compra</a>
+        </div>
+
+    </div>
+
+    <!-- Modal Login -->
+
+    <div class="modal" id="loginModal">
+
+        <div class="modal-content">
+
+            <button class="modal-close" onclick="closeLogin()">✕</button>
+
+            <h2>Entrar</h2>
+
+            <form onsubmit="return false;">
+                <input type="email" placeholder="E-mail">
+                <input type="password" placeholder="Senha">
+                <button class="btn-primary">Entrar</button>
+            </form>
+
+            <p>Ainda não possui conta? <a href="cadastro.html">Criar Conta</a></p>
+
+        </div>
+
+    </div>
+
+    <!-- Toast -->
+
+    <div class="toast" id="toast"></div>
+
+    <!-- Back To Top -->
+
+    <button id="backToTop">↑</button>
 
     <!-- Scripts -->
 

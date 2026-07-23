@@ -15,6 +15,15 @@
     <meta name="description"
         content="Confira as melhores ofertas da Amazônia Force.">
 
+    <meta name="robots" content="index,follow">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Ofertas | Amazônia Force">
+    <meta property="og:description" content="Confira as melhores ofertas da Amazônia Force.">
+    <meta property="og:image" content="../Assets/img/logo.png">
+    <meta property="og:url" content="https://amazoniaforce.com.br/Routes/ofertas.html">
+    <meta name="twitter:card" content="summary_large_image">
+
     <link rel="icon"
         href="../Assets/icons/favicon.ico">
 
@@ -41,31 +50,19 @@
 
             <div class="top-left">
 
-                <span>🚚 Frete para todo Brasil</span>
+                <span>🚚 Frete para todo o Brasil</span>
 
-                <span>✔ Compra 100% Segura</span>
+                <span>✔ Atendimento Especializado</span>
 
             </div>
 
             <div class="top-right">
 
-                <a href="contato.html">
+                <a href="contato.html">Contato</a>
 
-                    Contato
+                <a href="sobre.html">Sobre</a>
 
-                </a>
-
-                <a href="sobre.html">
-
-                    Sobre
-
-                </a>
-
-                <a href="login.html">
-
-                    Entrar
-
-                </a>
+                <a href="login.html">Entrar</a>
 
             </div>
 
@@ -81,35 +78,65 @@
 
             <div class="header-grid">
 
-                <a
-                    href="../index.html"
-                    class="logo">
+                <a href="../index.html" class="logo">
 
-                    <img
-                        src="../Assets/img/logo.png"
-                        alt="Amazonia Force">
+                    <img src="../Assets/img/logo.png" alt="Amazônia Force - Logo AF Pneumática">
 
                 </a>
 
-                <form class="search-bar">
+                <form id="searchForm" class="search-area" onsubmit="return false;">
 
-                    <input
-                        type="search"
-                        placeholder="Buscar produtos...">
+                    <input type="search" id="searchInput" placeholder="Buscar mangueira, drywall, chave...">
 
-                    <button type="submit">
-
-                        🔍
-
-                    </button>
+                    <button type="submit" aria-label="Buscar">🔍</button>
 
                 </form>
+
+                <div class="header-actions">
+
+                    <button class="favorite-btn" aria-label="Favoritos">
+                        ❤
+                        <span class="favorite-count">0</span>
+                    </button>
+
+                    <button class="cart-btn" onclick="toggleCart()" aria-label="Ver Carrinho">
+                        🛒
+                        <span class="cart-count">0</span>
+                    </button>
+
+                </div>
 
             </div>
 
         </div>
 
     </header>
+
+    <!-- Navbar -->
+
+    <nav class="navbar">
+
+        <div class="container">
+
+            <button class="menu-toggle">☰ Categorias</button>
+
+            <ul>
+
+                <li><a href="../index.html">Home</a></li>
+
+                <li><a href="produtos.html">Produtos</a></li>
+
+                <li><a href="categoria.html">Categorias</a></li>
+
+                <li><a href="ofertas.html" class="active">Ofertas</a></li>
+
+                <li><a href="contato.html">Contato</a></li>
+
+            </ul>
+
+        </div>
+
+    </nav>
 
     <!-- Breadcrumb -->
 
@@ -503,7 +530,7 @@
 
     <!-- Mini Carrinho -->
 
-    <aside class="mini-cart">
+    <div class="mini-cart">
 
         <div class="mini-cart-header">
 
@@ -551,7 +578,7 @@
 
         </div>
 
-    </aside>
+    </div>
 
     <!-- Modal Login -->
 
@@ -593,6 +620,13 @@
                 </button>
 
             </form>
+
+            <p>
+
+                Ainda não possui conta?
+                <a href="cadastro.html">Criar Conta</a>
+
+            </p>
 
         </div>
 
