@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Produtos | Amazônia Force</title>
+
+    <meta name="description"
+        content="Catálogo completo de produtos pneumáticos industriais.">
+
+    <link rel="icon" href="../Assets/icons/favicon.ico">
+
+    <link rel="stylesheet" href="../style.css">
+
+</head>
+
+<body>
+
+    <!-- Loader -->
+
+    <div class="loader">
+
+        <span></span>
+
+    </div>
+
+    <!-- Top Bar -->
+
+    <div class="top-bar">
+
+        <div class="container">
+
+            <div class="top-left">
+
+                <span>🚚 Frete para todo o Brasil</span>
+
+                <span>✔ Atendimento Especializado</span>
+
+            </div>
+
+            <div class="top-right">
+
+                <a href="contato.html">Contato</a>
+
+                <a href="sobre.html">Sobre</a>
+
+                <a href="login.html">Entrar</a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Header -->
+
+    <header id="header">
+
+        <div class="container">
+
+            <div class="header-grid">
+
+                <a href="../index.html" class="logo">
+
+                    <img
+                        src="../Assets/img/logo.png"
+                        alt="Amazonia Force">
+
+                </a>
+
+                <form class="search-area">
+
+                    <input
+                        type="search"
+                        placeholder="Pesquisar produtos...">
+
+                    <button>
+
+                        🔍
+
+                    </button>
+
+                </form>
+
+                <div class="header-actions">
+
+                    <button class="favorite-btn">
+
+                        ❤
+
+                        <span class="favorite-count">
+
+                            0
+
+                        </span>
+
+                    </button>
+
+                    <button
+                        class="cart-btn"
+                        onclick="toggleCart()">
+
+                        🛒
+
+                        <span class="cart-count">
+
+                            0
+
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- Navbar -->
+
+    <nav class="navbar">
+
+        <div class="container">
+
+            <button class="menu-toggle">
+
+                ☰
+
+            </button>
+
+            <ul>
+
+                <li><a href="../index.html">Home</a></li>
+
+                <li><a href="produtos.html" class="active">Produtos</a></li>
+
+                <li><a href="categoria.html">Categorias</a></li>
+
+                <li><a href="ofertas.html">Ofertas</a></li>
+
+                <li><a href="contato.html">Contato</a></li>
+
+            </ul>
+
+        </div>
+
+    </nav>
+
+    <!-- Breadcrumb -->
+
+    <section class="breadcrumb">
+
+        <div class="container">
+
+            <a href="../index.html">
+
+                Home
+
+            </a>
+
+            <span>/</span>
+
+            <strong>
+
+                Produtos
+
+            </strong>
+
+        </div>
+
+    </section>
+
+    <!-- Produtos -->
+
+    <section class="products-page">
+
+        <div class="container">
+
+            <div class="products-layout">
+
+                <!-- Sidebar -->
+
+                <aside class="filters">
+
+                    <h3>
+
+                        Filtrar Produtos
+
+                    </h3>
+
+                    <div class="filter-group">
+
+                        <h4>
+
+                            Categorias
+
+                        </h4>
+
+                        <label>
+
+                            <input type="checkbox">
+
+                            Cilindros
+
+                        </label>
+
+                        <label>
+
+                            <input type="checkbox">
+
+                            Válvulas
+
+                        </label>
+
+                        <label>
+
+                            <input type="checkbox">
+
+                            Conexões
+
+                        </label>
+
+                        <label>
+
+                            <input type="checkbox">
+
+                            Compressores
+
+                        </label>
+
+                        <label>
+
+                            <input type="checkbox">
+
+                            Mangueiras
+
+                        </label>
+
+                    </div>
+
+                    <div class="filter-group">
+
+                        <h4>
+
+                            Marcas
+
+                        </h4>
+
+                        <label><input type="checkbox"> SMC</label>
+
+                        <label><input type="checkbox"> Festo</label>
+
+                        <label><input type="checkbox"> Parker</label>
+
+                        <label><input type="checkbox"> Metal Work</label>
+
+                    </div>
+                                        <div class="filter-group">
+
+                        <h4>
+
+                            Faixa de Preço
+
+                        </h4>
+
+                        <label>
+
+                            <input type="radio" name="price">
+
+                            Até R$ 100
+
+                        </label>
+
+                        <label>
+
+                            <input type="radio" name="price">
+
+                            R$ 100 - R$ 300
+
+                        </label>
+
+                        <label>
+
+                            <input type="radio" name="price">
+
+                            R$ 300 - R$ 800
+
+                        </label>
+
+                        <label>
+
+                            <input type="radio" name="price">
+
+                            Acima de R$ 800
+
+                        </label>
+
+                    </div>
+
+                    <div class="filter-group">
+
+                        <h4>
+
+                            Avaliação
+
+                        </h4>
+
+                        <label>
+
+                            <input type="checkbox">
+
+                            ★★★★★
+
+                        </label>
+
+                        <label>
+
+                            <input type="checkbox">
+
+                            ★★★★☆
+
+                        </label>
+
+                        <label>
+
+                            <input type="checkbox">
+
+                            ★★★☆☆
+
+                        </label>
+
+                    </div>
+
+                    <button class="btn-primary filter-reset">
+
+                        Limpar Filtros
+
+                    </button>
+
+                </aside>
+
+                <!-- Conteúdo -->
+
+                <div class="products-content">
+
+                    <div class="products-toolbar">
+
+                        <div class="products-count">
+
+                            Mostrando
+
+                            <strong>
+
+                                24
+
+                            </strong>
+
+                            produtos
+
+                        </div>
+
+                        <div class="products-sort">
+
+                            <label>
+
+                                Ordenar por
+
+                            </label>
+
+                            <select id="sortProducts">
+
+                                <option value="popular">
+
+                                    Mais vendidos
+
+                                </option>
+
+                                <option value="recent">
+
+                                    Mais recentes
+
+                                </option>
+
+                                <option value="low">
+
+                                    Menor preço
+
+                                </option>
+
+                                <option value="high">
+
+                                    Maior preço
+
+                                </option>
+
+                                <option value="name">
+
+                                    A-Z
+
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Grid -->
+
+                    <div class="products-grid">
+
+                        <!-- Produtos carregados via JavaScript -->
+
+                    </div>
+
+                    <!-- Paginação -->
+
+                    <div class="pagination">
+
+                        <button class="page-btn">
+
+                            ←
+
+                        </button>
+
+                        <button class="page-btn active">
+
+                            1
+
+                        </button>
+
+                        <button class="page-btn">
+
+                            2
+
+                        </button>
+
+                        <button class="page-btn">
+
+                            3
+
+                        </button>
+
+                        <button class="page-btn">
+
+                            4
+
+                        </button>
+
+                        <button class="page-btn">
+
+                            →
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+        <!-- Newsletter -->
+
+    <section class="newsletter">
+
+        <div class="container">
+
+            <div class="newsletter-content">
+
+                <div class="newsletter-text">
+
+                    <h2>
+
+                        Receba nossas ofertas
+
+                    </h2>
+
+                    <p>
+
+                        Cadastre seu e-mail e fique por dentro das novidades, promoções e lançamentos da Amazônia Force.
+
+                    </p>
+
+                </div>
+
+                <form class="newsletter-form">
+
+                    <input
+                        type="email"
+                        placeholder="Digite seu e-mail"
+                        required>
+
+                    <button
+                        type="submit"
+                        class="btn-primary">
+
+                        Assinar
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div>
+
+                    <img
+                        src="../Assets/img/logo-white.png"
+                        class="footer-logo"
+                        alt="Amazonia Force">
+
+                    <p>
+
+                        Especialistas em soluções pneumáticas para indústria,
+                        automação e manutenção.
+
+                    </p>
+
+                </div>
+
+                <div>
+
+                    <h4>
+
+                        Institucional
+
+                    </h4>
+
+                    <ul>
+
+                        <li>
+
+                            <a href="sobre.html">
+
+                                Sobre Nós
+
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            <a href="contato.html">
+
+                                Contato
+
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            <a href="ofertas.html">
+
+                                Ofertas
+
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <div>
+
+                    <h4>
+
+                        Minha Conta
+
+                    </h4>
+
+                    <ul>
+
+                        <li>
+
+                            <a href="login.html">
+
+                                Entrar
+
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            <a href="cadastro.html">
+
+                                Criar Conta
+
+                            </a>
+
+                        </li>
+
+                        <li>
+
+                            <a href="minha-conta.html">
+
+                                Painel
+
+                            </a>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <div>
+
+                    <h4>
+
+                        Atendimento
+
+                    </h4>
+
+                    <ul>
+
+                        <li>
+
+                            (11) 4000-0000
+
+                        </li>
+
+                        <li>
+
+                            contato@amazoniaforce.com
+
+                        </li>
+
+                        <li>
+
+                            Segunda à Sexta
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+
+                © 2026 Amazônia Force — Todos os direitos reservados.
+
+            </div>
+
+        </div>
+
+    </footer>
+
+    <!-- Mini Carrinho -->
+
+    <div class="mini-cart">
+
+        <div class="mini-cart-header">
+
+            <h3>
+
+                Meu Carrinho
+
+            </h3>
+
+            <button onclick="toggleCart()">
+
+                ✕
+
+            </button>
+
+        </div>
+
+        <div class="cart-items">
+
+        </div>
+
+        <div class="mini-cart-footer">
+
+            <strong>
+
+                Total
+
+            </strong>
+
+            <span class="cart-total">
+
+                R$ 0,00
+
+            </span>
+
+            <a
+                href="checkout.html"
+                class="btn-primary">
+
+                Finalizar Compra
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- Modal Login -->
+
+    <div
+        class="modal"
+        id="loginModal">
+
+        <div class="modal-content">
+
+            <button
+                class="modal-close"
+                onclick="closeLogin()">
+
+                ✕
+
+            </button>
+
+            <h2>
+
+                Entrar
+
+            </h2>
+
+            <form>
+
+                <input
+                    type="email"
+                    placeholder="E-mail">
+
+                <input
+                    type="password"
+                    placeholder="Senha">
+
+                <button
+                    class="btn-primary">
+
+                    Entrar
+
+                </button>
+
+            </form>
+
+            <p>
+
+                Ainda não possui conta?
+
+                <a href="cadastro.html">
+
+                    Criar Conta
+
+                </a>
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- Toast -->
+
+    <div
+        class="toast"
+        id="toast">
+
+    </div>
+
+    <!-- Back To Top -->
+
+    <button
+        id="backToTop">
+
+        ↑
+
+    </button>
+
+    <script src="../script.js"></script>
+
+</body>
+
+</html>
