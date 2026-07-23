@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Ofertas | Amazônia Force</title>
+
+    <meta name="description"
+        content="Confira as melhores ofertas da Amazônia Force.">
+
+    <link rel="icon"
+        href="../Assets/icons/favicon.ico">
+
+    <link rel="stylesheet"
+        href="../style.css">
+
+</head>
+
+<body>
+
+    <!-- Loader -->
+
+    <div class="loader">
+
+        <span></span>
+
+    </div>
+
+    <!-- Top Bar -->
+
+    <div class="top-bar">
+
+        <div class="container">
+
+            <div class="top-left">
+
+                <span>🚚 Frete para todo Brasil</span>
+
+                <span>✔ Compra 100% Segura</span>
+
+            </div>
+
+            <div class="top-right">
+
+                <a href="contato.html">
+
+                    Contato
+
+                </a>
+
+                <a href="sobre.html">
+
+                    Sobre
+
+                </a>
+
+                <a href="login.html">
+
+                    Entrar
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Header -->
+
+    <header id="header">
+
+        <div class="container">
+
+            <div class="header-grid">
+
+                <a
+                    href="../index.html"
+                    class="logo">
+
+                    <img
+                        src="../Assets/img/logo.png"
+                        alt="Amazonia Force">
+
+                </a>
+
+                <form class="search-bar">
+
+                    <input
+                        type="search"
+                        placeholder="Buscar produtos...">
+
+                    <button type="submit">
+
+                        🔍
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- Breadcrumb -->
+
+    <section class="breadcrumb">
+
+        <div class="container">
+
+            <a href="../index.html">
+
+                Home
+
+            </a>
+
+            <span>/</span>
+
+            <strong>
+
+                Ofertas
+
+            </strong>
+
+        </div>
+
+    </section>
+
+    <!-- Banner -->
+
+    <section class="offers-banner">
+
+        <div class="container">
+
+            <div class="offers-banner-content">
+
+                <h1>
+
+                    🔥 Super Ofertas
+
+                </h1>
+
+                <p>
+
+                    Descontos imperdíveis por tempo limitado.
+
+                </p>
+
+                <div class="offer-countdown">
+
+                    <div>
+
+                        <strong id="days">
+
+                            00
+
+                        </strong>
+
+                        <span>Dias</span>
+
+                    </div>
+
+                    <div>
+
+                        <strong id="hours">
+
+                            00
+
+                        </strong>
+
+                        <span>Horas</span>
+
+                    </div>
+
+                    <div>
+
+                        <strong id="minutes">
+
+                            00
+
+                        </strong>
+
+                        <span>Minutos</span>
+
+                    </div>
+
+                    <div>
+
+                        <strong id="seconds">
+
+                            00
+
+                        </strong>
+
+                        <span>Segundos</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Conteúdo -->
+
+    <section class="offers-page">
+
+        <div class="container">
+
+            <div class="offers-layout">
+
+                <!-- Sidebar -->
+
+                <aside class="offers-sidebar">
+
+                    <h3>
+
+                        Filtrar Ofertas
+
+                    </h3>
+
+                    <div class="filter-group">
+
+                        <h4>
+
+                            Desconto
+
+                        </h4>
+
+                        <label><input type="checkbox"> 10% ou mais</label>
+
+                        <label><input type="checkbox"> 20% ou mais</label>
+
+                        <label><input type="checkbox"> 30% ou mais</label>
+
+                        <label><input type="checkbox"> 50% ou mais</label>
+
+                    </div>
+
+                    <div class="filter-group">
+
+                        <h4>
+
+                            Categoria
+
+                        </h4>
+
+                        <label><input type="checkbox"> Pneumática</label>
+
+                        <label><input type="checkbox"> Automação</label>
+
+                        <label><input type="checkbox"> Ferramentas</label>
+
+                        <label><input type="checkbox"> Compressores</label>
+
+                    </div>
+
+                </aside>
+
+                <!-- Produtos -->
+
+                <main class="offers-products">
+
+                    <div class="products-toolbar">
+
+                        <span>
+
+                            <strong>48</strong> ofertas encontradas
+
+                        </span>
+
+                        <select>
+
+                            <option>Maior Desconto</option>
+
+                            <option>Menor Preço</option>
+
+                            <option>Maior Preço</option>
+
+                            <option>Mais Vendidos</option>
+
+                        </select>
+
+                    </div>
+
+                    <div
+                        class="products-grid"
+                        id="offersGrid">
+
+                        <!-- Produtos carregados via JS -->
+
+                    </div>
+
+                    <div class="pagination">
+
+                        <button class="active">1</button>
+
+                        <button>2</button>
+
+                        <button>3</button>
+
+                        <button>Próxima →</button>
+
+                    </div>
+
+                </main>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Produtos Recomendados -->
+
+    <section class="related-products">
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>
+
+                    Produtos Recomendados
+
+                </h2>
+
+                <a href="produtos.html">
+
+                    Ver Todos
+
+                </a>
+
+            </div>
+
+            <div
+                class="products-grid"
+                id="recommendedProducts">
+
+                <!-- Produtos carregados via script.js -->
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Newsletter -->
+
+    <section class="newsletter">
+
+        <div class="container">
+
+            <div class="newsletter-content">
+
+                <div class="newsletter-text">
+
+                    <h2>
+
+                        Receba ofertas exclusivas
+
+                    </h2>
+
+                    <p>
+
+                        Cadastre seu e-mail para receber promoções, lançamentos e novidades da Amazônia Force.
+
+                    </p>
+
+                </div>
+
+                <form class="newsletter-form">
+
+                    <input
+                        type="email"
+                        placeholder="Digite seu e-mail"
+                        required>
+
+                    <button
+                        type="submit"
+                        class="btn-primary">
+
+                        Assinar
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <div class="footer-grid">
+
+                <div class="footer-column">
+
+                    <img
+                        src="../Assets/img/logo-white.png"
+                        class="footer-logo"
+                        alt="Amazonia Force">
+
+                    <p>
+
+                        Soluções em pneumática, automação industrial e equipamentos para profissionais e empresas.
+
+                    </p>
+
+                </div>
+
+                <div class="footer-column">
+
+                    <h4>
+
+                        Institucional
+
+                    </h4>
+
+                    <ul>
+
+                        <li><a href="sobre.html">Sobre Nós</a></li>
+
+                        <li><a href="contato.html">Contato</a></li>
+
+                        <li><a href="ofertas.html">Ofertas</a></li>
+
+                    </ul>
+
+                </div>
+
+                <div class="footer-column">
+
+                    <h4>
+
+                        Minha Conta
+
+                    </h4>
+
+                    <ul>
+
+                        <li><a href="login.html">Entrar</a></li>
+
+                        <li><a href="cadastro.html">Cadastrar</a></li>
+
+                        <li><a href="minha-conta.html">Minha Conta</a></li>
+
+                    </ul>
+
+                </div>
+
+                <div class="footer-column">
+
+                    <h4>
+
+                        Atendimento
+
+                    </h4>
+
+                    <ul>
+
+                        <li>(11) 4000-0000</li>
+
+                        <li>contato@amazoniaforce.com</li>
+
+                        <li>Segunda à Sexta</li>
+
+                        <li>08:00 às 18:00</li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+
+                © 2026 Amazônia Force — Todos os direitos reservados.
+
+            </div>
+
+        </div>
+
+    </footer>
+
+    <!-- Mini Carrinho -->
+
+    <aside class="mini-cart">
+
+        <div class="mini-cart-header">
+
+            <h3>
+
+                Meu Carrinho
+
+            </h3>
+
+            <button onclick="toggleCart()">
+
+                ✕
+
+            </button>
+
+        </div>
+
+        <div class="cart-items">
+
+            <!-- Itens via JavaScript -->
+
+        </div>
+
+        <div class="mini-cart-footer">
+
+            <strong>
+
+                Total
+
+            </strong>
+
+            <span class="cart-total">
+
+                R$ 0,00
+
+            </span>
+
+            <a
+                href="checkout.html"
+                class="btn-primary">
+
+                Finalizar Compra
+
+            </a>
+
+        </div>
+
+    </aside>
+
+    <!-- Modal Login -->
+
+    <div
+        class="modal"
+        id="loginModal">
+
+        <div class="modal-content">
+
+            <button
+                class="modal-close"
+                onclick="closeLogin()">
+
+                ✕
+
+            </button>
+
+            <h2>
+
+                Entrar
+
+            </h2>
+
+            <form>
+
+                <input
+                    type="email"
+                    placeholder="E-mail">
+
+                <input
+                    type="password"
+                    placeholder="Senha">
+
+                <button
+                    class="btn-primary">
+
+                    Entrar
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- Toast -->
+
+    <div
+        id="toast"
+        class="toast">
+
+    </div>
+
+    <!-- Back To Top -->
+
+    <button
+        id="backToTop">
+
+        ↑
+
+    </button>
+
+    <script src="../script.js"></script>
+
+</body>
+
+</html>
