@@ -1209,7 +1209,7 @@ img { max-width: 100%; display: block; }
     transition: var(--transition);
 }
 .modal-content button:hover { background: var(--af-blue-dark); }
-.close-modal {
+.modal-close {
     position: absolute;
     top: 1rem;
     right: 1.2rem;
@@ -1220,7 +1220,7 @@ img { max-width: 100%; display: block; }
     cursor: pointer;
     transition: var(--transition);
 }
-.close-modal:hover { color: var(--af-red); transform: rotate(90deg); }
+.modal-close:hover { color: var(--af-red); transform: rotate(90deg); }
 
 /* ==========================================================================
    TOAST & BACK TO TOP
