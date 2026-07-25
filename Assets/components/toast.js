@@ -4,7 +4,7 @@ class Toast{
 
         const toast=document.createElement("div");
 
-        toast.className=`toast ${type}`;
+        toast.className=`app-toast ${type}`;
 
         toast.innerHTML=message;
 

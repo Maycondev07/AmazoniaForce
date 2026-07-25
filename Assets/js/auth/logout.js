@@ -1,9 +1,13 @@
-document.addEventListener("click",(e)=>{
+document.addEventListener("click", (e) => {
 
-const btn=e.target.closest("[data-logout]");
+    const btn = e.target.closest("[data-logout]");
 
-if(!btn) return;
+    if (!btn) return;
 
-auth.logout();
+    e.preventDefault();
+
+    if (window.auth) {
+        window.auth.logout();
+    }
 
 });

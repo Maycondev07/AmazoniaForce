@@ -1,13 +1,16 @@
-// Assets/js/auth/guards.js
+/* ==========================================================
+   AMAZONIA FORCE
+   PROTEÇÃO DE ROTAS
+   Inclua este script em páginas que exigem login
+   (ex.: minha-conta.html, checkout.html).
+========================================================== */
 
-(async()=>{
+(async () => {
 
     const logged = await window.session.logged();
 
-    if(!logged){
-
-        window.location.href="login.html";
-
+    if (!logged) {
+        window.location.href = "login.html";
     }
 
 })();

@@ -1,27 +1,31 @@
-// Assets/js/auth/session.js
+/* ==========================================================
+   AMAZONIA FORCE
+   SESSÃO DO USUÁRIO (via Supabase Auth)
+   Requer supabase.js carregado antes deste arquivo.
+========================================================== */
 
-const session = {
+window.session = {
 
-    async user(){
-
-        const {
-
-            data:{user}
-
-        } = await window.supabaseClient.auth.getUser();
-
-        return user;
-
+    // Retorna a sessão ativa do Supabase (ou null)
+    async get() {
+        const { data, error } = await window.supabaseClient.auth.getSession();
+        if (error) {
+            console.error("Erro ao obter sessão:", error);
+            return null;
+        }
+        return data.session;
     },
 
-    async logged(){
+    // Retorna o usuário logado (ou null)
+    async user() {
+        const currentSession = await this.get();
+        return currentSession ? currentSession.user : null;
+    },
 
-        const user = await this.user();
-
-        return user !== null;
-
+    // true/false: existe usuário logado?
+    async logged() {
+        const currentSession = await this.get();
+        return currentSession !== null;
     }
 
 };
-
-window.session = session;
