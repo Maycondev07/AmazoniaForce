@@ -195,6 +195,8 @@
                             <input
                                 type="radio"
                                 name="tipo"
+                                id="tipoFisica"
+                                value="fisica"
                                 checked>
 
                             Pessoa Física
@@ -205,7 +207,9 @@
 
                             <input
                                 type="radio"
-                                name="tipo">
+                                name="tipo"
+                                id="tipoJuridica"
+                                value="juridica">
 
                             Pessoa Jurídica
 
@@ -219,7 +223,7 @@
 
                             <div class="form-group">
 
-                                <label>
+                                <label id="labelNome">
 
                                     Nome Completo
 
@@ -234,7 +238,7 @@
 
                             <div class="form-group">
 
-                                <label>
+                                <label id="labelDocumento">
 
                                     CPF
 
@@ -242,7 +246,8 @@
 
                                 <input
                                     type="text"
-                                    id="cpf"
+                                    id="documento"
+                                    placeholder="000.000.000-00"
                                     required>
 
                             </div>
@@ -256,7 +261,9 @@
                                 </label>
 
                                 <input
-                                    type="date">
+                                    type="date"
+                                    id="dataNascimento"
+                                    required>
 
                             </div>
 
@@ -270,7 +277,9 @@
 
                                 <input
                                     type="tel"
-                                    id="telefone">
+                                    id="telefone"
+                                    placeholder="(00) 00000-0000"
+                                    required>
 
                             </div>
 
@@ -293,20 +302,6 @@
 
                                 <label>
 
-                                    Confirmar E-mail
-
-                                </label>
-
-                                <input
-                                    type="email"
-                                    required>
-
-                            </div>
-
-                            <div class="form-group">
-
-                                <label>
-
                                     Senha
 
                                 </label>
@@ -315,154 +310,6 @@
                                     type="password"
                                     id="senha"
                                     required>
-
-                            </div>
-
-                            <div class="form-group">
-
-                                <label>
-
-                                    Confirmar Senha
-
-                                </label>
-
-                                <input
-                                    type="password"
-                                    id="confirmarSenha"
-                                    required>
-
-                            </div>
-
-                        </div>
-
-                        <h2>
-
-                            Endereço
-
-                        </h2>
-
-                        <div class="form-grid">
-
-                            <div class="form-group">
-
-                                <label>
-
-                                    CEP
-
-                                </label>
-
-                                <input
-                                    type="text"
-                                    placeholder="00000-000">
-
-                            </div>
-
-                            <div class="form-group">
-
-                                <label>
-
-                                    Endereço
-
-                                </label>
-
-                                <input
-                                    type="text">
-
-                            </div>
-
-                            <div class="form-group">
-
-                                <label>
-
-                                    Número
-
-                                </label>
-
-                                <input
-                                    type="text">
-
-                            </div>
-
-                            <div class="form-group">
-
-                                <label>
-
-                                    Complemento
-
-                                </label>
-
-                                <input
-                                    type="text">
-
-                            </div>
-
-                            <div class="form-group">
-
-                                <label>
-
-                                    Bairro
-
-                                </label>
-
-                                <input
-                                    type="text">
-
-                            </div>
-
-                            <div class="form-group">
-
-                                <label>
-
-                                    Cidade
-
-                                </label>
-
-                                <input
-                                    type="text">
-
-                            </div>
-
-                            <div class="form-group">
-
-                                <label>
-
-                                    Estado
-
-                                </label>
-
-                                <select>
-
-                                    <option>Selecione</option>
-
-                                    <option>AC</option>
-                                    <option>AL</option>
-                                    <option>AP</option>
-                                    <option>AM</option>
-                                    <option>BA</option>
-                                    <option>CE</option>
-                                    <option>DF</option>
-                                    <option>ES</option>
-                                    <option>GO</option>
-                                    <option>MA</option>
-                                    <option>MT</option>
-                                    <option>MS</option>
-                                    <option>MG</option>
-                                    <option>PA</option>
-                                    <option>PB</option>
-                                    <option>PR</option>
-                                    <option>PE</option>
-                                    <option>PI</option>
-                                    <option>RJ</option>
-                                    <option>RN</option>
-                                    <option>RS</option>
-                                    <option>RO</option>
-                                    <option>RR</option>
-                                    <option>SC</option>
-                                    <option>SP</option>
-                                    <option>SE</option>
-                                    <option>TO</option>
-
-                                </select>
 
                             </div>
 
@@ -875,6 +722,7 @@
     <script src="../Assets/components/loading.js"></script>
     <script src="../Assets/components/validator.js"></script>
     <script src="../Assets/js/auth/register.js"></script>
+    <script src="../Assets/js/auth/social.js"></script>
 
     <script src="../Assets/js/busca.js"></script>
 

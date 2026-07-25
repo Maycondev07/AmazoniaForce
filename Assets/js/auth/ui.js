@@ -9,13 +9,19 @@
 
     const user = await window.session.user();
 
+    // Cobre o login social (Google/Facebook): esse fluxo não passa por
+    // auth.login()/register(), então garantimos aqui que o perfil existe.
+    if (user) {
+        await window.auth.ensureProfile(user);
+    }
+
     // Header: troca "Entrar" por "Minha Conta" quando logado
     const loginBtn = document.querySelector("#loginButton");
     if (loginBtn && user) {
         loginBtn.textContent = "Minha Conta";
         loginBtn.href = loginBtn.getAttribute("href").includes("/Routes/")
             ? "Routes/minha-conta.html"
-            : "Routes/minha-conta.html";
+            : "minha-conta.html";
     }
 
     // Links visíveis só para administradores (ex.: "Painel Admin" em Minha Conta)
