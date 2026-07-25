@@ -1,0 +1,35 @@
+.loading{
+
+pointer-events:none;
+
+opacity:.7;
+
+}
+
+.loading-spinner{
+
+width:20px;
+
+height:20px;
+
+border-radius:50%;
+
+border:3px solid rgba(255,255,255,.3);
+
+border-top-color:#fff;
+
+animation:spin .7s linear infinite;
+
+display:inline-block;
+
+}
+
+@keyframes spin{
+
+100%{
+
+transform:rotate(360deg);
+
+}
+
+}

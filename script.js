@@ -222,3 +222,14 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => toast.classList.remove('show'), 3000);
     }
 });
+
+const btn =
+document.getElementById("btnCadastro");
+
+btn.disabled=true;
+
+btn.innerHTML="Criando...";
+
+btn.disabled=false;
+
+btn.innerHTML="Criar Conta";
