@@ -26,6 +26,7 @@
     <link rel="icon" href="../Assets/icons/favicon.ico">
 
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../Assets/css/toast.css">
 
 </head>
 
@@ -211,16 +212,8 @@
 
                         </h4>
 
-                        <ul>
-
-                            <li><label><input type="checkbox"> Pneumática</label></li>
-
-                            <li><label><input type="checkbox"> Automação</label></li>
-
-                            <li><label><input type="checkbox"> Ferramentas</label></li>
-
-                            <li><label><input type="checkbox"> Compressores</label></li>
-
+                        <ul id="filterCategorias">
+                            <!-- Populado dinamicamente com as categorias que realmente existem -->
                         </ul>
 
                     </div>
@@ -229,14 +222,17 @@
 
                         <h4>
 
-                            Faixa de Preço
+                            Faixa de Preço <span id="filterPriceValue" style="color:var(--af-steel); font-weight:400;"></span>
 
                         </h4>
 
                         <input
                             type="range"
+                            id="filterPriceRange"
                             min="0"
-                            max="5000">
+                            max="5000"
+                            step="10"
+                            value="5000">
 
                     </div>
 
@@ -248,19 +244,17 @@
 
                         </h4>
 
-                        <ul>
-
-                            <li><label><input type="checkbox"> Festo</label></li>
-
-                            <li><label><input type="checkbox"> Parker</label></li>
-
-                            <li><label><input type="checkbox"> SMC</label></li>
-
-                            <li><label><input type="checkbox"> Metal Work</label></li>
-
+                        <ul id="filterMarcas">
+                            <!-- Populado dinamicamente com as marcas que realmente existem -->
                         </ul>
 
                     </div>
+
+                    <button class="btn-primary filter-reset" id="filterReset" style="width:100%;">
+
+                        Limpar Filtros
+
+                    </button>
 
                 </aside>
 
@@ -272,21 +266,19 @@
 
                         <span>
 
-                            Exibindo <strong>24</strong> produtos
+                            Exibindo <strong id="productsCountNumber">0</strong> produtos
 
                         </span>
 
-                        <select>
+                        <select id="sortProducts">
 
-                            <option>Mais Relevantes</option>
+                            <option value="recent">Mais recentes</option>
 
-                            <option>Menor Preço</option>
+                            <option value="low">Menor Preço</option>
 
-                            <option>Maior Preço</option>
+                            <option value="high">Maior Preço</option>
 
-                            <option>Mais Vendidos</option>
-
-                            <option>Lançamentos</option>
+                            <option value="name">A-Z</option>
 
                         </select>
 
@@ -294,11 +286,10 @@
 
                     <div
                         class="products-grid"
-                        id="categoryProducts"
-                        data-products-source="categoria">
+                        id="categoryProducts">
 
-                        <!-- Produtos carregados dinamicamente via Assets/js/produtos-loader.js
-                             (filtra pelo parâmetro ?categoria= na URL) -->
+                        <!-- Produtos carregados dinamicamente via Assets/js/filtros.js
+                             (filtra pela categoria escolhida na URL ?categoria=) -->
 
                     </div>
 
@@ -626,9 +617,14 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../Assets/js/auth/supabase.js"></script>
     <script src="../Assets/js/auth/session.js"></script>
+    <script src="../Assets/components/toast.js"></script>
+    <script src="../Assets/js/cart.js"></script>
     <script src="../Assets/js/auth/auth.js"></script>
     <script src="../Assets/js/auth/ui.js"></script>
     <script src="../Assets/js/produtos-loader.js"></script>
+    <script src="../Assets/js/filtros.js"></script>
+
+    <script src="../Assets/js/busca.js"></script>
 
 </body>
 

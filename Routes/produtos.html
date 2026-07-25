@@ -26,6 +26,7 @@
     <link rel="icon" href="../Assets/icons/favicon.ico">
 
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../Assets/css/toast.css">
 
 </head>
 
@@ -83,17 +84,11 @@
 
                 </a>
 
-                <form class="search-area">
+                <form id="searchForm" class="search-area" onsubmit="return false;">
 
-                    <input
-                        type="search"
-                        placeholder="Pesquisar produtos...">
+                    <input type="search" id="searchInput" placeholder="Buscar mangueira, drywall, chave...">
 
-                    <button>
-
-                        🔍
-
-                    </button>
+                    <button type="submit" aria-label="Buscar">🔍</button>
 
                 </form>
 
@@ -213,45 +208,9 @@
 
                         </h4>
 
-                        <label>
-
-                            <input type="checkbox">
-
-                            Cilindros
-
-                        </label>
-
-                        <label>
-
-                            <input type="checkbox">
-
-                            Válvulas
-
-                        </label>
-
-                        <label>
-
-                            <input type="checkbox">
-
-                            Conexões
-
-                        </label>
-
-                        <label>
-
-                            <input type="checkbox">
-
-                            Compressores
-
-                        </label>
-
-                        <label>
-
-                            <input type="checkbox">
-
-                            Mangueiras
-
-                        </label>
+                        <div id="filterCategorias">
+                            <!-- Populado dinamicamente com as categorias que realmente existem -->
+                        </div>
 
                     </div>
 
@@ -263,17 +222,13 @@
 
                         </h4>
 
-                        <label><input type="checkbox"> SMC</label>
-
-                        <label><input type="checkbox"> Festo</label>
-
-                        <label><input type="checkbox"> Parker</label>
-
-                        <label><input type="checkbox"> Metal Work</label>
+                        <div id="filterMarcas">
+                            <!-- Populado dinamicamente com as marcas que realmente existem -->
+                        </div>
 
                     </div>
 
-                    <div class="filter-group">
+                    <div class="filter-group" id="filterPrecoGroup">
 
                         <h4>
 
@@ -283,7 +238,7 @@
 
                         <label>
 
-                            <input type="radio" name="price">
+                            <input type="radio" name="price" data-min="0" data-max="100">
 
                             Até R$ 100
 
@@ -291,7 +246,7 @@
 
                         <label>
 
-                            <input type="radio" name="price">
+                            <input type="radio" name="price" data-min="100" data-max="300">
 
                             R$ 100 - R$ 300
 
@@ -299,7 +254,7 @@
 
                         <label>
 
-                            <input type="radio" name="price">
+                            <input type="radio" name="price" data-min="300" data-max="800">
 
                             R$ 300 - R$ 800
 
@@ -307,7 +262,7 @@
 
                         <label>
 
-                            <input type="radio" name="price">
+                            <input type="radio" name="price" data-min="800" data-max="999999">
 
                             Acima de R$ 800
 
@@ -315,41 +270,7 @@
 
                     </div>
 
-                    <div class="filter-group">
-
-                        <h4>
-
-                            Avaliação
-
-                        </h4>
-
-                        <label>
-
-                            <input type="checkbox">
-
-                            ★★★★★
-
-                        </label>
-
-                        <label>
-
-                            <input type="checkbox">
-
-                            ★★★★☆
-
-                        </label>
-
-                        <label>
-
-                            <input type="checkbox">
-
-                            ★★★☆☆
-
-                        </label>
-
-                    </div>
-
-                    <button class="btn-primary filter-reset">
+                    <button class="btn-primary filter-reset" id="filterReset">
 
                         Limpar Filtros
 
@@ -367,9 +288,9 @@
 
                             Mostrando
 
-                            <strong>
+                            <strong id="productsCountNumber">
 
-                                24
+                                0
 
                             </strong>
 
@@ -386,12 +307,6 @@
                             </label>
 
                             <select id="sortProducts">
-
-                                <option value="popular">
-
-                                    Mais vendidos
-
-                                </option>
 
                                 <option value="recent">
 
@@ -425,9 +340,9 @@
 
                     <!-- Grid -->
 
-                    <div class="products-grid" data-products-source="todos">
+                    <div class="products-grid" id="productsGrid">
 
-                        <!-- Produtos carregados dinamicamente via Assets/js/produtos-loader.js -->
+                        <!-- Produtos carregados dinamicamente via Assets/js/filtros.js -->
 
                     </div>
 
@@ -813,9 +728,14 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../Assets/js/auth/supabase.js"></script>
     <script src="../Assets/js/auth/session.js"></script>
+    <script src="../Assets/components/toast.js"></script>
+    <script src="../Assets/js/cart.js"></script>
     <script src="../Assets/js/auth/auth.js"></script>
     <script src="../Assets/js/auth/ui.js"></script>
     <script src="../Assets/js/produtos-loader.js"></script>
+    <script src="../Assets/js/filtros.js"></script>
+
+    <script src="../Assets/js/busca.js"></script>
 
 </body>
 

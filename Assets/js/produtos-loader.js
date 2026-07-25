@@ -85,15 +85,33 @@
             return;
         }
 
-        if (!data || !data.length) {
+        let resultados = data || [];
+
+        // Na página de produto, não faz sentido "produto relacionado" ser o próprio produto
+        const params = new URLSearchParams(window.location.search);
+        const idAtual = params.get("id");
+        if (idAtual) resultados = resultados.filter(p => p.id !== idAtual);
+
+        if (!resultados.length) {
             grid.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:var(--af-steel); padding:2rem 0;">Nenhum produto encontrado no momento.</p>`;
             return;
         }
 
-        grid.innerHTML = data.map(cardHtml).join("");
+        grid.innerHTML = resultados.map(cardHtml).join("");
         // O clique em ".btn-add-cart" já é tratado globalmente por
         // script.js via delegação de eventos — não precisa religar aqui.
     }
+
+    function renderCards(grid, produtos) {
+        if (!produtos || !produtos.length) {
+            grid.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:var(--af-steel); padding:2rem 0;">Nenhum produto encontrado com esses filtros.</p>`;
+            return;
+        }
+        grid.innerHTML = produtos.map(cardHtml).join("");
+    }
+
+    // Módulo reaproveitado por Assets/js/filtros.js (busca e filtros de produtos.html/categoria.html)
+    window.ProdutosLoader = { cardHtml, renderCards, formatarPreco };
 
     document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll("[data-products-source]").forEach(carregarGrid);

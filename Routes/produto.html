@@ -26,6 +26,7 @@
     <link rel="icon" href="../Assets/icons/favicon.ico">
 
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../Assets/css/toast.css">
 
 </head>
 
@@ -83,17 +84,11 @@
 
                 </a>
 
-                <form class="search-area">
+                <form id="searchForm" class="search-area" onsubmit="return false;">
 
-                    <input
-                        type="search"
-                        placeholder="Pesquisar produtos...">
+                    <input type="search" id="searchInput" placeholder="Buscar mangueira, drywall, chave...">
 
-                    <button>
-
-                        🔍
-
-                    </button>
+                    <button type="submit" aria-label="Buscar">🔍</button>
 
                 </form>
 
@@ -185,9 +180,9 @@
 
             <span>/</span>
 
-            <strong>
+            <strong id="breadcrumbProductName">
 
-                Cilindro Pneumático ISO
+                Carregando...
 
             </strong>
 
@@ -201,7 +196,11 @@
 
         <div class="container">
 
-            <div class="product-layout">
+            <div class="admin-empty" id="productNotFound" style="display:none;">
+                Produto não encontrado. <a href="produtos.html" style="color:var(--af-blue);">Voltar para o catálogo →</a>
+            </div>
+
+            <div class="product-layout" id="productLayout">
 
                 <!-- Galeria -->
 
@@ -210,33 +209,15 @@
                     <div class="gallery-main">
 
                         <img
-
                             id="mainImage"
-
-                            src="../Assets/img/produtos/cilindro01.png"
-
+                            src="../Assets/img/logo.png"
                             alt="Produto">
 
                     </div>
 
-                    <div class="gallery-thumbs">
+                    <div class="gallery-thumbs" id="galleryThumbs" style="display:none;">
 
-                        <img
-                            class="active"
-                            src="../Assets/img/produtos/cilindro01.png"
-                            alt="">
-
-                        <img
-                            src="../Assets/img/produtos/cilindro02.png"
-                            alt="">
-
-                        <img
-                            src="../Assets/img/produtos/cilindro03.png"
-                            alt="">
-
-                        <img
-                            src="../Assets/img/produtos/cilindro04.png"
-                            alt="">
+                        <!-- Só é exibido se o produto tiver mais de uma imagem -->
 
                     </div>
 
@@ -246,61 +227,29 @@
 
                 <div class="product-info-page">
 
-                    <span class="product-brand">
+                    <span class="product-brand" id="productBrand"></span>
 
-                        SMC Corporation
+                    <h1 id="productTitle">
 
-                    </span>
-
-                    <h1>
-
-                        Cilindro Pneumático ISO Série CP96
+                        Carregando produto...
 
                     </h1>
 
-                    <div class="product-rating">
+                    <div class="product-code" id="productCode"></div>
 
-                        ★★★★★
-
-                        <span>
-
-                            (124 avaliações)
-
-                        </span>
-
-                    </div>
-
-                    <div class="product-code">
-
-                        Código: CP96SDB50-100
-
-                    </div>
-
-                    <div class="product-stock in-stock">
-
-                        ✔ Produto em estoque
-
-                    </div>
+                    <div class="product-stock" id="productStock"></div>
 
                     <div class="product-price-area">
 
-                        <span class="old-price">
+                        <span class="old-price" id="productOldPrice" style="display:none;"></span>
 
-                            R$ 459,90
+                        <h2 id="productPrice">
 
-                        </span>
-
-                        <h2>
-
-                            R$ 349,90
+                            —
 
                         </h2>
 
-                        <small>
-
-                            ou 10x de R$ 34,99 sem juros
-
-                        </small>
+                        <small id="productInstallment"></small>
 
                     </div>
                     <!-- Quantidade -->
@@ -316,26 +265,26 @@
                         <div class="qty-control">
 
                             <button
-                                type="button"
-                                onclick="changeProductQty(-1)">
+                            type="button"
+                            id="qtyMinus">
 
-                                −
+                            −
 
-                            </button>
+                        </button>
 
-                            <input
-                                type="number"
-                                id="productQty"
-                                value="1"
-                                min="1">
+                        <input
+                            type="number"
+                            id="productQty"
+                            value="1"
+                            min="1">
 
-                            <button
-                                type="button"
-                                onclick="changeProductQty(1)">
+                        <button
+                            type="button"
+                            id="qtyPlus">
 
-                                +
+                            +
 
-                            </button>
+                        </button>
 
                         </div>
 
@@ -346,7 +295,8 @@
                     <div class="product-buttons">
 
                         <button
-                            class="btn-primary buy-now">
+                            class="btn-primary buy-now"
+                            id="buyNowBtn">
 
                             Comprar Agora
 
@@ -354,7 +304,7 @@
 
                         <button
                             class="btn-secondary add-cart"
-                            onclick="addToCart(1)">
+                            id="addCartBtn">
 
                             Adicionar ao Carrinho
 
@@ -368,14 +318,15 @@
 
                         <button
                             class="favorite-product"
-                            onclick="toggleFavorite(1)">
+                            id="favoriteBtn">
 
-                            ❤ Adicionar aos Favoritos
+                            🤍 Adicionar aos Favoritos
 
                         </button>
 
                         <button
-                            class="share-product">
+                            class="share-product"
+                            id="shareBtn">
 
                             ⤴ Compartilhar
 
@@ -543,7 +494,7 @@
 
     <!-- Informações do Produto -->
 
-    <section class="product-details">
+    <section class="product-details" id="productDetailsSection">
 
         <div class="container">
 
@@ -579,37 +530,11 @@
 
                 </h2>
 
-                <p>
+                <div id="descricaoTexto">
 
-                    O Cilindro Pneumático Série CP96 foi desenvolvido para aplicações industriais
-                    que exigem alta precisão, durabilidade e excelente desempenho em sistemas
-                    pneumáticos.
+                    <p>Carregando descrição...</p>
 
-                </p>
-
-                <p>
-
-                    Fabricado com materiais de alta resistência, possui vedações de longa vida útil,
-                    haste cromada e corpo em alumínio anodizado, proporcionando excelente resistência
-                    à corrosão e baixo atrito durante a operação.
-
-                </p>
-
-                <ul class="product-features">
-
-                    <li>✔ Alta resistência mecânica</li>
-
-                    <li>✔ Vedação de longa duração</li>
-
-                    <li>✔ Baixa manutenção</li>
-
-                    <li>✔ Compatível com padrão ISO</li>
-
-                    <li>✔ Fácil instalação</li>
-
-                    <li>✔ Excelente custo-benefício</li>
-
-                </ul>
+                </div>
 
             </div>
 
@@ -625,87 +550,9 @@
 
                 <table class="specifications-table">
 
-                    <tbody>
+                    <tbody id="specsTableBody">
 
-                        <tr>
-
-                            <td>Marca</td>
-
-                            <td>SMC</td>
-
-                        </tr>
-
-                        <tr>
-
-                            <td>Série</td>
-
-                            <td>CP96</td>
-
-                        </tr>
-
-                        <tr>
-
-                            <td>Diâmetro</td>
-
-                            <td>50 mm</td>
-
-                        </tr>
-
-                        <tr>
-
-                            <td>Curso</td>
-
-                            <td>100 mm</td>
-
-                        </tr>
-
-                        <tr>
-
-                            <td>Pressão Máxima</td>
-
-                            <td>1,0 MPa</td>
-
-                        </tr>
-
-                        <tr>
-
-                            <td>Pressão Mínima</td>
-
-                            <td>0,05 MPa</td>
-
-                        </tr>
-
-                        <tr>
-
-                            <td>Temperatura</td>
-
-                            <td>-10°C até 70°C</td>
-
-                        </tr>
-
-                        <tr>
-
-                            <td>Fluido</td>
-
-                            <td>Ar Comprimido</td>
-
-                        </tr>
-
-                        <tr>
-
-                            <td>Material</td>
-
-                            <td>Alumínio</td>
-
-                        </tr>
-
-                        <tr>
-
-                            <td>Garantia</td>
-
-                            <td>12 Meses</td>
-
-                        </tr>
+                        <!-- Preenchido dinamicamente com os dados reais do produto -->
 
                     </tbody>
 
@@ -723,83 +570,11 @@
 
                 </h2>
 
-                <div class="review-card">
+                <p style="color: var(--af-steel);">
 
-                    <div class="review-header">
+                    Ainda não há avaliações para este produto. Assim que o sistema de avaliações estiver disponível, elas aparecerão aqui.
 
-                        <strong>
-
-                            Carlos Henrique
-
-                        </strong>
-
-                        <span>
-
-                            ★★★★★
-
-                        </span>
-
-                    </div>
-
-                    <p>
-
-                        Produto excelente. Chegou muito rápido e possui ótima qualidade.
-
-                    </p>
-
-                </div>
-
-                <div class="review-card">
-
-                    <div class="review-header">
-
-                        <strong>
-
-                            Marcelo Souza
-
-                        </strong>
-
-                        <span>
-
-                            ★★★★★
-
-                        </span>
-
-                    </div>
-
-                    <p>
-
-                        Material original e acabamento impecável.
-
-                    </p>
-
-                </div>
-
-                <div class="review-card">
-
-                    <div class="review-header">
-
-                        <strong>
-
-                            André Lima
-
-                        </strong>
-
-                        <span>
-
-                            ★★★★☆
-
-                        </span>
-
-                    </div>
-
-                    <p>
-
-                        Excelente custo-benefício. Recomendo.
-
-                    </p>
-
-                </div>
+                </p>
 
             </div>
 
@@ -1202,9 +977,14 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../Assets/js/auth/supabase.js"></script>
     <script src="../Assets/js/auth/session.js"></script>
+    <script src="../Assets/components/toast.js"></script>
+    <script src="../Assets/js/cart.js"></script>
     <script src="../Assets/js/auth/auth.js"></script>
     <script src="../Assets/js/auth/ui.js"></script>
     <script src="../Assets/js/produtos-loader.js"></script>
+    <script src="../Assets/js/produto-detalhe.js"></script>
+
+    <script src="../Assets/js/busca.js"></script>
 
 </body>
 

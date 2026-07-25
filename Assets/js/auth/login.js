@@ -30,9 +30,18 @@ return;
 
 Toast.show("Login realizado.","success");
 
+let destino = "minha-conta.html";
+try {
+    const salvo = localStorage.getItem("redirectAfterLogin");
+    if (salvo) {
+        destino = salvo;
+        localStorage.removeItem("redirectAfterLogin");
+    }
+} catch (e) { /* ignore */ }
+
 setTimeout(()=>{
 
-window.location.href="minha-conta.html";
+window.location.href=destino;
 
 },1200);
 
