@@ -2,17 +2,15 @@
 
 Este documento explica como colocar o sistema no ar. É só fazer uma vez.
 
-## 1) Rodar o script do banco de dados
+## 1) Rodar os scripts do banco de dados
 
-1. Acesse o painel do seu projeto em https://supabase.com/dashboard
-2. Vá em **SQL Editor** → **New query**
-3. Abra o arquivo `database/setup-produtos.sql` (nesta pasta do projeto), copie todo o conteúdo e cole lá
-4. Clique em **Run**
+Na ordem, no **SQL Editor** do Supabase:
 
-Isso cria:
-- a tabela `produtos` (com política de segurança: qualquer visitante só vê produtos ativos; só admins podem criar/editar/excluir)
-- o campo `is_admin` na tabela `profiles` que já existia (usada no login)
-- um bucket de armazenamento chamado `produtos`, público, para as fotos
+1. `database/setup-produtos.sql`
+2. `database/setup-funcionalidades.sql`
+3. `database/setup-perfil.sql`
+
+(Se você já rodou os dois primeiros antes, só falta rodar o `setup-perfil.sql`.)
 
 ## 2) Criar sua conta e virar administrador
 
@@ -49,8 +47,15 @@ Depois de cadastrados, os produtos aparecem sozinhos, sem precisar editar HTML:
 | `Routes/ofertas.html` | produtos que têm "Preço Antigo" preenchido (ou seja, em promoção) |
 | `Routes/checkout.html` e `Routes/produto.html` | uma vitrine de destaques no rodapé da página |
 
-## O que ainda é manual (próximos passos possíveis)
+## O que já é 100% funcional
 
-- **`Routes/produto.html`** (página de detalhe de um produto específico) ainda mostra um produto de exemplo fixo — ainda não busca o produto certo pelo `?id=` da URL. Consigo fazer isso a seguir se quiser.
-- Os filtros da barra lateral em `produtos.html`/`categoria.html` (checkboxes de marca, faixa de preço) ainda são só visuais, não filtram de verdade — também dá pra ligar.
-- O carrinho de compras continua "de mentira" (não salva nada, é só pra mostrar visualmente) — se quiser um carrinho de verdade que persiste, isso também precisaria do banco de dados.
+- **Carrinho**: persiste no banco por usuário logado, soma certo, sobrevive a recarregar a página. Frete é uma estimativa simples (não é integração real com transportadora) e cupom valida contra a tabela `cupons`.
+- **Página de produto**: abre o produto certo pelo link (`produto.html?id=...`), com dados reais — sem avaliação fake, sem especificação inventada.
+- **Filtros e busca** em Produtos/Categoria: categorias e marcas vêm dos produtos que existem de verdade; preço, ordenação e busca funcionam de verdade.
+- **Minha Conta**: pedidos (lista real, vazia até o checkout existir), favoritos (adicionar/remover de verdade), endereços (cadastrar/editar/excluir de verdade), dados pessoais e troca de senha (reais), preferências de notificação (salvas de verdade). "Formas de pagamento" foi deixado como aviso honesto — cartão é inserido direto no checkout, não guardamos número de cartão em lugar nenhum (isso exigiria um gateway de pagamento de verdade).
+
+## O que ainda falta
+
+- **Checkout** — hoje ainda não gera pedido de verdade (é a próxima etapa).
+- **Formulário de Contato** — ainda não envia a mensagem de verdade.
+- Paginação em Produtos/Categoria ainda é só visual (não pagina de verdade — só relevante se o catálogo crescer muito).

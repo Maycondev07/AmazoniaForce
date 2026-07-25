@@ -326,9 +326,9 @@
 
                                 </h3>
 
-                                <strong>
+                                <strong id="statPedidos">
 
-                                    12
+                                    0
 
                                 </strong>
 
@@ -342,9 +342,9 @@
 
                                 </h3>
 
-                                <strong>
+                                <strong id="statFavoritos">
 
-                                    8
+                                    0
 
                                 </strong>
 
@@ -358,9 +358,9 @@
 
                                 </h3>
 
-                                <strong>
+                                <strong id="statEnderecos">
 
-                                    3
+                                    0
 
                                 </strong>
 
@@ -370,13 +370,13 @@
 
                                 <h3>
 
-                                    Cupons
+                                    Itens no Carrinho
 
                                 </h3>
 
-                                <strong>
+                                <strong id="statCarrinho">
 
-                                    5
+                                    0
 
                                 </strong>
 
@@ -409,77 +409,19 @@
 
                                     <th>Total</th>
 
-                                    <th>Ações</th>
-
                                 </tr>
 
                             </thead>
 
-                            <tbody>
-
-                                <tr>
-
-                                    <td>#100254</td>
-
-                                    <td>15/07/2026</td>
-
-                                    <td>
-
-                                        <span class="status delivered">
-
-                                            Entregue
-
-                                        </span>
-
-                                    </td>
-
-                                    <td>R$ 389,90</td>
-
-                                    <td>
-
-                                        <button class="btn-secondary">
-
-                                            Ver Pedido
-
-                                        </button>
-
-                                    </td>
-
-                                </tr>
-
-                                <tr>
-
-                                    <td>#100255</td>
-
-                                    <td>18/07/2026</td>
-
-                                    <td>
-
-                                        <span class="status shipping">
-
-                                            Em Transporte
-
-                                        </span>
-
-                                    </td>
-
-                                    <td>R$ 199,90</td>
-
-                                    <td>
-
-                                        <button class="btn-secondary">
-
-                                            Rastrear
-
-                                        </button>
-
-                                    </td>
-
-                                </tr>
-
-                            </tbody>
+                            <tbody id="ordersTableBody"></tbody>
 
                         </table>
+
+                        <p id="ordersEmpty" class="admin-empty" style="display:none;">
+
+                            Você ainda não fez nenhum pedido. <a href="produtos.html" style="color:var(--af-blue);">Ver produtos →</a>
+
+                        </p>
 
                     </section>
 
@@ -493,11 +435,17 @@
 
                         </h2>
 
-                        <div class="favorites-grid">
+                        <div class="favorites-grid" id="favoritesGrid">
 
-                            <!-- Produtos carregados via JavaScript -->
+                            <!-- Produtos carregados via Assets/js/minha-conta.js -->
 
                         </div>
+
+                        <p id="favoritesEmpty" class="admin-empty" style="display:none;">
+
+                            Você ainda não adicionou nenhum produto aos favoritos.
+
+                        </p>
 
                     </section>
 
@@ -511,39 +459,92 @@
 
                         </h2>
 
-                        <div class="address-card">
-
-                            <strong>
-
-                                Endereço Principal
-
-                            </strong>
-
-                            <p>
-
-                                Rua Exemplo, 123
-
-                            </p>
-
-                            <p>
-
-                                Centro • São Paulo/SP
-
-                            </p>
-
-                            <p>
-
-                                CEP: 00000-000
-
-                            </p>
-
-                            <button class="btn-outline">
-
-                                Editar
-
-                            </button>
-
+                        <div id="addressesList">
+                            <!-- Endereços carregados via Assets/js/minha-conta.js -->
                         </div>
+
+                        <p id="addressesEmpty" class="admin-empty" style="display:none;">
+
+                            Você ainda não cadastrou nenhum endereço.
+
+                        </p>
+
+                        <button class="btn-outline" id="addAddressBtn" type="button">
+
+                            + Adicionar Endereço
+
+                        </button>
+
+                        <form id="addressForm" style="display:none; margin-top:1.5rem;">
+
+                            <input type="hidden" id="addressId">
+
+                            <div class="form-grid">
+
+                                <div class="form-group">
+                                    <label>Apelido (ex.: Casa, Trabalho)</label>
+                                    <input type="text" id="addressApelido">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Destinatário</label>
+                                    <input type="text" id="addressDestinatario">
+                                </div>
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>CEP</label>
+                                    <input type="text" id="addressCep">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Número</label>
+                                    <input type="text" id="addressNumero">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Rua</label>
+                                <input type="text" id="addressRua">
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Complemento</label>
+                                    <input type="text" id="addressComplemento">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Bairro</label>
+                                    <input type="text" id="addressBairro">
+                                </div>
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label>Cidade</label>
+                                    <input type="text" id="addressCidade">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Estado</label>
+                                    <input type="text" id="addressEstado" maxlength="2" placeholder="SP">
+                                </div>
+                            </div>
+
+                            <div class="checkbox-group">
+                                <label>
+                                    <input type="checkbox" id="addressPadrao">
+                                    Definir como endereço padrão
+                                </label>
+                            </div>
+
+                            <div class="admin-form-actions">
+                                <button type="submit" class="btn-primary" id="addressSaveBtn">Salvar Endereço</button>
+                                <button type="button" class="btn-outline" id="addressCancelBtn">Cancelar</button>
+                            </div>
+                        </form>
 
                     </section>
 
@@ -557,17 +558,11 @@
 
                         </h2>
 
-                        <div class="payment-card">
+                        <p style="color: var(--af-steel);">
 
-                            💳 Visa Final 4589
+                            Ainda não há um cartão salvo. As formas de pagamento são escolhidas na hora de finalizar a compra, no checkout.
 
-                        </div>
-
-                        <button class="btn-outline">
-
-                            Adicionar Cartão
-
-                        </button>
+                        </p>
 
                     </section>
 
@@ -593,7 +588,7 @@
 
                                 <input
                                     type="text"
-                                    value="Cliente Teste">
+                                    id="profileNome">
 
                             </div>
 
@@ -607,7 +602,9 @@
 
                                 <input
                                     type="email"
-                                    value="cliente@email.com">
+                                    id="profileEmail"
+                                    disabled
+                                    title="Para trocar o e-mail de login, entre em contato com o suporte.">
 
                             </div>
 
@@ -620,7 +617,8 @@
                                 </label>
 
                                 <input
-                                    type="tel">
+                                    type="tel"
+                                    id="profileTelefone">
 
                             </div>
 
@@ -633,13 +631,14 @@
                                 </label>
 
                                 <input
-                                    type="text">
+                                    type="text"
+                                    id="profileCpf">
 
                             </div>
 
                         </div>
 
-                        <button class="btn-primary">
+                        <button class="btn-primary" id="profileSaveBtn">
 
                             Salvar Alterações
 
@@ -668,7 +667,8 @@
                                 </label>
 
                                 <input
-                                    type="password">
+                                    type="password"
+                                    id="senhaAtual">
 
                             </div>
 
@@ -681,7 +681,8 @@
                                 </label>
 
                                 <input
-                                    type="password">
+                                    type="password"
+                                    id="novaSenha">
 
                             </div>
 
@@ -694,13 +695,14 @@
                                 </label>
 
                                 <input
-                                    type="password">
+                                    type="password"
+                                    id="confirmarNovaSenha">
 
                             </div>
 
                         </div>
 
-                        <button class="btn-primary">
+                        <button class="btn-primary" id="securitySaveBtn">
 
                             Atualizar Senha
 
@@ -722,7 +724,7 @@
 
                             <input
                                 type="checkbox"
-                                checked>
+                                id="notifOfertas">
 
                             Receber ofertas por e-mail
 
@@ -734,7 +736,7 @@
 
                             <input
                                 type="checkbox"
-                                checked>
+                                id="notifPedidos">
 
                             Receber atualizações dos pedidos
 
@@ -857,7 +859,7 @@
 
                         <li><a href="carrinho.html">Carrinho</a></li>
 
-                        <li><a href="favoritos.html">Favoritos</a></li>
+                        <li><a href="minha-conta.html#favorites">Favoritos</a></li>
 
                         <li><a href="#" data-logout>Sair</a></li>
 
@@ -1031,6 +1033,7 @@
     <script src="../Assets/components/toast.js"></script>
     <script src="../Assets/js/cart.js"></script>
     <script src="../Assets/components/loading.js"></script>
+    <script src="../Assets/js/minha-conta.js"></script>
 
     <script src="../Assets/js/busca.js"></script>
 
