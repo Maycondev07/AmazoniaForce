@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gerenciar Produtos | Amazônia Force</title>
+
+    <meta name="description" content="Painel administrativo de produtos da Amazônia Force.">
+
+    <meta name="robots" content="noindex,nofollow">
+
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../Assets/css/auth.css">
+    <link rel="stylesheet" href="../Assets/css/loading.css">
+    <link rel="stylesheet" href="../Assets/css/toast.css">
+
+    <link rel="icon" href="../Assets/icons/favicon.ico">
+
+</head>
+
+<body>
+
+    <!-- Loader -->
+    <div class="loader">
+        <span></span>
+    </div>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-left">
+                <span>🛠 Painel Administrativo</span>
+            </div>
+            <div class="top-right">
+                <a href="minha-conta.html">Minha Conta</a>
+                <a href="../index.html">Ver Site</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <div class="header-grid">
+                <a href="../index.html" class="logo">
+                    <img src="../Assets/img/logo.png" alt="Amazônia Force - Logo AF Pneumática">
+                </a>
+                <div></div>
+                <div class="header-actions">
+                    <a href="minha-conta.html" class="btn-outline">Sair do Painel</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb">
+        <div class="container">
+            <a href="../index.html">Home</a>
+            <span>/</span>
+            <a href="minha-conta.html">Minha Conta</a>
+            <span>/</span>
+            <strong>Gerenciar Produtos</strong>
+        </div>
+    </section>
+
+    <!-- Painel -->
+    <section class="admin-page">
+        <div class="container">
+
+            <div class="admin-header">
+                <h1>Gerenciar Produtos</h1>
+                <p>Cadastre, edite e remova os produtos exibidos no site.</p>
+            </div>
+
+            <div class="admin-layout">
+
+                <!-- Formulário -->
+                <div class="admin-card admin-form-card">
+                    <h2 id="produtoFormTitle">Novo Produto</h2>
+
+                    <form id="produtoForm">
+                        <input type="hidden" id="produtoId">
+                        <input type="hidden" id="produtoImagemUrl">
+
+                        <div class="admin-image-upload">
+                            <div class="admin-image-preview" id="imagemPreview">📦</div>
+                            <label class="file-btn">
+                                Escolher Imagem
+                                <input type="file" id="produtoImagem" accept="image/*">
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Nome do Produto</label>
+                            <input type="text" id="produtoNome" required>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Categoria</label>
+                                <input type="text" id="produtoCategoria" placeholder="Ex.: Cilindros">
+                            </div>
+                            <div class="form-group">
+                                <label>Marca</label>
+                                <input type="text" id="produtoMarca" placeholder="Ex.: SMC">
+                            </div>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Código</label>
+                                <input type="text" id="produtoCodigo">
+                            </div>
+                            <div class="form-group">
+                                <label>Estoque</label>
+                                <input type="number" id="produtoEstoque" min="0" value="0">
+                            </div>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Preço (R$)</label>
+                                <input type="number" id="produtoPreco" min="0" step="0.01" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Preço Antigo (opcional)</label>
+                                <input type="number" id="produtoPrecoAntigo" min="0" step="0.01">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Descrição</label>
+                            <textarea id="produtoDescricao" rows="4"></textarea>
+                        </div>
+
+                        <div class="admin-toggle-row">
+                            <label>
+                                <input type="checkbox" id="produtoDestaque">
+                                Produto em destaque
+                            </label>
+                            <label>
+                                <input type="checkbox" id="produtoAtivo" checked>
+                                Visível no site
+                            </label>
+                        </div>
+
+                        <div class="admin-form-actions">
+                            <button type="submit" class="btn-primary" id="produtoSubmitBtn">Cadastrar Produto</button>
+                            <button type="button" class="btn-outline" id="produtoCancelBtn" style="display:none;">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Listagem -->
+                <div class="admin-card">
+                    <h2>Produtos Cadastrados</h2>
+
+                    <div class="admin-toolbar">
+                        <input type="search" id="produtoSearch" placeholder="Buscar por nome ou categoria...">
+                        <span class="admin-count" id="produtosCount">0 produtos</span>
+                    </div>
+
+                    <div class="admin-table-wrap">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Imagem</th>
+                                    <th>Produto</th>
+                                    <th>Preço</th>
+                                    <th>Estoque</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="produtosTableBody"></tbody>
+                        </table>
+                    </div>
+
+                    <div class="admin-empty" id="produtosEmpty" style="display:none;">
+                        Nenhum produto cadastrado ainda. Use o formulário ao lado para adicionar o primeiro.
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../Assets/js/auth/supabase.js"></script>
+    <script src="../Assets/js/auth/session.js"></script>
+    <script src="../Assets/js/auth/admin-guard.js"></script>
+    <script src="../Assets/js/auth/auth.js"></script>
+
+    <script src="../Assets/components/toast.js"></script>
+    <script src="../Assets/components/loading.js"></script>
+    <script src="../Assets/components/validator.js"></script>
+
+    <script src="../Assets/js/admin/produtos-admin.js"></script>
+
+    <script>
+        // Loader simples desta página (não usa script.js global)
+        document.addEventListener("DOMContentLoaded", () => {
+            const loader = document.querySelector(".loader");
+            if (loader) setTimeout(() => loader.classList.add("hide"), 300);
+        });
+    </script>
+
+</body>
+
+</html>

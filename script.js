@@ -93,18 +93,22 @@ document.addEventListener('DOMContentLoaded', () => {
     let cart = [];
     const cartItemsContainer = document.querySelector('.cart-items');
 
-    document.querySelectorAll('.btn-add-cart').forEach(button => {
-        button.addEventListener('click', (e) => {
-            const card = e.target.closest('.product-card');
-            if (!card) return;
-            const id = card.dataset.id;
-            const name = card.dataset.name;
-            const price = parseFloat(card.dataset.price);
-            const img = card.querySelector('img');
+    // Delegação de eventos: funciona também para cards de produto
+    // inseridos dinamicamente depois (ex.: produtos-loader.js)
+    document.addEventListener('click', (e) => {
+        const button = e.target.closest('.btn-add-cart');
+        if (!button) return;
 
-            if (img) animateFlyToCart(img);
-            addToCart(id, name, price);
-        });
+        const card = button.closest('.product-card');
+        if (!card) return;
+
+        const id = card.dataset.id;
+        const name = card.dataset.name;
+        const price = parseFloat(card.dataset.price);
+        const img = card.querySelector('img');
+
+        if (img) animateFlyToCart(img);
+        addToCart(id, name, price);
     });
 
     function animateFlyToCart(imgElement) {
@@ -222,14 +226,3 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => toast.classList.remove('show'), 3000);
     }
 });
-
-const btn =
-document.getElementById("btnCadastro");
-
-btn.disabled=true;
-
-btn.innerHTML="Criando...";
-
-btn.disabled=false;
-
-btn.innerHTML="Criar Conta";

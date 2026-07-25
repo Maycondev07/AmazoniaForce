@@ -294,9 +294,11 @@
 
                     <div
                         class="products-grid"
-                        id="categoryProducts">
+                        id="categoryProducts"
+                        data-products-source="categoria">
 
-                        <!-- Produtos carregados via script.js -->
+                        <!-- Produtos carregados dinamicamente via Assets/js/produtos-loader.js
+                             (filtra pelo parâmetro ?categoria= na URL) -->
 
                     </div>
 
@@ -346,9 +348,11 @@
 
             <div
                 class="products-grid"
-                id="featuredProducts">
+                id="featuredProducts"
+                data-products-source="destaque"
+                data-products-limit="4">
 
-                <!-- Carregado pelo script.js -->
+                <!-- Carregado dinamicamente via Assets/js/produtos-loader.js -->
 
             </div>
 
@@ -624,6 +628,7 @@
     <script src="../Assets/js/auth/session.js"></script>
     <script src="../Assets/js/auth/auth.js"></script>
     <script src="../Assets/js/auth/ui.js"></script>
+    <script src="../Assets/js/produtos-loader.js"></script>
 
 </body>
 

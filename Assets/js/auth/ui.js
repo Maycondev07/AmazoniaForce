@@ -18,6 +18,19 @@
             : "minha-conta.html";
     }
 
+    // Links visíveis só para administradores (ex.: "Painel Admin" em Minha Conta)
+    if (user) {
+        const { data: perfilAdmin } = await window.supabaseClient
+            .from("profiles")
+            .select("is_admin")
+            .eq("id", user.id)
+            .maybeSingle();
+
+        if (perfilAdmin && perfilAdmin.is_admin) {
+            document.querySelectorAll(".admin-only-link").forEach(el => el.classList.add("visible"));
+        }
+    }
+
     // Página Minha Conta: preenche nome e e-mail do usuário logado
     const nameEl = document.querySelector("#accountUserName");
     const emailEl = document.querySelector("#accountUserEmail");

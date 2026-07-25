@@ -324,9 +324,10 @@
 
                     <div
                         class="products-grid"
-                        id="offersGrid">
+                        id="offersGrid"
+                        data-products-source="ofertas">
 
-                        <!-- Produtos carregados via JS -->
+                        <!-- Produtos carregados dinamicamente via Assets/js/produtos-loader.js -->
 
                     </div>
 
@@ -374,9 +375,11 @@
 
             <div
                 class="products-grid"
-                id="recommendedProducts">
+                id="recommendedProducts"
+                data-products-source="destaque"
+                data-products-limit="4">
 
-                <!-- Produtos carregados via script.js -->
+                <!-- Produtos carregados dinamicamente via Assets/js/produtos-loader.js -->
 
             </div>
 
@@ -656,6 +659,7 @@
     <script src="../Assets/js/auth/session.js"></script>
     <script src="../Assets/js/auth/auth.js"></script>
     <script src="../Assets/js/auth/ui.js"></script>
+    <script src="../Assets/js/produtos-loader.js"></script>
 
 </body>
 

@@ -322,72 +322,8 @@
                     <a href="Routes/produtos.html" class="view-all">Ver todos →</a>
                 </div>
 
-                <div class="products-grid" id="productsGrid">
-
-                    <!-- Produto 1: Mangueira Pneumática -->
-                    <article class="product-card" data-id="p1" data-name="Mangueira Pneumática PU 8mm" data-price="145.90">
-                        <span class="badge orange">Mais Vendido</span>
-                        <div class="product-img">
-                            <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80" alt="Mangueira Pneumática PU 8mm em rolo" loading="lazy">
-                        </div>
-                        <div class="product-info">
-                            <h3>Mangueira Pneumática PU 8mm (Rolo 50m)</h3>
-                            <p class="description">Tubulação em poliuretano flexível para redes de ar comprimido e automação.</p>
-                            <div class="price-row">
-                                <span class="price">R$ 145,90</span>
-                                <button class="btn-add-cart" aria-label="Adicionar ao Carrinho">🛒 Comprar</button>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Produto 2: Chapa Drywall -->
-                    <article class="product-card" data-id="p2" data-name="Chapa Drywall Standard ST" data-price="58.00">
-                        <span class="badge blue">Pronta Entrega</span>
-                        <div class="product-img">
-                            <img src="https://images.unsplash.com/photo-1591588582259-91a4239b8a1a?auto=format&fit=crop&w=600&q=80" alt="Chapa de Drywall empilhada" loading="lazy">
-                        </div>
-                        <div class="product-info">
-                            <h3>Chapa Drywall Standard ST 1.20x2.40m</h3>
-                            <p class="description">Placa de gesso acartonado para divisórias e forros de ambientes secos internos.</p>
-                            <div class="price-row">
-                                <span class="price">R$ 58,00</span>
-                                <button class="btn-add-cart" aria-label="Adicionar ao Carrinho">🛒 Comprar</button>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Produto 3: Chave de Impacto Pneumática -->
-                    <article class="product-card" data-id="p3" data-name="Chave de Impacto Pneumática" data-price="320.00">
-                        <span class="badge yellow">Uso Industrial</span>
-                        <div class="product-img">
-                            <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=600&q=80" alt="Chave de impacto pneumática 1/2 polegada" loading="lazy">
-                        </div>
-                        <div class="product-info">
-                            <h3>Chave de Impacto Pneumática 1/2"</h3>
-                            <p class="description">Torque elevado para aperto rápido de parafusos e porcas em oficinas e estruturas.</p>
-                            <div class="price-row">
-                                <span class="price">R$ 320,00</span>
-                                <button class="btn-add-cart" aria-label="Adicionar ao Carrinho">🛒 Comprar</button>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Produto 4: Conexão Engate Rápido -->
-                    <article class="product-card" data-id="p4" data-name="Conexão Engate Rápido Pneumático" data-price="24.50">
-                        <span class="badge red">Estrutura</span>
-                        <div class="product-img">
-                            <img src="https://images.unsplash.com/photo-1620912189866-a4d5b5f7c1c4?auto=format&fit=crop&w=600&q=80" alt="Conexão de engate rápido pneumático em latão" loading="lazy">
-                        </div>
-                        <div class="product-info">
-                            <h3>Conexão Engate Rápido Pneumático</h3>
-                            <p class="description">Engate em latão niquelado de altíssima vedação para redes de ar comprimido.</p>
-                            <div class="price-row">
-                                <span class="price">R$ 24,50</span>
-                                <button class="btn-add-cart" aria-label="Adicionar ao Carrinho">🛒 Comprar</button>
-                            </div>
-                        </div>
-                    </article>
-
+                <div class="products-grid" id="productsGrid" data-products-source="destaque" data-products-limit="8">
+                    <!-- Produtos em destaque carregados dinamicamente via Assets/js/produtos-loader.js -->
                 </div>
 
             </div>
@@ -551,6 +487,7 @@
     <script src="Assets/js/auth/session.js"></script>
     <script src="Assets/js/auth/auth.js"></script>
     <script src="Assets/js/auth/ui.js"></script>
+    <script src="Assets/js/produtos-loader.js"></script>
 
 </body>
 
