@@ -17,22 +17,21 @@
 
 (function () {
 
-    function formatarPreco(valor) {
-        return `R$ ${Number(valor).toFixed(2).replace(".", ",")}`;
-    }
-
     function cardHtml(p) {
-        const temDesconto = p.preco_antigo && p.preco_antigo > p.preco;
         const badges = [];
         if (p.destaque) badges.push('<span class="badge orange">Destaque</span>');
-        if (p.em_oferta || temDesconto) badges.push('<span class="badge red">Oferta</span>');
+        if (p.em_oferta) badges.push('<span class="badge red">Oferta</span>');
         const badgeHtml = badges.length ? `<div class="product-badges">${badges.join("")}</div>` : "";
 
         const imagem = p.imagem_url || "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=600&q=80";
-        const linkProduto = `produto.html?id=${p.id}`;
+
+        // O carregador roda tanto em index.html (raiz do site) quanto nas
+        // páginas dentro de /Routes/ — o link do produto precisa refletir isso.
+        const emRoutes = window.location.pathname.includes("/Routes/");
+        const linkProduto = `${emRoutes ? "" : "Routes/"}produto.html?id=${p.id}`;
 
         return `
-            <article class="product-card" data-id="${p.id}" data-name="${escapeAttr(p.nome)}" data-price="${p.preco}">
+            <article class="product-card" data-id="${p.id}" data-name="${escapeAttr(p.nome)}">
                 ${badgeHtml}
                 <a href="${linkProduto}" class="product-img">
                     <img src="${imagem}" alt="${escapeAttr(p.nome)}" loading="lazy">
@@ -41,11 +40,8 @@
                     <h3><a href="${linkProduto}" style="text-decoration:none; color:inherit;">${escapeHtml(p.nome)}</a></h3>
                     <p class="description">${escapeHtml(p.descricao || p.categoria || "")}</p>
                     <div class="price-row">
-                        <span class="price">
-                            ${temDesconto ? `<small style="display:block; text-decoration:line-through; color:var(--af-steel); font-weight:400; font-size:0.75rem;">${formatarPreco(p.preco_antigo)}</small>` : ""}
-                            ${formatarPreco(p.preco)}
-                        </span>
-                        <button class="btn-add-cart" aria-label="Adicionar ao Carrinho">🛒 Comprar</button>
+                        <span class="price price-consult">Consulte o valor com o vendedor</span>
+                        <button class="btn-add-cart" aria-label="Adicionar à lista">🛒 Adicionar</button>
                     </div>
                 </div>
             </article>
@@ -69,9 +65,7 @@
         if (source === "destaque") {
             query = query.eq("destaque", true);
         } else if (source === "ofertas") {
-            // Um produto aparece em Ofertas se o botão "Marcar como oferta"
-            // estiver ligado OU se tiver um preço antigo cadastrado (desconto).
-            query = query.or("em_oferta.eq.true,preco_antigo.not.is.null");
+            query = query.eq("em_oferta", true);
         } else if (source === "categoria") {
             const params = new URLSearchParams(window.location.search);
             const categoria = grid.dataset.productsCategoria || params.get("categoria");
@@ -81,10 +75,23 @@
         query = query.order("criado_em", { ascending: false });
         if (limite) query = query.limit(limite);
 
-        const { data, error } = await query;
+        let { data, error } = await query;
+
+        // Proteção: se a coluna "em_oferta" ainda não existir no banco (migração
+        // database/setup-variacoes-ofertas.sql pendente), refaz a busca de forma
+        // simples em vez de deixar a seção completamente vazia.
+        if (error && source === "ofertas") {
+            console.error("Erro ao carregar ofertas (tentando modo compatível):", error);
+            const fallback = await db.from("produtos").select("*").eq("ativo", true)
+                .order("criado_em", { ascending: false })
+                .limit(limite || 100);
+            data = fallback.data;
+            error = fallback.error;
+        }
 
         if (error) {
             console.error("Erro ao carregar produtos:", error);
+            grid.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:var(--af-steel); padding:2rem 0;">Não foi possível carregar os produtos agora.</p>`;
             return;
         }
 
@@ -114,7 +121,7 @@
     }
 
     // Módulo reaproveitado por Assets/js/filtros.js (busca e filtros de produtos.html/categoria.html)
-    window.ProdutosLoader = { cardHtml, renderCards, formatarPreco };
+    window.ProdutosLoader = { cardHtml, renderCards };
 
     document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll("[data-products-source]").forEach(carregarGrid);

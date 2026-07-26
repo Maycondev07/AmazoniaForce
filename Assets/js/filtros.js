@@ -19,9 +19,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const catContainer = document.getElementById("filterCategorias");
     const marcaContainer = document.getElementById("filterMarcas");
-    const priceGroup = document.getElementById("filterPrecoGroup");       // produtos.html (radios)
-    const priceRange = document.getElementById("filterPriceRange");       // categoria.html (slider)
-    const priceRangeValue = document.getElementById("filterPriceValue");
     const sortSelect = document.getElementById("sortProducts");
     const countEl = document.getElementById("productsCountNumber");
     const resetBtn = document.getElementById("filterReset");
@@ -85,22 +82,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (catContainer) catContainer.addEventListener("change", onFilterChange);
     if (marcaContainer) marcaContainer.addEventListener("change", onFilterChange);
     if (sortSelect) sortSelect.addEventListener("change", onFilterChange);
-    if (priceGroup) priceGroup.addEventListener("change", onFilterChange);
     if (searchInput) searchInput.addEventListener("input", onSearchInput);
-
-    if (priceRange) {
-        const atualizarLabel = () => { if (priceRangeValue) priceRangeValue.textContent = `Até R$ ${priceRange.value}`; };
-        atualizarLabel();
-        priceRange.addEventListener("input", atualizarLabel);
-        priceRange.addEventListener("change", onFilterChange);
-    }
 
     if (resetBtn) {
         resetBtn.addEventListener("click", () => {
             if (catContainer) catContainer.querySelectorAll("input").forEach(i => i.checked = false);
             if (marcaContainer) marcaContainer.querySelectorAll("input").forEach(i => i.checked = false);
-            if (priceGroup) priceGroup.querySelectorAll("input").forEach(i => i.checked = false);
-            if (priceRange) { priceRange.value = priceRange.max; if (priceRangeValue) priceRangeValue.textContent = `Até R$ ${priceRange.value}`; }
             if (searchInput) searchInput.value = "";
             if (sortSelect) sortSelect.value = "recent";
             executarBusca();
@@ -126,25 +113,13 @@ document.addEventListener("DOMContentLoaded", async () => {
             : [];
         if (marcasSelecionadas.length) query = query.in("marca", marcasSelecionadas);
 
-        if (priceGroup) {
-            const radio = priceGroup.querySelector("input:checked");
-            if (radio) {
-                query = query.gte("preco", Number(radio.dataset.min)).lte("preco", Number(radio.dataset.max));
-            }
-        }
-        if (priceRange) {
-            query = query.lte("preco", Number(priceRange.value));
-        }
-
         const termo = searchInput ? searchInput.value.trim() : "";
         if (termo) {
             query = query.or(`nome.ilike.%${termo}%,descricao.ilike.%${termo}%`);
         }
 
         const sortVal = sortSelect ? sortSelect.value : "recent";
-        if (sortVal === "low") query = query.order("preco", { ascending: true });
-        else if (sortVal === "high") query = query.order("preco", { ascending: false });
-        else if (sortVal === "name") query = query.order("nome", { ascending: true });
+        if (sortVal === "name") query = query.order("nome", { ascending: true });
         else query = query.order("criado_em", { ascending: false });
 
         const { data, error } = await query;

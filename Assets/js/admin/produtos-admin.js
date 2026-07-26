@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <span style="color:var(--af-steel); font-size:0.78rem;">${escapeHtml(p.categoria || "—")}</span>
                     ${qtdVariacoes ? `<br><span class="admin-badge variacoes">${qtdVariacoes} variação${qtdVariacoes === 1 ? "" : "ões"}</span>` : ""}
                 </td>
-                <td>R$ ${Number(p.preco).toFixed(2).replace(".", ",")}</td>
+                <td>${p.preco != null ? "R$ " + Number(p.preco).toFixed(2).replace(".", ",") : "—"}</td>
                 <td>${p.estoque ?? 0}</td>
                 <td>
                     <span class="admin-badge ${p.ativo ? "ativo" : "inativo"}">${p.ativo ? "Ativo" : "Inativo"}</span>
@@ -244,10 +244,6 @@ document.addEventListener("DOMContentLoaded", () => {
             Toast.show("Informe o nome do produto.", "error");
             return;
         }
-        if (!els.preco.value || Number(els.preco.value) <= 0) {
-            Toast.show("Informe um preço válido.", "error");
-            return;
-        }
 
         Loading.start(els.submitBtn, "Salvando...");
 
@@ -260,7 +256,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 marca: els.marca.value.trim() || null,
                 codigo: els.codigo.value.trim() || null,
                 estoque: parseInt(els.estoque.value || "0", 10),
-                preco: parseFloat(els.preco.value),
+                preco: els.preco.value ? parseFloat(els.preco.value) : null,
                 preco_antigo: els.precoAntigo.value ? parseFloat(els.precoAntigo.value) : null,
                 descricao: els.descricao.value.trim() || null,
                 imagem_url: imagemUrl,

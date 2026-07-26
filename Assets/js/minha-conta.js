@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     function escapeHtml(str) {
         return String(str || "").replace(/[&<>"']/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
     }
-    function formatarPreco(v) { return `R$ ${Number(v || 0).toFixed(2).replace(".", ",")}`; }
     function formatarData(iso) {
         const d = new Date(iso);
         return d.toLocaleDateString("pt-BR");
@@ -164,7 +163,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                     <td>#${p.id.slice(0, 8).toUpperCase()}</td>
                     <td>${formatarData(p.criado_em)}</td>
                     <td><span class="status ${statusClasse[p.status] || ""}">${statusLabel[p.status] || p.status}</span></td>
-                    <td>${formatarPreco(p.total)}</td>
                 </tr>
             `).join("");
         }
@@ -196,14 +194,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             const p = f.produtos;
             if (!p) return "";
             return `
-                <article class="product-card" data-id="${p.id}" data-name="${escapeHtml(p.nome)}" data-price="${p.preco}">
+                <article class="product-card" data-id="${p.id}" data-name="${escapeHtml(p.nome)}">
                     <a href="produto.html?id=${p.id}" class="product-img">
                         <img src="${p.imagem_url || '../Assets/img/logo.png'}" alt="${escapeHtml(p.nome)}" loading="lazy">
                     </a>
                     <div class="product-info">
                         <h3><a href="produto.html?id=${p.id}" style="text-decoration:none; color:inherit;">${escapeHtml(p.nome)}</a></h3>
                         <div class="price-row">
-                            <span class="price">${formatarPreco(p.preco)}</span>
+                            <span class="price price-consult">Consulte o valor com o vendedor</span>
                             <button class="btn-add-cart" aria-label="Adicionar ao Carrinho">🛒</button>
                         </div>
                         <button type="button" class="btn-outline" data-remove-fav="${p.id}" style="width:100%; margin-top:0.8rem;">Remover dos Favoritos</button>

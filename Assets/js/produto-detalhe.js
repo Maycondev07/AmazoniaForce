@@ -40,7 +40,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     /* ---------------- PREENCHER DADOS REAIS ---------------- */
-    function formatarPreco(v) { return `R$ ${Number(v).toFixed(2).replace(".", ",")}`; }
     function escapeHtml(str) {
         return String(str || "").replace(/[&<>"']/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
     }
@@ -75,23 +74,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             : "✖ Produto indisponível no momento";
     }
 
-    const oldPriceEl = document.getElementById("productOldPrice");
-    if (oldPriceEl) {
-        if (produto.preco_antigo && produto.preco_antigo > produto.preco) {
-            oldPriceEl.textContent = formatarPreco(produto.preco_antigo);
-            oldPriceEl.style.display = "block";
-        } else {
-            oldPriceEl.style.display = "none";
-        }
-    }
-
     const priceEl = document.getElementById("productPrice");
-    if (priceEl) priceEl.textContent = formatarPreco(produto.preco);
-
-    const installmentEl = document.getElementById("productInstallment");
-    if (installmentEl && produto.preco >= 20) {
-        installmentEl.textContent = `ou 10x de ${formatarPreco(produto.preco / 10)} sem juros`;
-    }
+    if (priceEl) priceEl.textContent = "💬 Consulte o valor com o vendedor";
 
     /* ---------------- VARIAÇÕES ---------------- */
     const { data: variacoes } = await db
@@ -107,20 +91,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const variationOptions = document.getElementById("variationOptions");
 
     function atualizarExibicaoPreco() {
-        const base = variacaoSelecionada || produto;
-        const precoAtual = variacaoSelecionada?.preco ?? produto.preco;
-
-        if (priceEl) priceEl.textContent = formatarPreco(precoAtual);
-
-        if (oldPriceEl) {
-            const mostrarAntigo = !variacaoSelecionada && produto.preco_antigo && produto.preco_antigo > produto.preco;
-            oldPriceEl.style.display = mostrarAntigo ? "block" : "none";
-        }
-
-        if (installmentEl && precoAtual >= 20) {
-            installmentEl.textContent = `ou 10x de ${formatarPreco(precoAtual / 10)} sem juros`;
-        }
-
         const estoqueAtual = variacaoSelecionada ? (variacaoSelecionada.estoque ?? 0) : (produto.estoque ?? 0);
         if (stockEl) {
             const disponivel = estoqueAtual > 0;

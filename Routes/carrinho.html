@@ -225,123 +225,23 @@
 
                         <span>
 
-                            Subtotal
+                            Itens no carrinho
 
                         </span>
 
                         <strong id="subtotal">
 
-                            R$ 0,00
+                            0
 
                         </strong>
 
                     </div>
 
-                    <div class="summary-line">
+                    <p style="color: var(--af-steel); font-size: 0.85rem;">
 
-                        <span>
+                        💬 O valor de cada produto é combinado direto com o vendedor pelo WhatsApp, junto com o frete e a forma de pagamento.
 
-                            Frete
-
-                        </span>
-
-                        <strong id="shipping">
-
-                            Calcular
-
-                        </strong>
-
-                    </div>
-
-                    <div class="summary-line total">
-
-                        <span>
-
-                            Total
-
-                        </span>
-
-                        <strong id="total">
-
-                            R$ 0,00
-
-                        </strong>
-
-                    </div>
-
-                    <!-- Frete -->
-
-                    <div class="shipping-calculator">
-
-                        <h4>
-
-                            Calcular Frete
-
-                        </h4>
-
-                        <div class="shipping-form">
-
-                            <input
-
-                                type="text"
-
-                                id="shippingZip"
-
-                                placeholder="Digite seu CEP">
-
-                            <button
-
-                                class="btn-secondary"
-
-                                onclick="calculateShipping()">
-
-                                Calcular
-
-                            </button>
-
-                        </div>
-
-                        <small>
-
-                            O valor será calculado conforme sua região.
-
-                        </small>
-
-                    </div>
-
-                    <!-- Cupom -->
-
-                    <div class="coupon-box">
-
-                        <h4>
-
-                            Cupom de Desconto
-
-                        </h4>
-
-                        <div class="coupon-form">
-
-                            <input
-
-                                type="text"
-
-                                id="coupon"
-
-                                placeholder="Digite seu cupom">
-
-                            <button
-
-                                class="btn-secondary"
-
-                                onclick="applyCoupon()">
-
-                                Aplicar
-
-                            </button>
-
-                        </div>
-
-                    </div>
+                    </p>
 
                     <!-- Botões -->
 
@@ -367,41 +267,15 @@
 
                         </button>
 
-                        <a
+                        <button
 
-                            href="checkout.html"
+                            class="btn-primary"
 
-                            class="btn-primary">
+                            data-solicitar-orcamento>
 
-                            Finalizar Compra
+                            Solicitar Orçamento pelo WhatsApp
 
-                        </a>
-
-                    </div>
-
-                    <!-- Formas de pagamento -->
-
-                    <div class="payment-methods">
-
-                        <h4>
-
-                            Formas de Pagamento
-
-                        </h4>
-
-                        <div class="payment-icons">
-
-                            <img src="../Assets/icons/visa.svg" alt="Visa">
-
-                            <img src="../Assets/icons/mastercard.svg" alt="Mastercard">
-
-                            <img src="../Assets/icons/elo.svg" alt="Elo">
-
-                            <img src="../Assets/icons/pix.svg" alt="Pix">
-
-                            <img src="../Assets/icons/boleto.svg" alt="Boleto">
-
-                        </div>
+                        </button>
 
                     </div>
 
@@ -417,13 +291,13 @@
 
                                 <strong>
 
-                                    Compra 100% Segura
+                                    Seus Dados Protegidos
 
                                 </strong>
 
                                 <p>
 
-                                    Seus dados são protegidos.
+                                    Suas informações são protegidas.
 
                                 </p>
 
@@ -455,19 +329,19 @@
 
                         <div class="secure-item">
 
-                            <span>💳</span>
+                            <span>💬</span>
 
                             <div>
 
                                 <strong>
 
-                                    Parcelamento
+                                    Atendimento Direto
 
                                 </strong>
 
                                 <p>
 
-                                    Até 10x sem juros.
+                                    Fale com o vendedor pelo WhatsApp.
 
                                 </p>
 
@@ -703,23 +577,9 @@
 
         <div class="mini-cart-footer">
 
-            <strong>Total</strong>
+            <a href="carrinho.html" class="btn-outline">Ver Carrinho Completo</a>
 
-            <span class="cart-total">
-
-                R$ 0,00
-
-            </span>
-
-            <a
-
-                href="checkout.html"
-
-                class="btn-primary">
-
-                Finalizar Compra
-
-            </a>
+            <button class="btn-primary" data-solicitar-orcamento>Solicitar Orçamento</button>
 
         </div>
 

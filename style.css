@@ -315,13 +315,13 @@ img { max-width: 100%; display: block; }
     gap: 2rem;
 }
 .menu-toggle {
+    display: none;
     background: var(--af-blue);
     color: #fff;
     border: none;
     padding: 0.8rem 1.2rem;
     font-weight: 700;
     cursor: pointer;
-    display: flex;
     align-items: center;
     gap: 0.5rem;
     border-radius: 8px 8px 0 0;
@@ -840,8 +840,11 @@ img { max-width: 100%; display: block; }
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 0.6rem;
 }
 .price { font-size: 1.35rem; font-weight: 800; color: var(--af-yellow); }
+.price-consult { flex: 1 1 100%; font-size: 0.8rem; font-weight: 600; color: var(--af-yellow); }
 
 .btn-add-cart {
     background: rgba(255, 107, 0, 0.15);
@@ -1404,7 +1407,8 @@ img { max-width: 100%; display: block; }
     float: right;
 }
 .mini-cart-footer a.btn-primary,
-.mini-cart-footer button.btn-primary {
+.mini-cart-footer button.btn-primary,
+.mini-cart-footer a.btn-outline {
     width: 100%;
     text-align: center;
     display: block;
@@ -1428,6 +1432,7 @@ img { max-width: 100%; display: block; }
     .search-area { display: none; }
     .login-btn span { display: none; }
     .navbar > .container > ul { display: none; }
+    .menu-toggle { display: flex; }
     .navbar > .container > ul.mobile-open {
         display: flex;
         position: absolute;
@@ -2129,7 +2134,7 @@ background:#2563eb;
     margin-bottom: 1.5rem;
 }
 .product-price-area .old-price { display: block; color: var(--af-steel); text-decoration: line-through; font-size: 0.95rem; }
-.product-price-area h2 { color: var(--af-yellow); font-size: 2rem; font-weight: 800; margin: 0.2rem 0; }
+.product-price-area h2 { color: var(--af-yellow); font-size: 1.15rem; font-weight: 700; margin: 0.2rem 0; }
 .product-price-area small { color: var(--af-steel); font-size: 0.85rem; }
 
 .product-quantity { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
