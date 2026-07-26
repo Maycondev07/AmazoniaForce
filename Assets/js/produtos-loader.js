@@ -23,16 +23,17 @@
 
     function cardHtml(p) {
         const temDesconto = p.preco_antigo && p.preco_antigo > p.preco;
-        const badge = p.destaque
-            ? '<span class="badge orange">Destaque</span>'
-            : (temDesconto ? '<span class="badge red">Oferta</span>' : "");
+        const badges = [];
+        if (p.destaque) badges.push('<span class="badge orange">Destaque</span>');
+        if (p.em_oferta || temDesconto) badges.push('<span class="badge red">Oferta</span>');
+        const badgeHtml = badges.length ? `<div class="product-badges">${badges.join("")}</div>` : "";
 
         const imagem = p.imagem_url || "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=600&q=80";
         const linkProduto = `produto.html?id=${p.id}`;
 
         return `
             <article class="product-card" data-id="${p.id}" data-name="${escapeAttr(p.nome)}" data-price="${p.preco}">
-                ${badge}
+                ${badgeHtml}
                 <a href="${linkProduto}" class="product-img">
                     <img src="${imagem}" alt="${escapeAttr(p.nome)}" loading="lazy">
                 </a>
@@ -68,7 +69,9 @@
         if (source === "destaque") {
             query = query.eq("destaque", true);
         } else if (source === "ofertas") {
-            query = query.not("preco_antigo", "is", null);
+            // Um produto aparece em Ofertas se o botão "Marcar como oferta"
+            // estiver ligado OU se tiver um preço antigo cadastrado (desconto).
+            query = query.or("em_oferta.eq.true,preco_antigo.not.is.null");
         } else if (source === "categoria") {
             const params = new URLSearchParams(window.location.search);
             const categoria = grid.dataset.productsCategoria || params.get("categoria");

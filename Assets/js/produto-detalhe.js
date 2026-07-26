@@ -93,6 +93,70 @@ document.addEventListener("DOMContentLoaded", async () => {
         installmentEl.textContent = `ou 10x de ${formatarPreco(produto.preco / 10)} sem juros`;
     }
 
+    /* ---------------- VARIAÇÕES ---------------- */
+    const { data: variacoes } = await db
+        .from("produto_variacoes")
+        .select("*")
+        .eq("produto_id", produto.id)
+        .order("ordem", { ascending: true });
+
+    let variacaoSelecionada = null;
+    const temVariacoes = !!(variacoes && variacoes.length);
+
+    const variationsWrap = document.getElementById("productVariations");
+    const variationOptions = document.getElementById("variationOptions");
+
+    function atualizarExibicaoPreco() {
+        const base = variacaoSelecionada || produto;
+        const precoAtual = variacaoSelecionada?.preco ?? produto.preco;
+
+        if (priceEl) priceEl.textContent = formatarPreco(precoAtual);
+
+        if (oldPriceEl) {
+            const mostrarAntigo = !variacaoSelecionada && produto.preco_antigo && produto.preco_antigo > produto.preco;
+            oldPriceEl.style.display = mostrarAntigo ? "block" : "none";
+        }
+
+        if (installmentEl && precoAtual >= 20) {
+            installmentEl.textContent = `ou 10x de ${formatarPreco(precoAtual / 10)} sem juros`;
+        }
+
+        const estoqueAtual = variacaoSelecionada ? (variacaoSelecionada.estoque ?? 0) : (produto.estoque ?? 0);
+        if (stockEl) {
+            const disponivel = estoqueAtual > 0;
+            stockEl.classList.toggle("in-stock", disponivel);
+            stockEl.classList.toggle("out-of-stock", !disponivel);
+            stockEl.textContent = disponivel
+                ? `✔ Em estoque (${estoqueAtual} ${estoqueAtual === 1 ? "unidade" : "unidades"})`
+                : "✖ Produto indisponível no momento";
+        }
+
+        if (qtyInput) qtyInput.max = estoqueAtual > 0 ? estoqueAtual : 99;
+
+        atualizarBotoesCompra();
+    }
+
+    if (temVariacoes && variationsWrap && variationOptions) {
+        variationsWrap.style.display = "block";
+
+        variationOptions.innerHTML = variacoes.map(v => `
+            <button type="button" class="variation-option" data-variacao-id="${v.id}">
+                ${escapeHtml(v.nome)}
+            </button>
+        `).join("");
+
+        variationOptions.querySelectorAll(".variation-option").forEach(btn => {
+            btn.addEventListener("click", () => {
+                variacaoSelecionada = variacoes.find(v => v.id === btn.dataset.variacaoId) || null;
+
+                variationOptions.querySelectorAll(".variation-option").forEach(b => b.classList.remove("selected"));
+                btn.classList.add("selected");
+
+                atualizarExibicaoPreco();
+            });
+        });
+    }
+
     const descTexto = document.getElementById("descricaoTexto");
     if (descTexto) {
         descTexto.innerHTML = produto.descricao
@@ -135,20 +199,43 @@ document.addEventListener("DOMContentLoaded", async () => {
     const addCartBtn = document.getElementById("addCartBtn");
     const buyNowBtn = document.getElementById("buyNowBtn");
 
+    function atualizarBotoesCompra() {
+        const estoqueAtual = variacaoSelecionada ? (variacaoSelecionada.estoque ?? 0) : (produto.estoque ?? 0);
+        const semEstoqueNaSelecao = !emEstoque || (temVariacoes && !!variacaoSelecionada && estoqueAtual <= 0);
+
+        [addCartBtn, buyNowBtn].forEach(btn => {
+            if (!btn) return;
+            btn.disabled = semEstoqueNaSelecao;
+            btn.textContent = semEstoqueNaSelecao
+                ? "Indisponível"
+                : (btn === addCartBtn ? "Adicionar ao Carrinho" : "Comprar Agora");
+        });
+    }
+
+    function validarSelecaoVariacao() {
+        if (temVariacoes && !variacaoSelecionada) {
+            Toast.show("Selecione uma opção antes de continuar.", "error");
+            return false;
+        }
+        return true;
+    }
+
     if (!emEstoque) {
         if (addCartBtn) { addCartBtn.disabled = true; addCartBtn.textContent = "Indisponível"; }
         if (buyNowBtn) { buyNowBtn.disabled = true; buyNowBtn.textContent = "Indisponível"; }
     } else {
         if (addCartBtn) {
             addCartBtn.addEventListener("click", () => {
+                if (!validarSelecaoVariacao()) return;
                 const qtd = parseInt(qtyInput?.value || "1", 10);
-                window.Cart.add(produto.id, qtd);
+                window.Cart.add(produto.id, qtd, variacaoSelecionada?.id || null);
             });
         }
         if (buyNowBtn) {
             buyNowBtn.addEventListener("click", async () => {
+                if (!validarSelecaoVariacao()) return;
                 const qtd = parseInt(qtyInput?.value || "1", 10);
-                await window.Cart.add(produto.id, qtd);
+                await window.Cart.add(produto.id, qtd, variacaoSelecionada?.id || null);
                 window.location.href = "carrinho.html";
             });
         }
