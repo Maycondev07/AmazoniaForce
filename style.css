@@ -2435,7 +2435,7 @@ background:#2563eb;
 .admin-header h1 { font-size: 1.9rem; color: #fff; text-transform: uppercase; margin-bottom: 0.4rem; }
 .admin-header p { color: var(--af-steel); }
 
-.admin-layout { display: grid; grid-template-columns: 400px 1fr; gap: 2rem; align-items: start; }
+.admin-layout { display: flex; flex-direction: column; gap: 2rem; }
 
 .admin-card {
     background: var(--bg-card);
@@ -2451,17 +2451,47 @@ background:#2563eb;
     padding-bottom: 1rem;
     border-bottom: 1px solid var(--border-color);
 }
-.admin-form-card { position: sticky; top: 100px; }
+.admin-section {
+    background: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1.4rem 1.6rem;
+    margin-bottom: 1.5rem;
+}
+.admin-section h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--af-orange);
+    margin-bottom: 1.3rem;
+}
+.admin-section-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.2rem;
+}
+.admin-section-grid-2 { grid-template-columns: repeat(2, minmax(220px, 1fr)); }
+.admin-section-grid .form-group,
+.admin-basic-top .form-group { margin-bottom: 0; }
+.admin-descricao-group { margin-top: 1.2rem; margin-bottom: 0; }
+
+.admin-basic-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.6rem;
+    margin-bottom: 1.2rem;
+}
+.admin-basic-top .form-group { flex: 1; }
 
 .admin-image-upload {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.2rem;
+    gap: 0.7rem;
 }
 .admin-image-preview {
-    width: 80px;
-    height: 80px;
+    width: 96px;
+    height: 96px;
     border-radius: 10px;
     border: 1px dashed var(--border-color);
     background: var(--bg-dark);
@@ -2596,6 +2626,9 @@ background:#2563eb;
 @media (max-width: 720px) {
     .variacao-row { grid-template-columns: 1fr 1fr; }
     .variacao-remover { justify-self: end; }
+    .admin-basic-top { flex-direction: column; align-items: stretch; }
+    .admin-image-upload { flex-direction: row; }
+    .admin-section-grid-2 { grid-template-columns: 1fr; }
 }
 
 .admin-row-actions { display: flex; gap: 0.5rem; }
@@ -2619,10 +2652,7 @@ background:#2563eb;
 .admin-only-link.visible { display: list-item !important; }
 a.admin-only-link.visible { display: inline-flex !important; }
 
-@media (max-width: 992px) {
-    .admin-layout { grid-template-columns: 1fr; }
-    .admin-form-card { position: static; }
-}
+
 
 /* ==========================================================================
    PÁGINAS LEGAIS (Termos, Privacidade, Cookies, Envio, Pagamento, Trocas)
