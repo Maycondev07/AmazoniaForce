@@ -764,6 +764,50 @@ img { max-width: 100%; display: block; }
 .badge.yellow { background: var(--af-yellow); color: #000; }
 .badge.red { background: var(--af-red); }
 
+.product-badges {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    z-index: 2;
+}
+.product-badges .badge { position: static; }
+
+.product-variations { margin: 1rem 0 1.5rem; }
+.product-variations > label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--af-steel);
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+}
+.variation-options { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.variation-option {
+    padding: 0.55rem 1.1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+    color: var(--text-main);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+.variation-option:hover { border-color: var(--af-blue); }
+.variation-option.selected {
+    border-color: var(--af-blue);
+    background: rgba(0, 102, 255, 0.12);
+    color: #fff;
+    font-weight: 600;
+}
+.variation-option:disabled,
+.variation-option.indisponivel {
+    opacity: 0.45;
+    cursor: not-allowed;
+    text-decoration: line-through;
+}
+
 .product-img {
     width: 100%;
     height: 210px;
@@ -1325,6 +1369,7 @@ img { max-width: 100%; display: block; }
 .cart-item-info { flex-grow: 1; }
 .cart-item-info h4 { font-size: 0.9rem; color: #fff; }
 .cart-item-info span { font-size: 0.8rem; color: var(--af-yellow); }
+.cart-item-info .cart-item-variacao { display: block; color: var(--af-blue); font-size: 0.75rem; margin-bottom: 0.15rem; }
 
 .cart-item-actions {
     display: flex;
@@ -2493,6 +2538,60 @@ background:#2563eb;
 .admin-badge.ativo { background: rgba(34, 197, 94, 0.15); color: #22c55e; }
 .admin-badge.inativo { background: rgba(230, 46, 46, 0.15); color: var(--af-red); }
 .admin-badge.destaque { background: rgba(255, 183, 0, 0.15); color: var(--af-yellow); }
+.admin-badge.oferta { background: rgba(230, 46, 46, 0.15); color: var(--af-red); }
+.admin-badge.variacoes { background: rgba(0, 102, 255, 0.15); color: var(--af-blue); margin-top: 0.35rem; }
+
+.admin-variacoes {
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1.5rem;
+    background: var(--bg-dark);
+}
+.admin-variacoes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.admin-variacoes-header h3 { font-size: 1rem; color: #fff; margin: 0; }
+.admin-variacoes-hint { color: var(--af-steel); font-size: 0.8rem; margin: 0.5rem 0 1rem; }
+
+.variacao-row {
+    display: grid;
+    grid-template-columns: 2fr 1.4fr 1fr 1fr auto;
+    gap: 0.6rem;
+    margin-bottom: 0.7rem;
+    align-items: center;
+}
+.variacao-row input {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0.6rem 0.75rem;
+    color: #fff;
+    font-size: 0.85rem;
+    outline: none;
+    width: 100%;
+}
+.variacao-row input:focus { border-color: var(--af-blue); }
+.variacao-remover {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: transparent;
+    color: var(--af-red);
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+.variacao-remover:hover { background: rgba(230, 46, 46, 0.12); }
+
+@media (max-width: 720px) {
+    .variacao-row { grid-template-columns: 1fr 1fr; }
+    .variacao-remover { justify-self: end; }
+}
 
 .admin-row-actions { display: flex; gap: 0.5rem; }
 .admin-row-actions button {
@@ -2518,4 +2617,76 @@ a.admin-only-link.visible { display: inline-flex !important; }
 @media (max-width: 992px) {
     .admin-layout { grid-template-columns: 1fr; }
     .admin-form-card { position: static; }
+}
+
+/* ==========================================================================
+   PÁGINAS LEGAIS (Termos, Privacidade, Cookies, Envio, Pagamento, Trocas)
+   ========================================================================== */
+.legal-page { padding: 3rem 0 4rem; }
+.legal-content {
+    max-width: 860px;
+    margin: 0 auto;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 2.5rem;
+    line-height: 1.8;
+    color: var(--text-main);
+}
+.legal-content > h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #fff;
+}
+.legal-content h2 {
+    font-size: 1.4rem;
+    margin: 2.2rem 0 1rem;
+    color: #fff;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+.legal-content h3 {
+    font-size: 1.1rem;
+    margin: 1.5rem 0 0.75rem;
+    color: var(--af-yellow);
+}
+.legal-content p { margin-bottom: 1rem; color: var(--text-muted); }
+.legal-content ul, .legal-content ol { margin: 0 0 1rem 1.5rem; color: var(--text-muted); }
+.legal-content li { margin-bottom: 0.4rem; }
+.legal-content a { color: var(--af-blue); text-decoration: underline; }
+.legal-content a:hover { color: var(--af-orange); }
+.legal-content blockquote {
+    background: rgba(0, 102, 255, 0.08);
+    border-left: 4px solid var(--af-blue);
+    padding: 0.9rem 1.2rem;
+    margin: 1.5rem 0;
+    border-radius: 6px;
+}
+.legal-content blockquote p { color: var(--text-main); margin-bottom: 0.3rem; }
+.legal-content blockquote p:last-child { margin-bottom: 0; }
+.legal-content hr { border: none; border-top: 1px solid var(--border-color); margin: 2rem 0; }
+.legal-content table { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; }
+.legal-content table th, .legal-content table td {
+    border: 1px solid var(--border-color);
+    padding: 0.6rem 0.8rem;
+    text-align: left;
+    color: var(--text-muted);
+}
+.legal-content table th { color: #fff; background: var(--bg-card-hover); }
+.legal-content strong { color: #fff; }
+
+.footer-legal-links {
+    margin-bottom: 0.75rem;
+    font-size: 0.85rem;
+}
+.footer-legal-links a {
+    color: var(--af-steel);
+    text-decoration: none;
+    margin: 0 0.15rem;
+}
+.footer-legal-links a:hover { color: var(--af-orange); }
+
+@media (max-width: 640px) {
+    .legal-content { padding: 1.5rem; }
+    .footer-legal-links { line-height: 2; }
 }

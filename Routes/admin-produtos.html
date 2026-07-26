@@ -146,9 +146,39 @@
                                 Produto em destaque
                             </label>
                             <label>
+                                <input type="checkbox" id="produtoOferta">
+                                Marcar como oferta
+                            </label>
+                            <label>
                                 <input type="checkbox" id="produtoAtivo" checked>
                                 Visível no site
                             </label>
+                        </div>
+
+                        <div class="admin-variacoes">
+
+                            <div class="admin-variacoes-header">
+                                <h3>Variações do Produto</h3>
+                                <button type="button" class="btn-outline" id="addVariacaoBtn">+ Adicionar Variação</button>
+                            </div>
+
+                            <p class="admin-variacoes-hint">
+                                Use quando o mesmo anúncio tiver opções diferentes, ex.: Bocal 1/2" e Bocal 1/4".
+                                Deixe em branco o preço da variação para usar o preço do produto principal.
+                            </p>
+
+                            <div id="variacoesLista"></div>
+
+                            <template id="variacaoRowTemplate">
+                                <div class="variacao-row">
+                                    <input type="text" class="variacao-nome" placeholder="Nome (ex.: 1/2&quot;)" required>
+                                    <input type="text" class="variacao-codigo" placeholder="Código (opcional)">
+                                    <input type="number" class="variacao-preco" placeholder="Preço (opcional)" min="0" step="0.01">
+                                    <input type="number" class="variacao-estoque" placeholder="Estoque" min="0" value="0">
+                                    <button type="button" class="variacao-remover" title="Remover variação">🗑</button>
+                                </div>
+                            </template>
+
                         </div>
 
                         <div class="admin-form-actions">

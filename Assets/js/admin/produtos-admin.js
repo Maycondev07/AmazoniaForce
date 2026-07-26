@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
         imagemUrl: document.getElementById("produtoImagemUrl"),
         imagemPreview: document.getElementById("imagemPreview"),
         destaque: document.getElementById("produtoDestaque"),
+        oferta: document.getElementById("produtoOferta"),
         ativo: document.getElementById("produtoAtivo"),
         submitBtn: document.getElementById("produtoSubmitBtn"),
         cancelBtn: document.getElementById("produtoCancelBtn"),
@@ -34,25 +35,46 @@ document.addEventListener("DOMContentLoaded", () => {
         tableBody: document.getElementById("produtosTableBody"),
         count: document.getElementById("produtosCount"),
         empty: document.getElementById("produtosEmpty"),
+        variacoesLista: document.getElementById("variacoesLista"),
+        addVariacaoBtn: document.getElementById("addVariacaoBtn"),
+        variacaoTemplate: document.getElementById("variacaoRowTemplate"),
     };
 
     let produtos = [];
     let arquivoSelecionado = null;
+    let variacoesPorProduto = {};   // { produtoId: quantidade de variações }
+    let variacoesOriginais = [];    // ids das variações carregadas ao editar um produto
 
     /* ---------------- CARREGAR LISTA ---------------- */
     async function carregarProdutos() {
-        const { data, error } = await db
-            .from("produtos")
-            .select("*")
-            .order("criado_em", { ascending: false });
+        const [{ data, error }, contagemVariacoes] = await Promise.all([
+            db.from("produtos").select("*").order("criado_em", { ascending: false }),
+            carregarContagemVariacoes(),
+        ]);
 
         if (error) {
             Toast.show("Erro ao carregar produtos: " + error.message, "error");
             return;
         }
 
+        variacoesPorProduto = contagemVariacoes;
         produtos = data || [];
         renderizarTabela();
+    }
+
+    async function carregarContagemVariacoes() {
+        const { data, error } = await db.from("produto_variacoes").select("produto_id");
+
+        if (error) {
+            console.error("Erro ao carregar variações:", error.message);
+            return {};
+        }
+
+        const contagem = {};
+        (data || []).forEach((v) => {
+            contagem[v.produto_id] = (contagem[v.produto_id] || 0) + 1;
+        });
+        return contagem;
     }
 
     function renderizarTabela() {
@@ -70,15 +92,22 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         els.empty.style.display = "none";
 
-        els.tableBody.innerHTML = filtrados.map(p => `
+        els.tableBody.innerHTML = filtrados.map(p => {
+            const qtdVariacoes = variacoesPorProduto[p.id] || 0;
+            return `
             <tr>
                 <td><img class="admin-thumb" src="${p.imagem_url || "../Assets/img/logo.png"}" alt=""></td>
-                <td><strong>${escapeHtml(p.nome)}</strong><br><span style="color:var(--af-steel); font-size:0.78rem;">${escapeHtml(p.categoria || "—")}</span></td>
+                <td>
+                    <strong>${escapeHtml(p.nome)}</strong><br>
+                    <span style="color:var(--af-steel); font-size:0.78rem;">${escapeHtml(p.categoria || "—")}</span>
+                    ${qtdVariacoes ? `<br><span class="admin-badge variacoes">${qtdVariacoes} variação${qtdVariacoes === 1 ? "" : "ões"}</span>` : ""}
+                </td>
                 <td>R$ ${Number(p.preco).toFixed(2).replace(".", ",")}</td>
                 <td>${p.estoque ?? 0}</td>
                 <td>
                     <span class="admin-badge ${p.ativo ? "ativo" : "inativo"}">${p.ativo ? "Ativo" : "Inativo"}</span>
                     ${p.destaque ? '<span class="admin-badge destaque">Destaque</span>' : ""}
+                    ${p.em_oferta ? '<span class="admin-badge oferta">Oferta</span>' : ""}
                 </td>
                 <td>
                     <div class="admin-row-actions">
@@ -87,11 +116,94 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
                 </td>
             </tr>
-        `).join("");
+        `;
+        }).join("");
     }
 
     function escapeHtml(str) {
         return String(str || "").replace(/[&<>"']/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
+    }
+
+    /* ---------------- VARIAÇÕES DO PRODUTO ---------------- */
+    function novaLinhaVariacao(v = {}) {
+        const frag = els.variacaoTemplate.content.cloneNode(true);
+        const row = frag.querySelector(".variacao-row");
+
+        row.dataset.id = v.id || "";
+        row.querySelector(".variacao-nome").value = v.nome || "";
+        row.querySelector(".variacao-codigo").value = v.codigo || "";
+        row.querySelector(".variacao-preco").value = v.preco ?? "";
+        row.querySelector(".variacao-estoque").value = v.estoque ?? 0;
+
+        row.querySelector(".variacao-remover").addEventListener("click", () => row.remove());
+
+        els.variacoesLista.appendChild(row);
+    }
+
+    els.addVariacaoBtn.addEventListener("click", () => novaLinhaVariacao());
+
+    function limparVariacoes() {
+        els.variacoesLista.innerHTML = "";
+        variacoesOriginais = [];
+    }
+
+    async function carregarVariacoesDoProduto(produtoId) {
+        limparVariacoes();
+
+        const { data, error } = await db
+            .from("produto_variacoes")
+            .select("*")
+            .eq("produto_id", produtoId)
+            .order("ordem", { ascending: true });
+
+        if (error) {
+            Toast.show("Erro ao carregar variações: " + error.message, "error");
+            return;
+        }
+
+        (data || []).forEach((v) => novaLinhaVariacao(v));
+        variacoesOriginais = (data || []).map(v => v.id);
+    }
+
+    function lerVariacoesDoFormulario() {
+        return Array.from(els.variacoesLista.querySelectorAll(".variacao-row"))
+            .map((row, index) => ({
+                id: row.dataset.id || null,
+                nome: row.querySelector(".variacao-nome").value.trim(),
+                codigo: row.querySelector(".variacao-codigo").value.trim() || null,
+                preco: row.querySelector(".variacao-preco").value
+                    ? parseFloat(row.querySelector(".variacao-preco").value)
+                    : null,
+                estoque: parseInt(row.querySelector(".variacao-estoque").value || "0", 10),
+                ordem: index,
+            }))
+            .filter(v => v.nome !== "");
+    }
+
+    async function salvarVariacoes(produtoId) {
+        const atuais = lerVariacoesDoFormulario();
+        const idsAtuais = atuais.filter(v => v.id).map(v => v.id);
+
+        const idsParaExcluir = variacoesOriginais.filter(id => !idsAtuais.includes(id));
+
+        if (idsParaExcluir.length) {
+            const { error } = await db.from("produto_variacoes").delete().in("id", idsParaExcluir);
+            if (error) throw new Error("Falha ao remover variações: " + error.message);
+        }
+
+        const novas = atuais.filter(v => !v.id).map(({ id, ...resto }) => ({ ...resto, produto_id: produtoId }));
+        const existentes = atuais.filter(v => v.id);
+
+        if (novas.length) {
+            const { error } = await db.from("produto_variacoes").insert(novas);
+            if (error) throw new Error("Falha ao criar variações: " + error.message);
+        }
+
+        for (const v of existentes) {
+            const { id, ...resto } = v;
+            const { error } = await db.from("produto_variacoes").update(resto).eq("id", id);
+            if (error) throw new Error("Falha ao atualizar variação: " + error.message);
+        }
     }
 
     /* ---------------- PREVIEW DE IMAGEM ---------------- */
@@ -153,17 +265,26 @@ document.addEventListener("DOMContentLoaded", () => {
                 descricao: els.descricao.value.trim() || null,
                 imagem_url: imagemUrl,
                 destaque: els.destaque.checked,
+                em_oferta: els.oferta.checked,
                 ativo: els.ativo.checked,
             };
 
+            let produtoId = els.id.value || null;
             let error;
-            if (els.id.value) {
-                ({ error } = await db.from("produtos").update(payload).eq("id", els.id.value));
+
+            if (produtoId) {
+                ({ error } = await db.from("produtos").update(payload).eq("id", produtoId));
             } else {
-                ({ error } = await db.from("produtos").insert(payload));
+                const resposta = await db.from("produtos").insert(payload).select("id").single();
+                error = resposta.error;
+                produtoId = resposta.data ? resposta.data.id : null;
             }
 
             if (error) throw new Error(error.message);
+
+            if (produtoId) {
+                await salvarVariacoes(produtoId);
+            }
 
             Toast.show(els.id.value ? "Produto atualizado!" : "Produto cadastrado!", "success");
             resetarFormulario();
@@ -183,7 +304,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (editBtn) {
             const produto = produtos.find(p => p.id === editBtn.dataset.edit);
-            if (produto) preencherFormulario(produto);
+            if (produto) await preencherFormulario(produto);
         }
 
         if (delBtn) {
@@ -202,7 +323,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    function preencherFormulario(p) {
+    async function preencherFormulario(p) {
         els.id.value = p.id;
         els.nome.value = p.nome || "";
         els.categoria.value = p.categoria || "";
@@ -214,9 +335,12 @@ document.addEventListener("DOMContentLoaded", () => {
         els.descricao.value = p.descricao || "";
         els.imagemUrl.value = p.imagem_url || "";
         els.destaque.checked = !!p.destaque;
+        els.oferta.checked = !!p.em_oferta;
         els.ativo.checked = p.ativo !== false;
         arquivoSelecionado = null;
         els.imagemPreview.innerHTML = p.imagem_url ? `<img src="${p.imagem_url}" alt="Prévia">` : "📦";
+
+        await carregarVariacoesDoProduto(p.id);
 
         els.formTitle.textContent = "Editar Produto";
         els.submitBtn.textContent = "Salvar Alterações";
@@ -232,6 +356,7 @@ document.addEventListener("DOMContentLoaded", () => {
         els.imagemPreview.innerHTML = "📦";
         arquivoSelecionado = null;
         els.ativo.checked = true;
+        limparVariacoes();
         els.formTitle.textContent = "Novo Produto";
         els.submitBtn.textContent = "Cadastrar Produto";
         els.cancelBtn.style.display = "none";

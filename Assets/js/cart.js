@@ -7,19 +7,27 @@
      supabase.js, session.js
 
    Expõe window.Cart e as funções globais usadas via onclick="":
-     changeQty(id, delta), removeFromCart(id)
+     changeQty(itemId, delta), removeFromCart(itemId)
+
+   Cada linha do carrinho é identificada pelo seu próprio id (não mais
+   pelo produto), porque agora um mesmo produto pode estar no carrinho
+   mais de uma vez com variações diferentes (ex.: Bocal 1/2" e 1/4").
 ========================================================== */
 
 (function () {
 
     const Cart = {
-        items: [],        // [{ id, produto_id, quantidade, produtos: {...} }]
+        items: [],        // [{ id, produto_id, variacao_id, quantidade, produtos: {...}, produto_variacoes: {...} }]
         user: null,
         loaded: false,
     };
 
     function formatarPreco(valor) {
         return `R$ ${Number(valor || 0).toFixed(2).replace(".", ",")}`;
+    }
+
+    function precoItem(i) {
+        return Number(i.produto_variacoes?.preco ?? i.produtos?.preco ?? 0);
     }
 
     /* ---------------- CARREGAR CARRINHO ---------------- */
@@ -35,7 +43,7 @@
 
         const { data, error } = await window.supabaseClient
             .from("carrinho_itens")
-            .select("id, produto_id, quantidade, produtos(*)")
+            .select("id, produto_id, variacao_id, quantidade, produtos(*), produto_variacoes(*)")
             .order("criado_em", { ascending: true });
 
         if (error) {
@@ -50,7 +58,7 @@
     }
 
     /* ---------------- AÇÕES ---------------- */
-    async function add(produtoId, quantidade = 1) {
+    async function add(produtoId, quantidade = 1, variacaoId = null) {
         Cart.user = Cart.user || await window.session.user();
 
         if (!Cart.user) {
@@ -61,7 +69,11 @@
             return;
         }
 
-        const existente = Cart.items.find(i => i.produto_id === produtoId);
+        variacaoId = variacaoId || null;
+
+        const existente = Cart.items.find(
+            i => i.produto_id === produtoId && (i.variacao_id || null) === variacaoId
+        );
 
         if (existente) {
             const { error } = await window.supabaseClient
@@ -72,7 +84,7 @@
         } else {
             const { error } = await window.supabaseClient
                 .from("carrinho_itens")
-                .insert({ user_id: Cart.user.id, produto_id: produtoId, quantidade });
+                .insert({ user_id: Cart.user.id, produto_id: produtoId, variacao_id: variacaoId, quantidade });
             if (error) { Toast.show("Erro ao adicionar ao carrinho.", "error"); return; }
         }
 
@@ -80,8 +92,8 @@
         await load();
     }
 
-    async function remove(produtoId) {
-        const item = Cart.items.find(i => i.produto_id === produtoId);
+    async function remove(itemId) {
+        const item = Cart.items.find(i => i.id === itemId);
         if (!item) return;
 
         const { error } = await window.supabaseClient
@@ -93,14 +105,14 @@
         await load();
     }
 
-    async function changeQty(produtoId, delta) {
-        const item = Cart.items.find(i => i.produto_id === produtoId);
+    async function changeQty(itemId, delta) {
+        const item = Cart.items.find(i => i.id === itemId);
         if (!item) return;
 
         const novaQtd = item.quantidade + delta;
 
         if (novaQtd <= 0) {
-            await remove(produtoId);
+            await remove(itemId);
             return;
         }
 
@@ -120,7 +132,7 @@
     }
 
     function totals() {
-        const subtotal = Cart.items.reduce((acc, i) => acc + (Number(i.produtos?.preco || 0) * i.quantidade), 0);
+        const subtotal = Cart.items.reduce((acc, i) => acc + (precoItem(i) * i.quantidade), 0);
         const totalQty = Cart.items.reduce((acc, i) => acc + i.quantidade, 0);
         return { subtotal, totalQty };
     }
@@ -154,12 +166,13 @@
             <div class="cart-item">
                 <div class="cart-item-info">
                     <h4>${escapeHtml(i.produtos?.nome || "Produto")}</h4>
-                    <span>${formatarPreco(i.produtos?.preco)}</span>
+                    ${i.produto_variacoes ? `<span class="cart-item-variacao">${escapeHtml(i.produto_variacoes.nome)}</span>` : ""}
+                    <span>${formatarPreco(precoItem(i))}</span>
                 </div>
                 <div class="cart-item-actions">
-                    <button class="btn-qty" onclick="changeQty('${i.produto_id}', -1)" aria-label="Diminuir">-</button>
+                    <button class="btn-qty" onclick="changeQty('${i.id}', -1)" aria-label="Diminuir">-</button>
                     <span>${i.quantidade}</span>
-                    <button class="btn-qty" onclick="changeQty('${i.produto_id}', 1)" aria-label="Aumentar">+</button>
+                    <button class="btn-qty" onclick="changeQty('${i.id}', 1)" aria-label="Aumentar">+</button>
                 </div>
             </div>
         `).join("");
@@ -188,21 +201,24 @@
 
         table.innerHTML = Cart.items.map(i => {
             const p = i.produtos || {};
-            const itemTotal = Number(p.preco || 0) * i.quantidade;
+            const v = i.produto_variacoes;
+            const preco = precoItem(i);
+            const itemTotal = preco * i.quantidade;
             return `
                 <div class="cart-item" style="display:flex; align-items:center; gap:1rem; padding:1rem; border:1px solid var(--border-color); border-radius:10px;">
-                    <img src="${p.imagem_url || '../Assets/img/logo.png'}" alt="${escapeHtml(p.nome)}" style="width:70px; height:70px; object-fit:contain; border-radius:8px; background:var(--bg-dark); flex-shrink:0;">
+                    <img src="${v?.imagem_url || p.imagem_url || '../Assets/img/logo.png'}" alt="${escapeHtml(p.nome)}" style="width:70px; height:70px; object-fit:contain; border-radius:8px; background:var(--bg-dark); flex-shrink:0;">
                     <div style="flex:1; min-width:0;">
                         <h4 style="color:#fff; font-size:0.95rem; margin-bottom:0.3rem;">${escapeHtml(p.nome || "Produto")}</h4>
-                        <span style="color:var(--af-steel); font-size:0.85rem;">${formatarPreco(p.preco)} cada</span>
+                        ${v ? `<span style="display:block; color:var(--af-blue); font-size:0.8rem; margin-bottom:0.2rem;">${escapeHtml(v.nome)}</span>` : ""}
+                        <span style="color:var(--af-steel); font-size:0.85rem;">${formatarPreco(preco)} cada</span>
                     </div>
                     <div class="cart-item-actions" style="display:flex; align-items:center; gap:0.6rem; border:1px solid var(--border-color); border-radius:8px; padding:0.2rem;">
-                        <button class="btn-qty" onclick="changeQty('${i.produto_id}', -1)" aria-label="Diminuir" style="width:28px; height:28px; border:none; background:none; color:#fff; cursor:pointer; font-size:1rem;">-</button>
+                        <button class="btn-qty" onclick="changeQty('${i.id}', -1)" aria-label="Diminuir" style="width:28px; height:28px; border:none; background:none; color:#fff; cursor:pointer; font-size:1rem;">-</button>
                         <span style="min-width:20px; text-align:center; color:#fff;">${i.quantidade}</span>
-                        <button class="btn-qty" onclick="changeQty('${i.produto_id}', 1)" aria-label="Aumentar" style="width:28px; height:28px; border:none; background:none; color:#fff; cursor:pointer; font-size:1rem;">+</button>
+                        <button class="btn-qty" onclick="changeQty('${i.id}', 1)" aria-label="Aumentar" style="width:28px; height:28px; border:none; background:none; color:#fff; cursor:pointer; font-size:1rem;">+</button>
                     </div>
                     <strong style="color:var(--af-yellow); min-width:90px; text-align:right;">${formatarPreco(itemTotal)}</strong>
-                    <button onclick="removeFromCart('${i.produto_id}')" aria-label="Remover" style="background:none; border:none; color:var(--af-red); cursor:pointer; font-size:1.2rem;">🗑</button>
+                    <button onclick="removeFromCart('${i.id}')" aria-label="Remover" style="background:none; border:none; color:var(--af-red); cursor:pointer; font-size:1.2rem;">🗑</button>
                 </div>
             `;
         }).join("");
@@ -258,8 +274,71 @@
         const img = card.querySelector("img");
         if (img && Cart.user) animateFlyToCart(img);
 
+        // Adição rápida pela vitrine: sem variação selecionada.
+        // Produtos com variações obrigatórias devem ser comprados
+        // pela página do produto, onde é possível escolher a opção.
         add(card.dataset.id, 1);
     });
+
+    /* ---------------- FINALIZAR PEDIDO PELO WHATSAPP ---------------- */
+    // Não há checkout/pagamento online: o cliente monta o carrinho aqui no
+    // site e o pedido final é fechado por WhatsApp com a loja.
+    const WHATSAPP_NUMERO = "5511970263943"; // Amazônia Force — inclui código do país (55) + DDD
+
+    function montarMensagemPedido() {
+        const linhas = Cart.items.map(i => {
+            const nome = i.produtos?.nome || "Produto";
+            const variacao = i.produto_variacoes?.nome ? ` (${i.produto_variacoes.nome})` : "";
+            const preco = precoItem(i);
+            const totalItem = preco * i.quantidade;
+            return `• ${i.quantidade}x ${nome}${variacao} — ${formatarPreco(preco)} cada = ${formatarPreco(totalItem)}`;
+        });
+
+        const { subtotal } = totals();
+
+        return [
+            "Olá! Gostaria de fazer o seguinte pedido na Amazônia Force:",
+            "",
+            ...linhas,
+            "",
+            `Total: ${formatarPreco(subtotal)}`,
+            "",
+            "Aguardo confirmação de frete e forma de pagamento.",
+        ].join("\n");
+    }
+
+    async function finalizarPedidoWhatsApp() {
+        Cart.user = Cart.user || await window.session.user();
+
+        if (!Cart.user) {
+            Toast.show("Faça login para finalizar seu pedido.", "info");
+            try { localStorage.setItem("redirectAfterLogin", window.location.href); } catch (e) { /* ignore */ }
+            const loginUrl = window.location.pathname.includes("/Routes/") ? "login.html" : "Routes/login.html";
+            setTimeout(() => { window.location.href = loginUrl; }, 900);
+            return;
+        }
+
+        if (!Cart.items.length) {
+            Toast.show("Seu carrinho está vazio.", "error");
+            return;
+        }
+
+        const mensagem = montarMensagemPedido();
+        const url = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(mensagem)}`;
+        window.open(url, "_blank", "noopener");
+    }
+
+    // Intercepta qualquer botão/link "Finalizar Compra" (mini-carrinho, página
+    // do carrinho) e o antigo botão "Finalizar Pedido" do checkout, e manda
+    // direto para o WhatsApp em vez de seguir para checkout.html.
+    document.addEventListener("click", (e) => {
+        const alvo = e.target.closest('a[href="checkout.html"], .checkout-button');
+        if (!alvo) return;
+        e.preventDefault();
+        finalizarPedidoWhatsApp();
+    });
+
+    window.finalizarPedidoWhatsApp = finalizarPedidoWhatsApp;
 
     /* ---------------- FRETE (estimativa) ---------------- */
     // Não há integração com transportadora — é uma regra simples e transparente:
