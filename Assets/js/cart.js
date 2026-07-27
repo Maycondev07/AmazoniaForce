@@ -321,7 +321,18 @@
 
         const mensagem = montarMensagemPedido();
         const url = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(mensagem)}`;
-        window.open(url, "_blank", "noopener");
+
+        // Em celulares, abrir "nova aba" com window.open() depois de um await
+        // é bloqueado por vários navegadores (o disparo não é mais visto como
+        // uma ação direta do clique). Por isso, no celular navegamos na própria
+        // aba (funciona em 100% dos aparelhos); no computador, abrimos em nova
+        // aba pra não perder a página do carrinho.
+        const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        if (isMobile) {
+            window.location.href = url;
+        } else {
+            window.open(url, "_blank", "noopener");
+        }
     }
 
     // Intercepta qualquer botão/link "Solicitar Orçamento" (mini-carrinho, página

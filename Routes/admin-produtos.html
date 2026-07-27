@@ -89,78 +89,70 @@
                         <input type="hidden" id="produtoId">
                         <input type="hidden" id="produtoImagemUrl">
 
-                        <div class="admin-section">
-                            <h3>Informações do Produto</h3>
+                        <div class="admin-image-upload">
+                            <div class="admin-image-preview" id="imagemPreview">📦</div>
+                            <label class="file-btn">
+                                Escolher Imagem
+                                <input type="file" id="produtoImagem" accept="image/*">
+                            </label>
+                        </div>
 
-                            <div class="admin-basic-top">
-                                <div class="admin-image-upload">
-                                    <div class="admin-image-preview" id="imagemPreview">📦</div>
-                                    <label class="file-btn">
-                                        Escolher Imagem
-                                        <input type="file" id="produtoImagem" accept="image/*">
-                                    </label>
-                                </div>
-                                <div class="form-group">
-                                    <label>Nome do Produto</label>
-                                    <input type="text" id="produtoNome" required>
-                                </div>
+                        <div class="form-group">
+                            <label>Nome do Produto</label>
+                            <input type="text" id="produtoNome" required>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Categoria</label>
+                                <input type="text" id="produtoCategoria" placeholder="Ex.: Cilindros">
                             </div>
-
-                            <div class="admin-section-grid">
-                                <div class="form-group">
-                                    <label>Categoria</label>
-                                    <input type="text" id="produtoCategoria" placeholder="Ex.: Cilindros">
-                                </div>
-                                <div class="form-group">
-                                    <label>Marca</label>
-                                    <input type="text" id="produtoMarca" placeholder="Ex.: SMC">
-                                </div>
-                                <div class="form-group">
-                                    <label>Código</label>
-                                    <input type="text" id="produtoCodigo">
-                                </div>
-                                <div class="form-group">
-                                    <label>Estoque</label>
-                                    <input type="number" id="produtoEstoque" min="0" value="0">
-                                </div>
-                            </div>
-
-                            <div class="form-group admin-descricao-group">
-                                <label>Descrição</label>
-                                <textarea id="produtoDescricao" rows="4"></textarea>
+                            <div class="form-group">
+                                <label>Marca</label>
+                                <input type="text" id="produtoMarca" placeholder="Ex.: SMC">
                             </div>
                         </div>
 
-                        <div class="admin-section">
-                            <h3>Preço</h3>
-                            <div class="admin-section-grid admin-section-grid-2">
-                                <div class="form-group">
-                                    <label>Preço (R$) — uso interno, não aparece no site</label>
-                                    <input type="number" id="produtoPreco" min="0" step="0.01">
-                                </div>
-                                <div class="form-group">
-                                    <label>Preço Antigo (opcional)</label>
-                                    <input type="number" id="produtoPrecoAntigo" min="0" step="0.01">
-                                </div>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Código</label>
+                                <input type="text" id="produtoCodigo">
+                            </div>
+                            <div class="form-group">
+                                <label>Estoque</label>
+                                <input type="number" id="produtoEstoque" min="0" value="0">
                             </div>
                         </div>
 
-                        <div class="admin-section">
-                            <h3>Visibilidade</h3>
-                            <div class="admin-toggle-row">
-                                <label>
-                                    <input type="checkbox" id="produtoDestaque">
-                                    Produto em destaque
-                                </label>
-                                <label>
-                                    <input type="checkbox" id="produtoOferta">
-                                    Marcar como oferta
-                                </label>
-                                <label>
-                                    <input type="checkbox" id="produtoAtivo" checked>
-                                    Visível no site
-                                </label>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Preço (R$) — uso interno, não aparece no site</label>
+                                <input type="number" id="produtoPreco" min="0" step="0.01">
                             </div>
+                            <div class="form-group">
+                                <label>Preço Antigo (opcional)</label>
+                                <input type="number" id="produtoPrecoAntigo" min="0" step="0.01">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Descrição</label>
+                            <textarea id="produtoDescricao" rows="4"></textarea>
+                        </div>
+
+                        <div class="admin-toggle-row">
+                            <label>
+                                <input type="checkbox" id="produtoDestaque">
+                                Produto em destaque
+                            </label>
+                            <label>
+                                <input type="checkbox" id="produtoOferta">
+                                Marcar como oferta
+                            </label>
+                            <label>
+                                <input type="checkbox" id="produtoAtivo" checked>
+                                Visível no site
+                            </label>
                         </div>
 
                         <div class="admin-variacoes">

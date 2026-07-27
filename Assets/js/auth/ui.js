@@ -19,7 +19,7 @@
     const loginBtn = document.querySelector("#loginButton");
     if (loginBtn && user) {
         loginBtn.textContent = "Minha Conta";
-        loginBtn.href = loginBtn.getAttribute("href").includes("Routes/")
+        loginBtn.href = loginBtn.getAttribute("href").includes("/Routes/")
             ? "Routes/minha-conta.html"
             : "minha-conta.html";
     }
