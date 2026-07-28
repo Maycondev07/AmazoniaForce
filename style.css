@@ -315,13 +315,13 @@ img { max-width: 100%; display: block; }
     gap: 2rem;
 }
 .menu-toggle {
-    display: none;
     background: var(--af-blue);
     color: #fff;
     border: none;
     padding: 0.8rem 1.2rem;
     font-weight: 700;
     cursor: pointer;
+    display: flex;
     align-items: center;
     gap: 0.5rem;
     border-radius: 8px 8px 0 0;
@@ -1432,7 +1432,6 @@ img { max-width: 100%; display: block; }
     .search-area { display: none; }
     .login-btn span { display: none; }
     .navbar > .container > ul { display: none; }
-    .menu-toggle { display: flex; }
     .navbar > .container > ul.mobile-open {
         display: flex;
         position: absolute;

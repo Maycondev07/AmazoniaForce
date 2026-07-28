@@ -39,21 +39,8 @@
             .order("criado_em", { ascending: true });
 
         if (error) {
-            // Proteção: se a coluna "variacao_id"/tabela "produto_variacoes" ainda
-            // não existir no banco (migração database/setup-variacoes-ofertas.sql
-            // pendente), refaz a busca no formato antigo em vez de quebrar o carrinho.
-            console.error("Erro ao carregar carrinho (tentando modo compatível):", error);
-            const fallback = await window.supabaseClient
-                .from("carrinho_itens")
-                .select("id, produto_id, quantidade, produtos(*)")
-                .order("criado_em", { ascending: true });
-
-            if (fallback.error) {
-                console.error("Erro ao carregar carrinho:", fallback.error);
-                Cart.items = [];
-            } else {
-                Cart.items = fallback.data || [];
-            }
+            console.error("Erro ao carregar carrinho:", error);
+            Cart.items = [];
         } else {
             Cart.items = data || [];
         }
@@ -87,20 +74,9 @@
                 .eq("id", existente.id);
             if (error) { Toast.show("Erro ao atualizar carrinho.", "error"); return; }
         } else {
-            let { error } = await window.supabaseClient
+            const { error } = await window.supabaseClient
                 .from("carrinho_itens")
                 .insert({ user_id: Cart.user.id, produto_id: produtoId, variacao_id: variacaoId, quantidade });
-
-            if (error) {
-                // Proteção: banco ainda sem a coluna "variacao_id" (migração pendente) —
-                // tenta de novo sem ela em vez de bloquear a adição ao carrinho.
-                console.error("Erro ao adicionar (tentando modo compatível):", error);
-                const fallback = await window.supabaseClient
-                    .from("carrinho_itens")
-                    .insert({ user_id: Cart.user.id, produto_id: produtoId, quantidade });
-                error = fallback.error;
-            }
-
             if (error) { Toast.show("Erro ao adicionar ao carrinho.", "error"); return; }
         }
 
@@ -321,18 +297,7 @@
 
         const mensagem = montarMensagemPedido();
         const url = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(mensagem)}`;
-
-        // Em celulares, abrir "nova aba" com window.open() depois de um await
-        // é bloqueado por vários navegadores (o disparo não é mais visto como
-        // uma ação direta do clique). Por isso, no celular navegamos na própria
-        // aba (funciona em 100% dos aparelhos); no computador, abrimos em nova
-        // aba pra não perder a página do carrinho.
-        const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-        if (isMobile) {
-            window.location.href = url;
-        } else {
-            window.open(url, "_blank", "noopener");
-        }
+        window.open(url, "_blank", "noopener");
     }
 
     // Intercepta qualquer botão/link "Solicitar Orçamento" (mini-carrinho, página
@@ -346,7 +311,6 @@
     });
 
     window.finalizarPedidoWhatsApp = finalizarPedidoWhatsApp;
-    window.updateCart = () => load();
 
     /* ---------------- EXPOSIÇÃO GLOBAL ---------------- */
     window.Cart = { load, add, remove, changeQty, clear, totals: () => totals() };
