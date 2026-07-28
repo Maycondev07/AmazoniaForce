@@ -217,6 +217,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (!btn) return;
             await db.from("favoritos").delete().eq("user_id", user.id).eq("produto_id", btn.dataset.removeFav);
             Toast.show("Removido dos favoritos.", "success");
+            if (window.Favoritos) window.Favoritos.refresh();
             carregarFavoritos();
         });
     }

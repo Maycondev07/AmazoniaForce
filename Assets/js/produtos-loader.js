@@ -33,6 +33,12 @@
         return `
             <article class="product-card" data-id="${p.id}" data-name="${escapeAttr(p.nome)}">
                 ${badgeHtml}
+                <button
+                    type="button"
+                    class="card-favorite-btn"
+                    data-produto-id="${p.id}"
+                    aria-label="Adicionar aos favoritos"
+                    title="Favoritar">🤍</button>
                 <a href="${linkProduto}" class="product-img">
                     <img src="${imagem}" alt="${escapeAttr(p.nome)}" loading="lazy">
                 </a>
@@ -52,6 +58,67 @@
         return String(str || "").replace(/[&<>"']/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
     }
     function escapeAttr(str) { return escapeHtml(str); }
+
+    /* ---------------- ESTADO DOS FAVORITOS (❤ nos cards) ---------------- */
+    // Carregado uma única vez por página e reaproveitado em toda grid
+    // renderizada (Destaque, Ofertas, Categoria, Recomendados, etc.).
+    let favoritosPromise = null;
+
+    async function carregarFavoritosIds() {
+        if (favoritosPromise) return favoritosPromise;
+
+        favoritosPromise = (async () => {
+            const db = window.supabaseClient;
+            if (!db || !window.session) return new Set();
+
+            const user = await window.session.user();
+            if (!user) return new Set();
+
+            const { data, error } = await db.from("favoritos").select("produto_id").eq("user_id", user.id);
+            if (error || !data) return new Set();
+
+            return new Set(data.map(f => f.produto_id));
+        })();
+
+        return favoritosPromise;
+    }
+
+    async function aplicarEstadoFavoritos(grid) {
+        const botoes = grid.querySelectorAll(".card-favorite-btn");
+        if (!botoes.length) return;
+
+        const idsFavoritados = await carregarFavoritosIds();
+        botoes.forEach(btn => marcarBotao(btn, idsFavoritados.has(btn.dataset.produtoId)));
+    }
+
+    function marcarBotao(btn, ativo) {
+        btn.classList.toggle("active", ativo);
+        btn.textContent = ativo ? "❤" : "🤍";
+    }
+
+    // Chamado por Assets/js/favoritos.js assim que o usuário curte/descurtir
+    // um produto pelo coração do card, pra manter todos os cards do produto
+    // (ele pode aparecer em mais de uma vitrine na mesma página) sincronizados.
+    async function setFavoritoState(produtoId, ativo) {
+        const ids = await carregarFavoritosIds();
+        if (ativo) ids.add(produtoId); else ids.delete(produtoId);
+
+        document.querySelectorAll(`.card-favorite-btn[data-produto-id="${produtoId}"]`)
+            .forEach(btn => marcarBotao(btn, ativo));
+    }
+
+    /* ---------------- MONTAGEM DA GRID ---------------- */
+    function montarGrid(grid, produtos) {
+        if (!produtos || !produtos.length) {
+            grid.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:var(--af-steel); padding:2rem 0;">Nenhum produto encontrado com esses filtros.</p>`;
+            return;
+        }
+        grid.innerHTML = produtos.map(cardHtml).join("");
+        aplicarEstadoFavoritos(grid);
+        // O clique em ".btn-add-cart" e ".card-favorite-btn" já é tratado
+        // globalmente (cart.js / favoritos.js) por delegação de eventos —
+        // não precisa religar nada aqui.
+    }
 
     async function carregarGrid(grid) {
         const db = window.supabaseClient;
@@ -102,26 +169,13 @@
         const idAtual = params.get("id");
         if (idAtual) resultados = resultados.filter(p => p.id !== idAtual);
 
-        if (!resultados.length) {
-            grid.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:var(--af-steel); padding:2rem 0;">Nenhum produto encontrado no momento.</p>`;
-            return;
-        }
-
-        grid.innerHTML = resultados.map(cardHtml).join("");
-        // O clique em ".btn-add-cart" já é tratado globalmente por
-        // script.js via delegação de eventos — não precisa religar aqui.
+        montarGrid(grid, resultados);
     }
 
-    function renderCards(grid, produtos) {
-        if (!produtos || !produtos.length) {
-            grid.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:var(--af-steel); padding:2rem 0;">Nenhum produto encontrado com esses filtros.</p>`;
-            return;
-        }
-        grid.innerHTML = produtos.map(cardHtml).join("");
-    }
-
-    // Módulo reaproveitado por Assets/js/filtros.js (busca e filtros de produtos.html/categoria.html)
-    window.ProdutosLoader = { cardHtml, renderCards };
+    // Módulo reaproveitado por Assets/js/filtros.js e Assets/js/ofertas.js
+    // (busca e filtros de produtos.html/categoria.html/ofertas.html) e por
+    // Assets/js/favoritos.js (sincronização do coração entre cards).
+    window.ProdutosLoader = { cardHtml, renderCards: montarGrid, setFavoritoState };
 
     document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll("[data-products-source]").forEach(carregarGrid);

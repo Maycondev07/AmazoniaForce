@@ -251,6 +251,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 Toast.show("Adicionado aos favoritos!", "success");
             }
             atualizarBotaoFavorito();
+            if (window.Favoritos) window.Favoritos.refresh();
         });
     }
 
