@@ -933,6 +933,36 @@
     <!-- Back To Top -->
 
     <button id="backToTop">↑</button>
+    <!-- Barra de Navegação Inferior (somente mobile) -->
+    <nav class="mobile-bottom-nav">
+
+        <a href="../index.html" class="mobile-nav-item" data-nav="home">
+            <span class="mobile-nav-icon">🏠</span>
+            <span>Início</span>
+        </a>
+
+        <a href="categoria.html" class="mobile-nav-item" data-nav="categorias">
+            <span class="mobile-nav-icon">📂</span>
+            <span>Categorias</span>
+        </a>
+
+        <button type="button" class="mobile-nav-item" data-nav="buscar">
+            <span class="mobile-nav-icon">🔍</span>
+            <span>Buscar</span>
+        </button>
+
+        <button type="button" class="mobile-nav-item" onclick="toggleCart()" data-nav="carrinho">
+            <span class="mobile-nav-icon">🛒<span class="mobile-nav-badge cart-count">0</span></span>
+            <span>Carrinho</span>
+        </button>
+
+        <a href="login.html" class="mobile-nav-item" id="mobileNavAccount" data-nav="conta">
+            <span class="mobile-nav-icon">👤</span>
+            <span>Conta</span>
+        </a>
+
+    </nav>
+
 
     <!-- Scripts -->
 
@@ -948,6 +978,7 @@
     <script src="../Assets/js/favoritos.js"></script>
 
     <script src="../Assets/js/busca.js"></script>
+    <script src="../Assets/js/mobile-nav.js"></script>
 
 </body>
 

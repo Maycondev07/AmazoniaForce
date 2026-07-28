@@ -199,12 +199,12 @@
         if (!table) return; // só existe em carrinho.html
 
         if (!Cart.user) {
-            table.innerHTML = `<p style="text-align:center; color:var(--af-steel); padding:2rem 0;">Faça login para ver seu carrinho.</p>`;
+            table.innerHTML = `<p class="cart-empty-msg">Faça login para ver seu carrinho.</p>`;
             return;
         }
 
         if (!Cart.items.length) {
-            table.innerHTML = `<p style="text-align:center; color:var(--af-steel); padding:2rem 0;">Seu carrinho está vazio. <a href="produtos.html" style="color:var(--af-blue);">Ver produtos →</a></p>`;
+            table.innerHTML = `<p class="cart-empty-msg">Seu carrinho está vazio. <a href="produtos.html">Ver produtos →</a></p>`;
             return;
         }
 
@@ -212,18 +212,18 @@
             const p = i.produtos || {};
             const v = i.produto_variacoes;
             return `
-                <div class="cart-item" style="display:flex; align-items:center; gap:1rem; padding:1rem; border:1px solid var(--border-color); border-radius:10px;">
-                    <img src="${p.imagem_url || v?.imagem_url || '../Assets/img/logo.png'}" alt="${escapeHtml(p.nome)}" style="width:70px; height:70px; object-fit:contain; border-radius:8px; background:var(--bg-dark); flex-shrink:0;">
-                    <div style="flex:1; min-width:0;">
-                        <h4 style="color:#fff; font-size:0.95rem; margin-bottom:0.3rem;">${escapeHtml(p.nome || "Produto")}</h4>
-                        ${v ? `<span style="color:var(--af-steel); font-size:0.82rem;">Opção: ${escapeHtml(v.nome)}</span>` : ""}
+                <div class="cart-page-item">
+                    <img class="cart-page-item-img" src="${p.imagem_url || v?.imagem_url || '../Assets/img/logo.png'}" alt="${escapeHtml(p.nome)}">
+                    <div class="cart-page-item-info">
+                        <h4>${escapeHtml(p.nome || "Produto")}</h4>
+                        ${v ? `<span class="cart-page-item-variacao">Opção: ${escapeHtml(v.nome)}</span>` : ""}
                     </div>
-                    <div class="cart-item-actions" style="display:flex; align-items:center; gap:0.6rem; border:1px solid var(--border-color); border-radius:8px; padding:0.2rem;">
-                        <button class="btn-qty" onclick="changeQty('${i.id}', -1)" aria-label="Diminuir" style="width:28px; height:28px; border:none; background:none; color:#fff; cursor:pointer; font-size:1rem;">-</button>
-                        <span style="min-width:20px; text-align:center; color:#fff;">${i.quantidade}</span>
-                        <button class="btn-qty" onclick="changeQty('${i.id}', 1)" aria-label="Aumentar" style="width:28px; height:28px; border:none; background:none; color:#fff; cursor:pointer; font-size:1rem;">+</button>
+                    <div class="cart-item-actions cart-page-item-actions">
+                        <button class="btn-qty" onclick="changeQty('${i.id}', -1)" aria-label="Diminuir">-</button>
+                        <span class="cart-page-item-qty">${i.quantidade}</span>
+                        <button class="btn-qty" onclick="changeQty('${i.id}', 1)" aria-label="Aumentar">+</button>
                     </div>
-                    <button onclick="removeFromCart('${i.id}')" aria-label="Remover" style="background:none; border:none; color:var(--af-red); cursor:pointer; font-size:1.2rem;">🗑</button>
+                    <button class="cart-page-item-remove" onclick="removeFromCart('${i.id}')" aria-label="Remover">🗑</button>
                 </div>
             `;
         }).join("");
