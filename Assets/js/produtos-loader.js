@@ -24,7 +24,11 @@
         const badgeHtml = badges.length ? `<div class="product-badges">${badges.join("")}</div>` : "";
 
         const imagem = p.imagem_url || "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=600&q=80";
-        const linkProduto = `produto.html?id=${p.id}`;
+
+        // O carregador roda tanto em index.html (raiz do site) quanto nas
+        // páginas dentro de /Routes/ — o link do produto precisa refletir isso.
+        const emRoutes = window.location.pathname.includes("/Routes/");
+        const linkProduto = `${emRoutes ? "" : "Routes/"}produto.html?id=${p.id}`;
 
         return `
             <article class="product-card" data-id="${p.id}" data-name="${escapeAttr(p.nome)}">
@@ -71,10 +75,23 @@
         query = query.order("criado_em", { ascending: false });
         if (limite) query = query.limit(limite);
 
-        const { data, error } = await query;
+        let { data, error } = await query;
+
+        // Proteção: se a coluna "em_oferta" ainda não existir no banco (migração
+        // database/setup-variacoes-ofertas.sql pendente), refaz a busca de forma
+        // simples em vez de deixar a seção completamente vazia.
+        if (error && source === "ofertas") {
+            console.error("Erro ao carregar ofertas (tentando modo compatível):", error);
+            const fallback = await db.from("produtos").select("*").eq("ativo", true)
+                .order("criado_em", { ascending: false })
+                .limit(limite || 100);
+            data = fallback.data;
+            error = fallback.error;
+        }
 
         if (error) {
             console.error("Erro ao carregar produtos:", error);
+            grid.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:var(--af-steel); padding:2rem 0;">Não foi possível carregar os produtos agora.</p>`;
             return;
         }
 

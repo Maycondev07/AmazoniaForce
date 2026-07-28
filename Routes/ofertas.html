@@ -187,49 +187,13 @@
 
                     <div>
 
-                        <strong id="days">
+                        <strong id="offersActiveCount">
 
-                            00
-
-                        </strong>
-
-                        <span>Dias</span>
-
-                    </div>
-
-                    <div>
-
-                        <strong id="hours">
-
-                            00
+                            0
 
                         </strong>
 
-                        <span>Horas</span>
-
-                    </div>
-
-                    <div>
-
-                        <strong id="minutes">
-
-                            00
-
-                        </strong>
-
-                        <span>Minutos</span>
-
-                    </div>
-
-                    <div>
-
-                        <strong id="seconds">
-
-                            00
-
-                        </strong>
-
-                        <span>Segundos</span>
+                        <span>Ofertas ativas agora</span>
 
                     </div>
 
@@ -263,17 +227,13 @@
 
                         <h4>
 
-                            Desconto
+                            Categoria
 
                         </h4>
 
-                        <label><input type="checkbox"> 10% ou mais</label>
-
-                        <label><input type="checkbox"> 20% ou mais</label>
-
-                        <label><input type="checkbox"> 30% ou mais</label>
-
-                        <label><input type="checkbox"> 50% ou mais</label>
+                        <div id="offerFilterCategorias">
+                            <!-- Populado dinamicamente com as categorias que realmente têm ofertas -->
+                        </div>
 
                     </div>
 
@@ -281,19 +241,21 @@
 
                         <h4>
 
-                            Categoria
+                            Marca
 
                         </h4>
 
-                        <label><input type="checkbox"> Pneumática</label>
-
-                        <label><input type="checkbox"> Automação</label>
-
-                        <label><input type="checkbox"> Ferramentas</label>
-
-                        <label><input type="checkbox"> Compressores</label>
+                        <div id="offerFilterMarcas">
+                            <!-- Populado dinamicamente com as marcas que realmente têm ofertas -->
+                        </div>
 
                     </div>
+
+                    <button class="btn-primary filter-reset" id="offerFilterReset">
+
+                        Limpar Filtros
+
+                    </button>
 
                 </aside>
 
@@ -305,13 +267,15 @@
 
                         <span>
 
-                            <strong>48</strong> ofertas encontradas
+                            <strong id="offersCountNumber">0</strong> ofertas encontradas
 
                         </span>
 
-                        <select>
+                        <select id="offersSort">
 
-                            <option>Mais recentes</option>
+                            <option value="recent">Mais recentes</option>
+
+                            <option value="name">A-Z</option>
 
                         </select>
 
@@ -319,22 +283,15 @@
 
                     <div
                         class="products-grid"
-                        id="offersGrid"
-                        data-products-source="ofertas">
+                        id="offersGrid">
 
-                        <!-- Produtos carregados dinamicamente via Assets/js/produtos-loader.js -->
+                        <!-- Produtos carregados dinamicamente via Assets/js/ofertas.js -->
 
                     </div>
 
-                    <div class="pagination">
+                    <div class="pagination" id="offersPagination">
 
-                        <button class="active">1</button>
-
-                        <button>2</button>
-
-                        <button>3</button>
-
-                        <button>Próxima →</button>
+                        <!-- Páginas geradas dinamicamente via Assets/js/ofertas.js -->
 
                     </div>
 
@@ -650,6 +607,7 @@
     <script src="../Assets/js/auth/auth.js"></script>
     <script src="../Assets/js/auth/ui.js"></script>
     <script src="../Assets/js/produtos-loader.js"></script>
+    <script src="../Assets/js/ofertas.js"></script>
 
     <script src="../Assets/js/busca.js"></script>
 

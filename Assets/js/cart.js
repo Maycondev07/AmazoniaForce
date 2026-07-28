@@ -39,8 +39,21 @@
             .order("criado_em", { ascending: true });
 
         if (error) {
-            console.error("Erro ao carregar carrinho:", error);
-            Cart.items = [];
+            // Proteção: se a coluna "variacao_id"/tabela "produto_variacoes" ainda
+            // não existir no banco (migração database/setup-variacoes-ofertas.sql
+            // pendente), refaz a busca no formato antigo em vez de quebrar o carrinho.
+            console.error("Erro ao carregar carrinho (tentando modo compatível):", error);
+            const fallback = await window.supabaseClient
+                .from("carrinho_itens")
+                .select("id, produto_id, quantidade, produtos(*)")
+                .order("criado_em", { ascending: true });
+
+            if (fallback.error) {
+                console.error("Erro ao carregar carrinho:", fallback.error);
+                Cart.items = [];
+            } else {
+                Cart.items = fallback.data || [];
+            }
         } else {
             Cart.items = data || [];
         }
@@ -74,9 +87,20 @@
                 .eq("id", existente.id);
             if (error) { Toast.show("Erro ao atualizar carrinho.", "error"); return; }
         } else {
-            const { error } = await window.supabaseClient
+            let { error } = await window.supabaseClient
                 .from("carrinho_itens")
                 .insert({ user_id: Cart.user.id, produto_id: produtoId, variacao_id: variacaoId, quantidade });
+
+            if (error) {
+                // Proteção: banco ainda sem a coluna "variacao_id" (migração pendente) —
+                // tenta de novo sem ela em vez de bloquear a adição ao carrinho.
+                console.error("Erro ao adicionar (tentando modo compatível):", error);
+                const fallback = await window.supabaseClient
+                    .from("carrinho_itens")
+                    .insert({ user_id: Cart.user.id, produto_id: produtoId, quantidade });
+                error = fallback.error;
+            }
+
             if (error) { Toast.show("Erro ao adicionar ao carrinho.", "error"); return; }
         }
 
@@ -311,6 +335,7 @@
     });
 
     window.finalizarPedidoWhatsApp = finalizarPedidoWhatsApp;
+    window.updateCart = () => load();
 
     /* ---------------- EXPOSIÇÃO GLOBAL ---------------- */
     window.Cart = { load, add, remove, changeQty, clear, totals: () => totals() };
