@@ -2670,6 +2670,42 @@ background:#2563eb;
 
 .admin-empty { text-align: center; padding: 3rem 1rem; color: var(--af-steel); }
 
+/* --- Importação de produtos em massa (planilha) --- */
+.admin-import-card { margin-bottom: 2rem; }
+.admin-import-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+.admin-import-header h2 { font-size: 1.15rem; text-transform: none; border: none; margin: 0 0 0.3rem; padding: 0; }
+.admin-import-header p { color: var(--af-steel); font-size: 0.88rem; }
+
+.admin-import-dropzone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0.4rem;
+    border: 2px dashed var(--border-color);
+    border-radius: var(--radius);
+    padding: 2.5rem 1.5rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+.admin-import-dropzone:hover,
+.admin-import-dropzone.active { border-color: var(--af-blue); background: rgba(0, 102, 255, 0.05); }
+.admin-import-dropzone strong { color: #fff; font-size: 1rem; }
+.admin-import-dropzone small { color: var(--af-steel); font-size: 0.82rem; }
+.admin-import-icon { font-size: 2rem; margin-bottom: 0.3rem; }
+
+#importPreviewWrap { margin-top: 1.5rem; }
+#importPreviewWrap .admin-table td[title] { cursor: help; }
+
+
 .admin-only-link { display: none !important; }
 .admin-only-link.visible { display: list-item !important; }
 a.admin-only-link.visible { display: inline-flex !important; }

@@ -363,4 +363,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     resetarFormulario();
     carregarProdutos();
+
+    // Exposto pro Assets/js/admin/importar-produtos.js recarregar a lista
+    // depois de uma importação em massa, sem precisar recarregar a página.
+    window.recarregarProdutosAdmin = carregarProdutos;
 });
