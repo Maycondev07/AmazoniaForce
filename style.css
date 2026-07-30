@@ -2060,6 +2060,57 @@ background:#2563eb;
 .filter-group input[type="range"] { width: 100%; accent-color: var(--af-blue); }
 .filter-reset { width: 100%; text-align: center; margin-top: 0.5rem; }
 
+/* ==========================================================================
+   CATÁLOGOS
+   ========================================================================== */
+.catalogos-toolbar {
+    display: flex;
+    justify-content: center;
+    color: var(--af-steel);
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+}
+.catalogos-toolbar strong { color: #fff; }
+
+.catalogos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.8rem;
+}
+
+.catalogo-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+}
+.catalogo-card:hover { transform: translateY(-6px); border-color: var(--af-blue); }
+
+.catalogo-capa {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    background: var(--bg-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.catalogo-capa img { width: 100%; height: 100%; object-fit: cover; }
+.catalogo-capa .catalogo-capa-fallback { font-size: 3rem; color: var(--af-steel); }
+
+.catalogo-info { padding: 1.3rem; display: flex; flex-direction: column; gap: 0.5rem; flex-grow: 1; }
+.catalogo-marca { color: var(--af-blue); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+.catalogo-info h3 { color: #fff; font-size: 1.05rem; line-height: 1.3; }
+.catalogo-info p { color: var(--af-steel); font-size: 0.85rem; flex-grow: 1; }
+.catalogo-meta { color: var(--af-steel); font-size: 0.78rem; }
+.catalogo-info .btn-primary { text-align: center; margin-top: 0.4rem; }
+
+/* ==========================================================================
+   PRODUCTS TOOLBAR (produtos.html / categoria.html / ofertas.html)
+   ========================================================================== */
 .products-toolbar {
     display: flex;
     justify-content: space-between;

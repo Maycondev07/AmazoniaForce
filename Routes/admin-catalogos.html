@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gerenciar Catálogos | Amazônia Force</title>
+
+    <meta name="description" content="Painel administrativo de catálogos da Amazônia Force.">
+
+    <meta name="robots" content="noindex,nofollow">
+
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../Assets/css/auth.css">
+    <link rel="stylesheet" href="../Assets/css/loading.css">
+    <link rel="stylesheet" href="../Assets/css/toast.css">
+
+    <link rel="icon" href="../Assets/icons/favicon.ico">
+
+</head>
+
+<body>
+
+    <!-- Loader -->
+    <div class="loader">
+        <span></span>
+    </div>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="top-left">
+                <span>🛠 Painel Administrativo</span>
+            </div>
+            <div class="top-right">
+                <a href="admin-produtos.html">Produtos</a>
+                <a href="minha-conta.html">Minha Conta</a>
+                <a href="../index.html">Ver Site</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <div class="header-grid">
+                <a href="../index.html" class="logo">
+                    <img src="../Assets/img/logo.png" alt="Amazônia Force - Logo AF Pneumática">
+                </a>
+                <div></div>
+                <div class="header-actions">
+                    <a href="minha-conta.html" class="btn-outline">Sair do Painel</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <section class="breadcrumb">
+        <div class="container">
+            <a href="../index.html">Home</a>
+            <span>/</span>
+            <a href="minha-conta.html">Minha Conta</a>
+            <span>/</span>
+            <strong>Gerenciar Catálogos</strong>
+        </div>
+    </section>
+
+    <!-- Painel -->
+    <section class="admin-page">
+        <div class="container">
+
+            <div class="admin-header">
+                <h1>Gerenciar Catálogos</h1>
+                <p>Cadastre os PDFs de catálogo que os clientes podem baixar no site.</p>
+            </div>
+
+            <div class="admin-layout">
+
+                <!-- Formulário -->
+                <div class="admin-card admin-form-card">
+                    <h2 id="catalogoFormTitle">Novo Catálogo</h2>
+
+                    <form id="catalogoForm">
+                        <input type="hidden" id="catalogoId">
+                        <input type="hidden" id="catalogoArquivoUrl">
+                        <input type="hidden" id="catalogoCapaUrl">
+
+                        <div class="admin-image-upload">
+                            <div class="admin-image-preview" id="capaPreview">📄</div>
+                            <label class="file-btn">
+                                Escolher Capa (opcional)
+                                <input type="file" id="catalogoCapa" accept="image/*">
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Título do Catálogo</label>
+                            <input type="text" id="catalogoTitulo" placeholder="Ex.: Catálogo Geral 2026" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Marca (opcional)</label>
+                            <input type="text" id="catalogoMarca" placeholder="Ex.: SMC">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Descrição (opcional)</label>
+                            <textarea id="catalogoDescricao" rows="3" placeholder="Ex.: Linha completa de cilindros e válvulas pneumáticas."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Arquivo PDF</label>
+                            <label class="file-btn" style="display:block; text-align:center;">
+                                <span id="pdfBtnLabel">Escolher Arquivo PDF</span>
+                                <input type="file" id="catalogoPdf" accept="application/pdf">
+                            </label>
+                            <small id="pdfArquivoAtual" style="color:var(--af-steel); display:block; margin-top:0.5rem;"></small>
+                        </div>
+
+                        <div class="admin-toggle-row">
+                            <label>
+                                <input type="checkbox" id="catalogoAtivo" checked>
+                                Visível no site
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Ordem de exibição (menor aparece primeiro)</label>
+                            <input type="number" id="catalogoOrdem" min="0" value="0">
+                        </div>
+
+                        <div class="admin-form-actions">
+                            <button type="submit" class="btn-primary" id="catalogoSubmitBtn">Cadastrar Catálogo</button>
+                            <button type="button" class="btn-outline" id="catalogoCancelBtn" style="display:none;">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Listagem -->
+                <div class="admin-card">
+                    <h2>Catálogos Cadastrados</h2>
+
+                    <div class="admin-toolbar">
+                        <input type="search" id="catalogoSearch" placeholder="Buscar por título ou marca...">
+                        <span class="admin-count" id="catalogosCount">0 catálogos</span>
+                    </div>
+
+                    <div class="admin-table-wrap">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Capa</th>
+                                    <th>Catálogo</th>
+                                    <th>Tamanho</th>
+                                    <th>Status</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="catalogosTableBody"></tbody>
+                        </table>
+                    </div>
+
+                    <div class="admin-empty" id="catalogosEmpty" style="display:none;">
+                        Nenhum catálogo cadastrado ainda. Use o formulário ao lado para adicionar o primeiro.
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../Assets/js/auth/supabase.js"></script>
+    <script src="../Assets/js/auth/session.js"></script>
+    <script src="../Assets/js/auth/admin-guard.js"></script>
+    <script src="../Assets/js/auth/auth.js"></script>
+
+    <script src="../Assets/components/toast.js"></script>
+    <script src="../Assets/components/loading.js"></script>
+    <script src="../Assets/components/validator.js"></script>
+
+    <script src="../Assets/js/admin/catalogos-admin.js"></script>
+
+    <script>
+        // Loader simples desta página (não usa script.js global)
+        document.addEventListener("DOMContentLoaded", () => {
+            const loader = document.querySelector(".loader");
+            if (loader) setTimeout(() => loader.classList.add("hide"), 300);
+        });
+    </script>
+
+</body>
+
+</html>

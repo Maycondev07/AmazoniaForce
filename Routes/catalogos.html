@@ -7,20 +7,21 @@
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-    <title>Criar Conta | Amazônia Force</title>
+    <title>Catálogos | Amazônia Force</title>
 
     <meta name="description"
-        content="Crie sua conta na Amazônia Force.">
+        content="Baixe os catálogos em PDF da Amazônia Force e das principais marcas que trabalhamos.">
 
-    <meta name="robots" content="noindex,follow">
+    <meta name="robots" content="index,follow">
 
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Criar Conta | Amazônia Force">
-    <meta property="og:description" content="Crie sua conta na Amazônia Force.">
+    <meta property="og:title" content="Catálogos | Amazônia Force">
+    <meta property="og:description" content="Baixe os catálogos em PDF da Amazônia Force e das principais marcas que trabalhamos.">
     <meta property="og:image" content="../Assets/img/logo.png">
-    <meta property="og:url" content="https://amazoniaforce.com.br/Routes/cadastro.html">
+    <meta property="og:url" content="https://amazoniaforce.com.br/Routes/catalogos.html">
     <meta name="twitter:card" content="summary_large_image">
 
     <link rel="icon"
@@ -28,8 +29,6 @@
 
     <link rel="stylesheet"
         href="../style.css">
-    <link rel="stylesheet" href="../Assets/css/auth.css">
-    <link rel="stylesheet" href="../Assets/css/loading.css">
     <link rel="stylesheet" href="../Assets/css/toast.css">
 
 </head>
@@ -64,7 +63,7 @@
 
                 <a href="sobre.html">Sobre</a>
 
-                <a href="login.html">Entrar</a>
+                <a href="login.html" id="loginButton">Entrar</a>
 
             </div>
 
@@ -133,7 +132,7 @@
 
                 <li><a href="ofertas.html">Ofertas</a></li>
 
-                <li><a href="catalogos.html">Catálogos</a></li>
+                <li><a href="catalogos.html" class="active">Catálogos</a></li>
 
                 <li><a href="contato.html">Contato</a></li>
 
@@ -159,7 +158,7 @@
 
             <strong>
 
-                Criar Conta
+                Catálogos
 
             </strong>
 
@@ -167,286 +166,93 @@
 
     </section>
 
-    <!-- Cadastro -->
+    <!-- Banner -->
 
-    <section class="register-page">
+    <section class="offers-banner catalogos-banner">
 
         <div class="container">
 
-            <div class="register-wrapper">
+            <div class="offers-banner-content">
 
-                <div class="register-form">
+                <h1>
 
-                    <h1>
+                    📚 Catálogos para Download
 
-                        Criar Conta
+                </h1>
 
-                    </h1>
+                <p>
 
-                    <p>
+                    Baixe em PDF os catálogos completos da Amazônia Force e das marcas com as quais trabalhamos.
 
-                        Cadastre-se para comprar com mais rapidez.
+                </p>
 
-                    </p>
+            </div>
 
-                    <!-- Tipo -->
+        </div>
 
-                    <div class="account-type">
+    </section>
 
-                        <label>
+    <!-- Conteúdo -->
 
-                            <input
-                                type="radio"
-                                name="tipo"
-                                id="tipoFisica"
-                                value="fisica"
-                                checked>
+    <section class="offers-page">
 
-                            Pessoa Física
+        <div class="container">
 
-                        </label>
+            <div class="catalogos-toolbar">
 
-                        <label>
+                <span>
 
-                            <input
-                                type="radio"
-                                name="tipo"
-                                id="tipoJuridica"
-                                value="juridica">
+                    <strong id="catalogosCountNumber">0</strong> catálogos disponíveis
 
-                            Pessoa Jurídica
+                </span>
 
-                        </label>
+            </div>
 
-                    </div>
+            <div class="catalogos-grid" id="catalogosGrid">
 
-                    <form id="registerForm">
+                <!-- Catálogos carregados dinamicamente via Assets/js/catalogos-loader.js -->
 
-                        <div class="form-grid">
+            </div>
 
-                            <div class="form-group">
+            <p class="admin-empty" id="catalogosVazio" style="display:none;">
 
-                                <label id="labelNome">
+                Nenhum catálogo disponível no momento. Volte em breve!
 
-                                    Nome Completo
+            </p>
 
-                                </label>
+        </div>
 
-                                <input
-                                    type="text"
-                                    id="nome"
-                                    required>
+    </section>
 
-                            </div>
+    <!-- Produtos Recomendados -->
 
-                            <div class="form-group">
+    <section class="related-products">
 
-                                <label id="labelDocumento">
+        <div class="container">
 
-                                    CPF
+            <div class="section-title">
 
-                                </label>
+                <h2>
 
-                                <input
-                                    type="text"
-                                    id="documento"
-                                    placeholder="000.000.000-00"
-                                    required>
+                    Confira Nossos Produtos
 
-                            </div>
+                </h2>
 
-                            <div class="form-group">
+                <a href="produtos.html">
 
-                                <label>
+                    Ver Todos
 
-                                    Data de Nascimento
+                </a>
 
-                                </label>
+            </div>
 
-                                <input
-                                    type="date"
-                                    id="dataNascimento"
-                                    required>
+            <div
+                class="products-grid"
+                id="recommendedProducts"
+                data-products-source="destaque"
+                data-products-limit="4">
 
-                            </div>
-
-                            <div class="form-group">
-
-                                <label>
-
-                                    Telefone
-
-                                </label>
-
-                                <input
-                                    type="tel"
-                                    id="telefone"
-                                    placeholder="(00) 00000-0000"
-                                    required>
-
-                            </div>
-
-                            <div class="form-group">
-
-                                <label>
-
-                                    E-mail
-
-                                </label>
-
-                                <input
-                                    type="email"
-                                    id="email"
-                                    required>
-
-                            </div>
-
-                            <div class="form-group">
-
-                                <label>
-
-                                    Senha
-
-                                </label>
-
-                                <input
-                                    type="password"
-                                    id="senha"
-                                    required>
-
-                            </div>
-
-                        </div>
-
-                        <div class="checkbox-group">
-
-                            <label>
-
-                                <input
-                                    type="checkbox"
-                                    required>
-
-                                Li e aceito os
-                                <a href="termos-de-uso.html" target="_blank" rel="noopener">
-
-                                    Termos de Uso
-
-                                </a>
-
-                                e a
-
-                                <a href="politica-de-privacidade.html" target="_blank" rel="noopener">
-
-                                    Política de Privacidade
-
-                                </a>
-
-                            </label>
-
-                        </div>
-
-                        <div class="checkbox-group">
-
-                            <label>
-
-                                <input
-                                    type="checkbox">
-
-                                Desejo receber ofertas e novidades por e-mail.
-
-                            </label>
-
-                        </div>
-
-                        <button
-                            class="btn-primary register-btn"
-                            type="submit" id="btnCadastro">
-
-                            Criar Minha Conta
-
-                        </button>
-
-                    </form>
-
-                    <div class="login-divider">
-
-                        <span>
-
-                            ou
-
-                        </span>
-
-                    </div>
-
-                    <div class="social-login">
-
-                        <button class="social-btn google">
-
-                            <img
-                                src="../Assets/icons/google.svg"
-                                alt="Google">
-
-                            Cadastrar com Google
-
-                        </button>
-
-                        <button class="social-btn facebook">
-
-                            <img
-                                src="../Assets/icons/facebook.svg"
-                                alt="Facebook">
-
-                            Cadastrar com Facebook
-
-                        </button>
-
-                    </div>
-
-                    <div class="register-link">
-
-                        Já possui cadastro?
-
-                        <a href="login.html">
-
-                            Entrar
-
-                        </a>
-
-                    </div>
-
-                </div>
-
-                <!-- Benefícios -->
-
-                <aside class="register-benefits">
-
-                    <h2>
-
-                        Benefícios da sua conta
-
-                    </h2>
-
-                    <ul>
-
-                        <li>✔ Histórico de Pedidos</li>
-
-                        <li>✔ Lista de Favoritos</li>
-
-                        <li>✔ Compras mais rápidas</li>
-
-                        <li>✔ Múltiplos Endereços</li>
-
-                        <li>✔ Atendimento Prioritário</li>
-
-                        <li>✔ Promoções Exclusivas</li>
-
-                        <li>✔ Rastreamento de Pedidos</li>
-
-                        <li>✔ Garantia dos Produtos</li>
-
-                    </ul>
-
-                </aside>
+                <!-- Produtos carregados dinamicamente via Assets/js/produtos-loader.js -->
 
             </div>
 
@@ -472,8 +278,7 @@
 
                     <p>
 
-                        Cadastre seu e-mail para receber promoções,
-                        lançamentos e novidades da Amazônia Force.
+                        Cadastre seu e-mail para receber promoções, lançamentos e novidades da Amazônia Force.
 
                     </p>
 
@@ -519,8 +324,7 @@
 
                     <p>
 
-                        Especialistas em produtos pneumáticos,
-                        automação industrial e soluções para empresas.
+                        Soluções em pneumática, automação industrial e equipamentos para profissionais e empresas.
 
                     </p>
 
@@ -633,6 +437,8 @@
 
         <div class="cart-items">
 
+            <!-- Itens via JavaScript -->
+
         </div>
 
         <div class="mini-cart-footer">
@@ -667,13 +473,18 @@
 
             </h2>
 
-            <form onsubmit="return false;">
+            <form>
 
-                <input type="email" placeholder="E-mail">
+                <input
+                    type="email"
+                    placeholder="E-mail">
 
-                <input type="password" placeholder="Senha">
+                <input
+                    type="password"
+                    placeholder="Senha">
 
-                <button class="btn-primary">
+                <button
+                    class="btn-primary">
 
                     Entrar
 
@@ -700,7 +511,7 @@
 
     </div>
 
-    <!-- Botão Voltar ao Topo -->
+    <!-- Back To Top -->
 
     <button
         id="backToTop">
@@ -744,14 +555,13 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="../Assets/js/auth/supabase.js"></script>
     <script src="../Assets/js/auth/session.js"></script>
-    <script src="../Assets/js/auth/auth.js"></script>
     <script src="../Assets/components/toast.js"></script>
     <script src="../Assets/js/cart.js"></script>
+    <script src="../Assets/js/auth/auth.js"></script>
+    <script src="../Assets/js/auth/ui.js"></script>
     <script src="../Assets/js/favoritos.js"></script>
-    <script src="../Assets/components/loading.js"></script>
-    <script src="../Assets/components/validator.js"></script>
-    <script src="../Assets/js/auth/register.js"></script>
-    <script src="../Assets/js/auth/social.js"></script>
+    <script src="../Assets/js/produtos-loader.js"></script>
+    <script src="../Assets/js/catalogos-loader.js"></script>
 
     <script src="../Assets/js/busca.js"></script>
     <script src="../Assets/js/mobile-nav.js"></script>
