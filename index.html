@@ -317,25 +317,32 @@
 
         <!-- Vitrine de Produtos -->
 
-        <section class="featured-products">
+<section class="featured-products">
 
-            <div class="container">
+    <div class="container">
 
-                <div class="section-title">
-                    <div>
-                        <span class="section-subtitle">Suprimentos de alta resistência</span>
-                        <h2>Nossos Produtos</h2>
-                    </div>
-                    <a href="Routes/produtos.html" class="view-all">Ver todos →</a>
-                </div>
+        <div class="section-title">
+            <div>
+                <span class="section-subtitle">Suprimentos de alta resistência</span>
+                <h2>Nossos Produtos</h2>
+            </div>
+            <a href="Routes/produtos.html" class="view-all">Ver todos →</a>
+        </div>
 
-                <div class="products-grid" id="productsGrid" data-products-source="destaque" data-products-limit="8">
-                    <!-- Produtos em destaque carregados dinamicamente via Assets/js/produtos-loader.js -->
-                </div>
-
+        <!-- Wrapper do Carrossel com Botões de Navegação -->
+        <div class="products-carousel-wrapper">
+            <button class="carousel-btn prev-btn" id="productPrevBtn" aria-label="Produto Anterior">❮</button>
+            
+            <div class="products-grid products-carousel" id="productsGrid" data-products-source="destaque" data-products-limit="8">
+                <!-- Produtos em destaque carregados dinamicamente via Assets/js/produtos-loader.js -->
             </div>
 
-        </section>
+            <button class="carousel-btn next-btn" id="productNextBtn" aria-label="Próximo Produto">❯</button>
+        </div>
+
+    </div>
+
+</section>
 
         <!-- Newsletter -->
 
