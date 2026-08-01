@@ -285,7 +285,7 @@
     /* ---------------- FINALIZAR PEDIDO PELO WHATSAPP ---------------- */
     // Não há checkout/pagamento online: o cliente monta o carrinho aqui no
     // site e o valor é combinado direto com o vendedor pelo WhatsApp.
-    const WHATSAPP_NUMERO = "5511970263943"; // Amazônia Force — inclui código do país (55) + DDD
+    const WHATSAPP_NUMERO = "559292000727"; // Amazônia Force — inclui código do país (55) + DDD
 
     function montarMensagemPedido() {
         const linhas = Cart.items.map(i => {
