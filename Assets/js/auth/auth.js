@@ -1,100 +1,76 @@
 /* ==========================================================
-   AMAZONIA FORCE
-   AUTENTICAÇÃO (Supabase Auth) + PERFIL (tabela public.profiles)
-   Requer supabase.js carregado antes deste arquivo.
+   AMAZONIA FORCE — VERSÃO DEMO
+   AUTENTICAÇÃO GENÉRICA (100% local, sem backend real)
+   Nenhuma conta criada aqui é enviada para qualquer servidor —
+   tudo fica salvo no localStorage do próprio navegador, apenas
+   para fins de demonstração do fluxo de login/cadastro.
+   Requer supabase.js (demoStore) carregado antes deste arquivo.
 ========================================================== */
 
 window.auth = {
 
     // Faz login com e-mail e senha
     async login(email, senha) {
-        const { data, error } = await window.supabaseClient.auth.signInWithPassword({
-            email,
-            password: senha
-        });
+        const usuario = window.demoStore.buscarPorEmail(email);
 
-        if (error) {
-            return { success: false, message: traduzirErro(error) };
+        if (!usuario || usuario.senha !== senha) {
+            return { success: false, message: "E-mail ou senha incorretos." };
         }
 
-        // Garante que o perfil existe (cobre o caso de o insert do
-        // cadastro não ter rolado por falta de sessão/confirmação de e-mail)
-        await salvarPerfil(data.user);
+        window.demoStore.definirSessaoId(usuario.id);
 
-        return { success: true, user: data.user };
+        const sessao = await window.session.get();
+        return { success: true, user: sessao.user };
     },
 
-    // Cria uma conta nova (Pessoa Física usa CPF, Pessoa Jurídica usa CNPJ)
+    // Cria uma conta de demonstração nova (Pessoa Física usa CPF,
+    // Pessoa Jurídica usa CNPJ) — fica salva só neste navegador.
     async register({ nome, email, senha, telefone, documento, tipoPessoa, dataNascimento }) {
-        const cpf = tipoPessoa === "juridica" ? null : documento;
-        const cnpj = tipoPessoa === "juridica" ? documento : null;
+        if (window.demoStore.buscarPorEmail(email)) {
+            return { success: false, message: "Este e-mail já possui uma conta." };
+        }
 
-        const { data, error } = await window.supabaseClient.auth.signUp({
+        if (!senha || senha.length < 8) {
+            return { success: false, message: "A senha precisa ter no mínimo 8 caracteres." };
+        }
+
+        const novoUsuario = {
+            id: window.demoStore.gerarId(),
             email,
-            password: senha,
-            options: {
-                data: { nome, telefone, cpf, cnpj, tipo_pessoa: tipoPessoa, data_nascimento: dataNascimento }
-            }
-        });
+            senha,
+            nome,
+            telefone,
+            documento,
+            tipoPessoa,
+            dataNascimento,
+            isAdmin: false
+        };
 
-        if (error) {
-            return { success: false, message: traduzirErro(error) };
-        }
+        window.demoStore.adicionarUsuario(novoUsuario);
 
-        // Só existe sessão ativa aqui se a confirmação de e-mail
-        // estiver desligada no projeto. Se não existir, o perfil
-        // é salvo automaticamente no primeiro login (ver login() acima).
-        if (data.session) {
-            await salvarPerfil(data.user, { nome, telefone, cpf, cnpj, tipo_pessoa: tipoPessoa, data_nascimento: dataNascimento });
-        }
-
-        return { success: true, user: data.user };
+        return { success: true, user: usuarioParaSessaoPublico(novoUsuario) };
     },
 
-    // Login com Google via Supabase OAuth (precisa do provedor Google
-    // habilitado em Supabase -> Authentication -> Providers)
+    // Login social simulado — como este é um site de demonstração, não
+    // há integração real com Google/Facebook. Entra com uma conta de
+    // demonstração genérica só para mostrar o fluxo funcionando.
     async loginWithGoogle() {
-        const { error } = await window.supabaseClient.auth.signInWithOAuth({
-            provider: "google",
-            options: { redirectTo: urlPosLogin() }
-        });
-
-        if (error) {
-            return { success: false, message: traduzirErro(error) };
-        }
-
-        return { success: true };
+        return loginSocialDemo("Visitante (Google Demo)", "visitante-google@demo.com");
     },
 
-    // Login com Facebook via Supabase OAuth (precisa do provedor Facebook
-    // habilitado em Supabase -> Authentication -> Providers)
     async loginWithFacebook() {
-        const { error } = await window.supabaseClient.auth.signInWithOAuth({
-            provider: "facebook",
-            options: { redirectTo: urlPosLogin() }
-        });
-
-        if (error) {
-            return { success: false, message: traduzirErro(error) };
-        }
-
-        return { success: true };
+        return loginSocialDemo("Visitante (Facebook Demo)", "visitante-facebook@demo.com");
     },
 
-    // Garante que o perfil existe em public.profiles para o usuário logado.
-    // Chamado nas páginas gerais (ui.js) para cobrir também quem entrou
-    // via Google/Facebook, já que o fluxo OAuth não passa por login()/register().
-    async ensureProfile(user) {
-        await salvarPerfil(user);
+    // Mantido por compatibilidade com páginas que chamam isso após
+    // login social — na versão demo não há nada extra para garantir.
+    async ensureProfile() {
+        return;
     },
 
     // Encerra a sessão atual
     async logout() {
-        const { error } = await window.supabaseClient.auth.signOut();
-
-        if (error) {
-            console.error("Erro ao sair:", error);
-        }
+        window.demoStore.limparSessao();
 
         const emRoutes = window.location.pathname.includes("/Routes/");
         window.location.href = emRoutes ? "login.html" : "Routes/login.html";
@@ -110,52 +86,38 @@ function urlPosLogin() {
     return new URL(caminho, window.location.href).href;
 }
 
-// Cria/atualiza a linha do usuário em public.profiles.
-// Usa upsert para nunca duplicar (id é a chave, igual ao auth.users.id).
-async function salvarPerfil(user, dadosExtras = {}) {
-    if (!user) return;
-
-    const meta = user.user_metadata || {};
-
-    const perfil = {
-        id: user.id,
-        nome: dadosExtras.nome || meta.nome || meta.full_name || meta.name || null,
-        telefone: dadosExtras.telefone || meta.telefone || null,
-        cpf: dadosExtras.cpf || meta.cpf || null,
-        cnpj: dadosExtras.cnpj || meta.cnpj || null,
-        tipo_pessoa: dadosExtras.tipo_pessoa || meta.tipo_pessoa || "fisica",
-        data_nascimento: dadosExtras.data_nascimento || meta.data_nascimento || null
+function usuarioParaSessaoPublico(usuario) {
+    return {
+        id: usuario.id,
+        email: usuario.email,
+        is_admin: !!usuario.isAdmin,
+        user_metadata: { nome: usuario.nome, telefone: usuario.telefone }
     };
-
-    const { error } = await window.supabaseClient
-        .from("profiles")
-        .upsert(perfil, { onConflict: "id" });
-
-    if (error) {
-        // Não trava o login/cadastro por causa disso, só avisa no console.
-        // Se cair aqui sempre, o mais provável é a policy de INSERT/UPDATE
-        // da tabela profiles não estar liberando para o dono do registro
-        // (auth.uid() = id).
-        console.error("Erro ao salvar perfil em profiles:", error);
-    }
 }
 
-// Traduz as mensagens de erro mais comuns do Supabase Auth para PT-BR
-function traduzirErro(error) {
-    const msg = (error && error.message) ? error.message : "";
+async function loginSocialDemo(nomeExibicao, emailDemo) {
+    let usuario = window.demoStore.buscarPorEmail(emailDemo);
 
-    if (msg.includes("Invalid login credentials")) {
-        return "E-mail ou senha incorretos.";
-    }
-    if (msg.includes("User already registered")) {
-        return "Este e-mail já possui uma conta.";
-    }
-    if (msg.includes("Password should be at least")) {
-        return "A senha precisa ter no mínimo 8 caracteres.";
-    }
-    if (msg.includes("Unable to validate email address")) {
-        return "E-mail inválido.";
+    if (!usuario) {
+        usuario = {
+            id: window.demoStore.gerarId(),
+            email: emailDemo,
+            senha: null,
+            nome: nomeExibicao,
+            telefone: "",
+            documento: "",
+            tipoPessoa: "fisica",
+            dataNascimento: "",
+            isAdmin: false
+        };
+        window.demoStore.adicionarUsuario(usuario);
     }
 
-    return msg || "Ocorreu um erro. Tente novamente.";
+    window.demoStore.definirSessaoId(usuario.id);
+
+    setTimeout(() => {
+        window.location.href = urlPosLogin();
+    }, 600);
+
+    return { success: true };
 }

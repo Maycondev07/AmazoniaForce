@@ -1,19 +1,13 @@
 /* ==========================================================
-   AMAZONIA FORCE
-   UI REATIVA AO ESTADO DE LOGIN
+   AMAZONIA FORCE — VERSÃO DEMO
+   UI REATIVA AO ESTADO DE LOGIN (genérica, local)
    Atualiza o botão "Entrar" do header e, quando presentes,
-   os dados do usuário na página Minha Conta (via public.profiles).
+   os dados do usuário na página Minha Conta.
 ========================================================== */
 
 (async () => {
 
     const user = await window.session.user();
-
-    // Cobre o login social (Google/Facebook): esse fluxo não passa por
-    // auth.login()/register(), então garantimos aqui que o perfil existe.
-    if (user) {
-        await window.auth.ensureProfile(user);
-    }
 
     // Header: troca "Entrar" por "Minha Conta" quando logado
     const loginBtn = document.querySelector("#loginButton");
@@ -34,16 +28,8 @@
     }
 
     // Links visíveis só para administradores (ex.: "Painel Admin" em Minha Conta)
-    if (user) {
-        const { data: perfilAdmin } = await window.supabaseClient
-            .from("profiles")
-            .select("is_admin")
-            .eq("id", user.id)
-            .maybeSingle();
-
-        if (perfilAdmin && perfilAdmin.is_admin) {
-            document.querySelectorAll(".admin-only-link").forEach(el => el.classList.add("visible"));
-        }
+    if (user && user.is_admin) {
+        document.querySelectorAll(".admin-only-link").forEach(el => el.classList.add("visible"));
     }
 
     // Página Minha Conta: preenche nome e e-mail do usuário logado
@@ -55,20 +41,7 @@
     if (emailEl) emailEl.textContent = user.email;
 
     if (nameEl) {
-        // Tenta a tabela profiles primeiro (fonte da verdade);
-        // se não achar, cai pro metadata salvo no cadastro.
-        let nome = user.user_metadata ? user.user_metadata.nome : null;
-
-        const { data, error } = await window.supabaseClient
-            .from("profiles")
-            .select("nome")
-            .eq("id", user.id)
-            .maybeSingle();
-
-        if (!error && data && data.nome) {
-            nome = data.nome;
-        }
-
+        const nome = user.user_metadata ? user.user_metadata.nome : null;
         nameEl.textContent = `Olá, ${nome || "Cliente"}`;
     }
 

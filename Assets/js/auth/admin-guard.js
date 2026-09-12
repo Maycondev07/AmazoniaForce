@@ -1,6 +1,6 @@
 /* ==========================================================
-   AMAZONIA FORCE
-   PROTEÇÃO DE ROTAS ADMINISTRATIVAS
+   AMAZONIA FORCE — VERSÃO DEMO
+   PROTEÇÃO DE ROTAS ADMINISTRATIVAS (genérica, local)
    Inclua este script (depois de session.js) em páginas que só
    administradores podem acessar, ex.: admin-produtos.html.
 ========================================================== */
@@ -14,15 +14,7 @@
         return;
     }
 
-    const { data, error } = await window.supabaseClient
-        .from("profiles")
-        .select("is_admin")
-        .eq("id", user.id)
-        .maybeSingle();
-
-    const isAdmin = !error && data && data.is_admin === true;
-
-    if (!isAdmin) {
+    if (!user.is_admin) {
         window.location.href = "minha-conta.html";
     }
 

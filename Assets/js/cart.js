@@ -282,10 +282,11 @@
         add(card.dataset.id, 1);
     });
 
-    /* ---------------- FINALIZAR PEDIDO PELO WHATSAPP ---------------- */
-    // Não há checkout/pagamento online: o cliente monta o carrinho aqui no
-    // site e o valor é combinado direto com o vendedor pelo WhatsApp.
-    const WHATSAPP_NUMERO = "559292000727"; // Amazônia Force — inclui código do país (55) + DDD
+    /* ---------------- FINALIZAR PEDIDO PELO WHATSAPP (DESATIVADO NA DEMO) ---------------- */
+    // Na versão original, não há checkout/pagamento online: o cliente monta o
+    // carrinho aqui no site e o valor é combinado direto com o vendedor pelo
+    // WhatsApp. Nesta versão de demonstração, o número real foi removido e o
+    // botão apenas mostra um aviso, em vez de abrir o WhatsApp de verdade.
 
     function montarMensagemPedido() {
         const linhas = Cart.items.map(i => {
@@ -319,20 +320,12 @@
             return;
         }
 
-        const mensagem = montarMensagemPedido();
-        const url = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(mensagem)}`;
+        // A mensagem ainda é montada (pra mostrar que a lógica funciona),
+        // mas nesta demo ela só aparece no console — nenhum link real é
+        // aberto e nenhuma mensagem é enviada para lugar nenhum.
+        console.info("[DEMO] Mensagem que seria enviada pelo WhatsApp:\n" + montarMensagemPedido());
 
-        // Em celulares, abrir "nova aba" com window.open() depois de um await
-        // é bloqueado por vários navegadores (o disparo não é mais visto como
-        // uma ação direta do clique). Por isso, no celular navegamos na própria
-        // aba (funciona em 100% dos aparelhos); no computador, abrimos em nova
-        // aba pra não perder a página do carrinho.
-        const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-        if (isMobile) {
-            window.location.href = url;
-        } else {
-            window.open(url, "_blank", "noopener");
-        }
+        Toast.show("⚠️ Versão de demonstração: em um site real, você seria direcionado ao WhatsApp da loja para finalizar o orçamento.", "info");
     }
 
     // Intercepta qualquer botão/link "Solicitar Orçamento" (mini-carrinho, página

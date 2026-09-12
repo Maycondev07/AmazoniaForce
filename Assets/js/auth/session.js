@@ -1,19 +1,41 @@
 /* ==========================================================
-   AMAZONIA FORCE
-   SESSÃO DO USUÁRIO (via Supabase Auth)
-   Requer supabase.js carregado antes deste arquivo.
+   AMAZONIA FORCE — VERSÃO DEMO
+   SESSÃO DO USUÁRIO (genérica, local)
+   Requer demoStore (supabase.js) carregado antes deste arquivo.
 ========================================================== */
+
+function usuarioParaSessao(usuario) {
+    if (!usuario) return null;
+
+    // Formato parecido com o de um usuário autenticado, para que o
+    // restante do site (ui.js, admin-guard.js etc.) continue
+    // funcionando sem precisar saber que a conta é local/demo.
+    return {
+        id: usuario.id,
+        email: usuario.email,
+        is_admin: !!usuario.isAdmin,
+        user_metadata: {
+            nome: usuario.nome,
+            telefone: usuario.telefone,
+            cpf: usuario.tipoPessoa === "juridica" ? null : usuario.documento,
+            cnpj: usuario.tipoPessoa === "juridica" ? usuario.documento : null,
+            tipo_pessoa: usuario.tipoPessoa,
+            data_nascimento: usuario.dataNascimento
+        }
+    };
+}
 
 window.session = {
 
-    // Retorna a sessão ativa do Supabase (ou null)
+    // Retorna a sessão ativa (ou null)
     async get() {
-        const { data, error } = await window.supabaseClient.auth.getSession();
-        if (error) {
-            console.error("Erro ao obter sessão:", error);
-            return null;
-        }
-        return data.session;
+        const id = window.demoStore.obterSessaoId();
+        if (!id) return null;
+
+        const usuario = window.demoStore.buscarPorId(id);
+        if (!usuario) return null;
+
+        return { user: usuarioParaSessao(usuario) };
     },
 
     // Retorna o usuário logado (ou null)
